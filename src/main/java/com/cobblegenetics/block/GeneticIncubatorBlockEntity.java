@@ -70,6 +70,8 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
     private ItemStack egg = ItemStack.EMPTY;
     /** Set while a player is choosing parents, so two players cannot fill the same incubator at once. */
     private UUID choosing;
+    /** Whether this Incubator has checked it is a villager job site since it was loaded (not saved). */
+    private boolean poiChecked;
     /** Fraction of a step carried between seconds while an attendant tends the Egg (not saved). */
     private double attendantSteps;
 
@@ -279,6 +281,10 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
     // ------------------------------------------------------------------ breeding
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, GeneticIncubatorBlockEntity incubator) {
+        if (!incubator.poiChecked && level instanceof ServerLevel serverLevel) {
+            incubator.poiChecked = true;
+            ensureJobSite(serverLevel, pos, state);
+        }
         if (incubator.phase == Phase.EGG_READY && level.getGameTime() % 20 == 0
                 && level instanceof ServerLevel serverLevel) {
             try {
@@ -298,6 +304,23 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
                 incubator.phase = Phase.EMPTY;
                 incubator.changed();
             }
+        }
+    }
+
+    /**
+     * Makes sure villagers see this Incubator as a job site (Day Care Attendant). Minecraft records points of interest
+     * when a block is placed, and rescans only chunks it has never saved: Incubators placed before CobbleGenetics had
+     * the profession would never be found by villagers without this.
+     */
+    private static void ensureJobSite(ServerLevel level, BlockPos pos, BlockState state) {
+        try {
+            var poi = level.getPoiManager();
+            if (poi.getType(pos).isEmpty()) {
+                net.minecraft.world.entity.ai.village.poi.PoiTypes.forState(state)
+                        .ifPresent(type -> poi.add(pos, type));
+            }
+        } catch (RuntimeException e) {
+            CobbleGenetics.failed("registering an Incubator as a villager job site", e);
         }
     }
 

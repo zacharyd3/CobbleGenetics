@@ -115,7 +115,7 @@ public class AnalyzerScreen extends DexScreen {
         renderFrame(graphics);
         renderReport(graphics, mouseX, mouseY);
         renderPokemon(graphics, mouseX, mouseY, partialTick);
-        super.render(graphics, mouseX, mouseY, partialTick);
+        renderWidgets(graphics, mouseX, mouseY, partialTick);
     }
 
     private void renderReport(GuiGraphics graphics, int mouseX, int mouseY) {

@@ -67,6 +67,16 @@ abstract class DexScreen extends Screen {
         renderTransparentBackground(graphics);
     }
 
+    /**
+     * Widgets only. Not super.render: in 1.21 Screen.render draws the darkened background again, which would dim
+     * the whole Pokédex we just drew on top of it.
+     */
+    protected void renderWidgets(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        for (var renderable : renderables) {
+            renderable.render(graphics, mouseX, mouseY, partialTick);
+        }
+    }
+
     protected void renderFrame(GuiGraphics graphics) {
         tintedFrame(graphics, left, left + SEAM_X, LEFT_TINT);
         tintedFrame(graphics, left + SEAM_X, left + BASE_WIDTH, RIGHT_TINT);
