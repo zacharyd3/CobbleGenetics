@@ -26,7 +26,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -39,8 +38,9 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * The Incubator's state, in the lower half. EMPTY -> (two parents put in) BREEDING -> (time passes) EGG_READY ->
- * (egg taken) EMPTY. The parents are stored as Cobblemon's own full Pokémon NBT, so nothing about them is lost while
+ * The Incubator's state, in the lower half. EMPTY -> (two parents put in, free) WAITING -> (each parent fed a berry,
+ * love hearts) BREEDING -> (time passes) EGG_READY -> (egg taken) EMPTY. While WAITING the owner can sneak-click to
+ * take the pair back. The parents are stored as Cobblemon's own full Pokémon NBT, so nothing about them is lost while
  * they are inside, and they go back to the owner's party (or PC) the moment breeding finishes, online or not.
  *
  * <p>Clients only receive what they need to draw the case: each parent's species and aspects, the end time, and the
@@ -49,7 +49,7 @@ import java.util.UUID;
 public class GeneticIncubatorBlockEntity extends BlockEntity {
 
     public enum Phase {
-        EMPTY, BREEDING, EGG_READY
+        EMPTY, WAITING, BREEDING, EGG_READY
     }
 
     /** What the client draws for one parent. */
@@ -60,6 +60,8 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
     private UUID owner;
     private final List<CompoundTag> parents = new ArrayList<>();
     private final List<Display> displays = new ArrayList<>();
+    /** How many of the parents were fed (0-2) while WAITING. */
+    private int fed;
     private long endTime;
     private long startTime;
     private ItemStack egg = ItemStack.EMPTY;
@@ -76,6 +78,10 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
 
     public List<Display> displays() {
         return displays;
+    }
+
+    public int fed() {
+        return fed;
     }
 
     public ItemStack egg() {
@@ -95,6 +101,20 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
     public void use(ServerPlayer player) {
         switch (phase) {
             case EMPTY -> startChoosing(player);
+            case WAITING -> {
+                if (player.isShiftKeyDown() && isOwner(player)) {
+                    returnParents(player.serverLevel());
+                    phase = Phase.EMPTY;
+                    fed = 0;
+                    owner = null;
+                    changed();
+                    player.displayClientMessage(Component.translatable("message.cobblegenetics.incubator_returned"),
+                            true);
+                } else {
+                    player.displayClientMessage(Component.translatable("message.cobblegenetics.incubator_feed", fed)
+                            .withStyle(ChatFormatting.LIGHT_PURPLE), true);
+                }
+            }
             case BREEDING -> {
                 long seconds = Math.max(0, (endTime - player.level().getGameTime()) / 20);
                 player.displayClientMessage(Component.translatable("message.cobblegenetics.incubator_breeding",
@@ -107,11 +127,6 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
     private void startChoosing(ServerPlayer player) {
         if (!GeneticsConfig.get().builtInBreeding) {
             player.displayClientMessage(Component.translatable("message.cobblegenetics.incubator_disabled")
-                    .withStyle(ChatFormatting.RED), true);
-            return;
-        }
-        if (!player.isCreative() && !player.getInventory().contains(new ItemStack(Items.EGG))) {
-            player.displayClientMessage(Component.translatable("message.cobblegenetics.incubator_needs_egg")
                     .withStyle(ChatFormatting.RED), true);
             return;
         }
@@ -162,11 +177,6 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
         if (BattleRegistry.getBattleByParticipatingPlayer(player) != null) {
             return;
         }
-        if (!player.isCreative() && !consumeEgg(player)) {
-            player.displayClientMessage(Component.translatable("message.cobblegenetics.incubator_needs_egg")
-                    .withStyle(ChatFormatting.RED), true);
-            return;
-        }
         var party = Cobblemon.INSTANCE.getStorage().getParty(player);
         parents.clear();
         displays.clear();
@@ -180,18 +190,60 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
             party.remove(parent);
         }
         owner = player.getUUID();
-        phase = Phase.BREEDING;
-        startTime = level.getGameTime();
-        endTime = startTime + Math.round(GeneticsConfig.get().incubatorBreedingMinutes * 1200);
+        phase = Phase.WAITING;
+        fed = 0;
         changed();
         level.playSound(null, worldPosition, SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 0.6f, 1.4f);
-        player.sendSystemMessage(Component.translatable("message.cobblegenetics.incubator_started",
-                first.getDisplayName(false), second.getDisplayName(false),
-                Math.round(GeneticsConfig.get().incubatorBreedingMinutes * 10) / 10.0).withStyle(ChatFormatting.AQUA));
+        player.sendSystemMessage(Component.translatable("message.cobblegenetics.incubator_inside",
+                first.getDisplayName(false), second.getDisplayName(false)).withStyle(ChatFormatting.AQUA));
+    }
+
+    /**
+     * Right-click with breeding food (the item tag cobblegenetics:breeding_food, Cobblemon's berries by default):
+     * feeds the next parent, with love hearts. When both are fed, breeding starts. Returns true if the food was used.
+     */
+    public boolean feed(ServerPlayer player, ItemStack food) {
+        if (phase != Phase.WAITING || !food.is(BREEDING_FOOD)) {
+            return false;
+        }
+        int slot = fed;
+        fed++;
+        food.consume(1, player);
+        ServerLevel serverLevel = player.serverLevel();
+        double side = slot == 0 ? -0.19 : 0.19;
+        net.minecraft.core.Direction facing = getBlockState().getValue(GeneticIncubatorBlock.FACING);
+        // The same left/right as the renderer: across the facing direction
+        double x = worldPosition.getX() + 0.5 + facing.getClockWise().getStepX() * side;
+        double z = worldPosition.getZ() + 0.5 + facing.getClockWise().getStepZ() * side;
+        serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.HEART, x, worldPosition.getY() + 1.0, z,
+                6, 0.15, 0.25, 0.15, 0.05);
+        serverLevel.playSound(null, worldPosition, SoundEvents.GENERIC_EAT, SoundSource.BLOCKS, 0.7f, 1.2f);
+        if (fed >= 2) {
+            phase = Phase.BREEDING;
+            startTime = serverLevel.getGameTime();
+            endTime = startTime + Math.round(GeneticsConfig.get().incubatorBreedingMinutes * 1200);
+            serverLevel.playSound(null, worldPosition, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.BLOCKS, 1, 1.3f);
+            player.sendSystemMessage(Component.translatable("message.cobblegenetics.incubator_started",
+                    Math.round(GeneticsConfig.get().incubatorBreedingMinutes * 10) / 10.0)
+                    .withStyle(ChatFormatting.LIGHT_PURPLE));
+        } else {
+            player.displayClientMessage(Component.translatable("message.cobblegenetics.incubator_feed", fed)
+                    .withStyle(ChatFormatting.LIGHT_PURPLE), true);
+        }
+        changed();
+        return true;
+    }
+
+    public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BREEDING_FOOD =
+            net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM,
+                    CobbleGenetics.id("breeding_food"));
+
+    private boolean isOwner(ServerPlayer player) {
+        return owner == null || owner.equals(player.getUUID()) || player.hasPermissions(2);
     }
 
     private void takeEgg(ServerPlayer player) {
-        if (owner != null && !owner.equals(player.getUUID()) && !player.hasPermissions(2)) {
+        if (!isOwner(player)) {
             player.displayClientMessage(Component.translatable("message.cobblegenetics.incubator_not_yours")
                     .withStyle(ChatFormatting.RED), true);
             return;
@@ -259,7 +311,8 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
         level.playSound(null, worldPosition, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1, 1);
         if (player != null) {
             player.sendSystemMessage(Component.translatable(GeneticsConfig.get().incubatorEggs
-                            ? "message.cobblegenetics.incubator_done" : "message.cobblegenetics.bred",
+                            ? (offspring.fusion() ? "message.cobblegenetics.incubator_done_fusion"
+                            : "message.cobblegenetics.incubator_done") : "message.cobblegenetics.bred",
                     offspring.mother().getDisplayName(false), offspring.father().getDisplayName(false),
                     offspring.child().getDisplayName(false)).withStyle(ChatFormatting.GREEN));
             if (offspring.mutation() != null) {
@@ -298,17 +351,6 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
             egg = ItemStack.EMPTY;
         }
         phase = Phase.EMPTY;
-    }
-
-    private static boolean consumeEgg(ServerPlayer player) {
-        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
-            ItemStack stack = player.getInventory().getItem(i);
-            if (stack.is(Items.EGG)) {
-                stack.shrink(1);
-                return true;
-            }
-        }
-        return false;
     }
 
     private void changed() {
@@ -351,6 +393,7 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
             }
         }
         startTime = tag.getLong("start");
+        fed = tag.getInt("fed");
         endTime = tag.getLong("end");
         egg = tag.contains("egg") ? ItemStack.parseOptional(registries, tag.getCompound("egg")) : ItemStack.EMPTY;
         displays.clear();
@@ -370,6 +413,7 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
     private void writeDisplay(CompoundTag tag, HolderLookup.Provider registries) {
         tag.putString("phase", phase.name());
         tag.putLong("start", startTime);
+        tag.putInt("fed", fed);
         tag.putLong("end", endTime);
         if (!egg.isEmpty()) {
             tag.put("egg", egg.save(registries));

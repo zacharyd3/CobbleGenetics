@@ -57,7 +57,8 @@ public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBl
             return;
         }
         try {
-            if (incubator.phase() == GeneticIncubatorBlockEntity.Phase.BREEDING) {
+            if (incubator.phase() == GeneticIncubatorBlockEntity.Phase.BREEDING
+                    || incubator.phase() == GeneticIncubatorBlockEntity.Phase.WAITING) {
                 renderParents(incubator, level, partialTick, pose, buffers, light);
             } else if (incubator.phase() == GeneticIncubatorBlockEntity.Phase.EGG_READY && !incubator.egg().isEmpty()) {
                 renderEgg(incubator, level, partialTick, pose, buffers, light, overlay);

@@ -126,6 +126,10 @@ public final class BreedingService {
         if (dittoA || dittoB) {
             return null;
         }
+        if (isCrossSpecies(a, b)) {
+            // Different families make a Fusionmon fusion baby: no egg group or gender rules, like fusing
+            return null;
+        }
         if (Collections.disjoint(a.getForm().getEggGroups(), b.getForm().getEggGroups())) {
             return Component.translatable("breeding.cobblegenetics.egg_groups");
         }
@@ -135,6 +139,21 @@ public final class BreedingService {
             return Component.translatable("breeding.cobblegenetics.genders");
         }
         return null;
+    }
+
+    /**
+     * True when the pair would make a fusion baby: two different evolutionary families (neither a Ditto), with
+     * Fusionmon installed and crossSpeciesFusions on. Same-family pairs always breed by the main-series rules.
+     */
+    public static boolean isCrossSpecies(Pokemon a, Pokemon b) {
+        return crossSpeciesFusions() && !isDitto(a) && !isDitto(b)
+                && baseSpecies(a.getSpecies()) != baseSpecies(b.getSpecies());
+    }
+
+    /** Fusion babies need Fusionmon: its "fusion_body" Cobblemon property does the fusing, so there is no code link. */
+    public static boolean crossSpeciesFusions() {
+        return GeneticsConfig.get().crossSpeciesFusions && net.neoforged.fml.ModList.get() != null
+                && net.neoforged.fml.ModList.get().isLoaded("fusionmon");
     }
 
     private static boolean isDitto(Pokemon pokemon) {
@@ -157,7 +176,7 @@ public final class BreedingService {
     }
 
     /** The finished breeding: offspring Pokémon and whether it was born with a mutation. */
-    public record Offspring(Pokemon child, Pokemon mother, Pokemon father, MutationDef mutation) {
+    public record Offspring(Pokemon child, Pokemon mother, Pokemon father, MutationDef mutation, boolean fusion) {
     }
 
     /**
@@ -166,16 +185,30 @@ public final class BreedingService {
      * the caller decides where the parents and the offspring (or its egg) go. {@code owner} may be offline (null).
      */
     public static Offspring breed(ServerPlayer owner, ServerLevel level, BlockPos pos, Pokemon a, Pokemon b) {
-        Pokemon[] pair = order(a, b);
-        Pokemon mother = pair[0];
-        Pokemon father = pair[1];
-        Species species = baseSpecies(mother.getSpecies());
-        PokemonProperties properties = PokemonProperties.Companion.parse(
-                "species=" + species.getResourceIdentifier() + " level=1");
+        Random random = ThreadLocalRandom.current();
+        boolean fusion = isCrossSpecies(a, b);
+        Pokemon mother;
+        Pokemon father;
+        PokemonProperties properties;
+        if (fusion) {
+            // Fusion baby: a random parent's first stage is the head, the other's the body. Fusionmon reads its own
+            // "fusion_body" property and fuses the Pokémon when it is created
+            boolean firstIsHead = random.nextBoolean();
+            mother = firstIsHead ? a : b;
+            father = firstIsHead ? b : a;
+            properties = PokemonProperties.Companion.parse("species=" + baseSpecies(mother.getSpecies())
+                    .getResourceIdentifier() + " level=1 fusion_body=" + baseSpecies(father.getSpecies())
+                    .getResourceIdentifier());
+        } else {
+            Pokemon[] pair = order(a, b);
+            mother = pair[0];
+            father = pair[1];
+            properties = PokemonProperties.Companion.parse(
+                    "species=" + baseSpecies(mother.getSpecies()).getResourceIdentifier() + " level=1");
+        }
         Pokemon child = owner != null ? properties.create(owner) : properties.create();
 
         // Main-series IV inheritance: three random stats take the IV of a random parent
-        Random random = ThreadLocalRandom.current();
         List<Stat> stats = new ArrayList<>(MAIN_STATS);
         Collections.shuffle(stats, random);
         for (Stat stat : stats.subList(0, 3)) {
@@ -201,7 +234,7 @@ public final class BreedingService {
         PokemonGenetics.setLastBred(mother, now);
         PokemonGenetics.setLastBred(father, now);
         countBreeding(owner, mother, father);
-        return new Offspring(child, mother, father, mutation);
+        return new Offspring(child, mother, father, mutation, fusion);
     }
 
     static Species baseSpecies(Species species) {
