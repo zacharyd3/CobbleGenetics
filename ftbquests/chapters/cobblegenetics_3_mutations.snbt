@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "cobblegenetics_3_mutations"
-	group: "52E24F4D0DDFF37E"
+	group: "639C8B4E3836D569"
 	icon: { id: "cobblegenetics:mutagen" }
 	id: "6A6E624E40E54022"
 	order_index: 3

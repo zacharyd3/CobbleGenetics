@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "cobblegenetics_2_heredity"
-	group: "52E24F4D0DDFF37E"
+	group: "639C8B4E3836D569"
 	icon: { id: "cobblegenetics:genetic_incubator" }
 	id: "2C88263FACF30DC2"
 	order_index: 2

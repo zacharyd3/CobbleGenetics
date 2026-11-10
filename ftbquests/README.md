@@ -22,15 +22,18 @@ Quests that hinge on rare luck (a natural mutation, a rare recessive trait, Epic
 
 Do these steps **with the game or server closed**. FTB Quests rewrites its lang files from memory when it saves, so text pasted while it runs can be lost.
 
-1. Copy the files in `chapters/` to `config/ftbquests/quests/chapters/`. The chapters join the **Cobblemon** chapter group (`52E24F4D0DDFF37E`), after Fusionmon. Change `group` in each file if your pack's group id differs.
-2. Add the quest text. Pick the layout your pack uses:
-   * **`config/ftbquests/quests/lang/en_us/` is a folder** (packs with *FTB Quests Lang Splitter*, which has `chapters/`, `chapter.snbt`, `chapter_group.snbt`...):
+The chapters go in their own chapter group, **Cobblemods** (id `639C8B4E3836D569`), meant to hold Cobblemon addon chapters. Fusionmon's chapter belongs first in it (`order_index: 0`); the CobbleGenetics chapters are 1-7.
+
+1. Copy the files in `chapters/` to `config/ftbquests/quests/chapters/`.
+2. Create the group: in `config/ftbquests/quests/chapter_groups.snbt`, add the line from `chapter_group-entry.snbt` to the `chapter_groups` list, at the position where the group should appear (for example right after the Cobblemon group). To use an existing group instead, change `group` in each chapter file.
+3. Add the text. Pick the layout your pack uses:
+   * **`config/ftbquests/quests/lang/en_us/` is a folder** (packs with *FTB Quests Lang Splitter*, with `chapters/`, `chapter.snbt`, `chapter_group.snbt`...):
      * copy the files in `lang/en_us/chapters/` to `config/ftbquests/quests/lang/en_us/chapters/`;
-     * paste the lines of `lang/en_us/chapter-lines.snbt` into `config/ftbquests/quests/lang/en_us/chapter.snbt`, just before its last `}`.
-   * **`config/ftbquests/quests/lang/en_us.snbt` is a single file:** paste the lines of `lang-en_us-lines.snbt` into it, just before its last `}`.
+     * paste the lines of `lang/en_us/chapter-lines.snbt` into `lang/en_us/chapter.snbt`, and the line of `lang/en_us/chapter_group-lines.snbt` into `lang/en_us/chapter_group.snbt`, each just before the last `}`.
+   * **`config/ftbquests/quests/lang/en_us.snbt` is a single file:** paste the lines of `lang-en_us-lines.snbt` into it, just before its last `}` (they include the group title).
 
    Never put the files from `chapters/` (step 1) in the lang folder: they define quests, not text.
-3. Start the game. If it was already running, use `/ftbquests reload` without editing any quest first.
+4. Start the game. If it was already running, use `/ftbquests reload` without editing any quest first.
 
 ## Progression notes
 

@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "cobblegenetics_5_shadow"
-	group: "52E24F4D0DDFF37E"
+	group: "639C8B4E3836D569"
 	icon: { id: "cobblegenetics:shadow_beacon" }
 	id: "23DB2B6EF776B2E8"
 	order_index: 5
