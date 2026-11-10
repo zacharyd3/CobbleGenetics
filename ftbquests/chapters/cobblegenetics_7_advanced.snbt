@@ -2,10 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "cobblegenetics_7_advanced"
-	group: ""
+	group: "52E24F4D0DDFF37E"
 	icon: { id: "minecraft:knowledge_book" }
 	id: "B79A25411AEF4966"
-	order_index: 6
+	order_index: 7
 	quest_links: [ ]
 	quests: [
 		{
