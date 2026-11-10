@@ -18,7 +18,8 @@
       "aspect": "cg-purified-aura"
     },
     {
-      "type": "glow"
+      "type": "glow",
+      "color": "#fff3c4"
     },
     {
       "type": "friendship_multiplier",

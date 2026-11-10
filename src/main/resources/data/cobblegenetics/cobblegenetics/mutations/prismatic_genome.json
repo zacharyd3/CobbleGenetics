@@ -23,7 +23,8 @@
       "color": "#ffffff"
     },
     {
-      "type": "glow"
+      "type": "glow",
+      "color": "#ffffff"
     },
     {
       "type": "all_ivs",

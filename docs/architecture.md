@@ -1,6 +1,6 @@
 # Architecture, extension points and limitations
 
-CobbleGenetics extends Cobblemon. It does not replace any Cobblemon class, and its only mixin is a client-side render tint. Everything else goes through Cobblemon's public extension points, all checked with `javap` against the Cobblemon **1.7.3** jar.
+CobbleGenetics extends Cobblemon. It does not replace any Cobblemon class, and its only mixin is a client-side render hook (colour tint, plus the light and halo of glowing Pokémon). Everything else goes through Cobblemon's public extension points, all checked with `javap` against the Cobblemon **1.7.3** jar.
 
 ## What Cobblemon 1.7.3 offers, and what we use
 
@@ -79,4 +79,4 @@ CobbleGenetics extends Cobblemon. It does not replace any Cobblemon class, and i
 * **CobblemonSizeVariation** also sets the scale modifier. While it is installed, the genetic size gene is recorded but does not overwrite its scale; size mutations still multiply on top (config `sizeConflictMods`).
 * **Fusionmon** keeps the visible (head) Pokémon's `persistentData`, so a fusion shows the head's genetics. Unfusing restores each part from its saved NBT, including its own genetics.
 * **Mega Showdown, Pokérus, RCT, Raid Dens:** no shared state. Their Pokémon get retroactive genomes the first time they are analysed or caught. Datapack bosses can use `cg_shadow=...` in their properties.
-* **Mixins:** one, client side, optional (`require = 0`). If a future Cobblemon changes `PokemonRenderer.render`, Pokémon simply render without the tint.
+* **Mixins:** one, client side, optional (`require = 0`). If a future Cobblemon changes `PokemonRenderer.render`, Pokémon simply render without the tint and glow.
