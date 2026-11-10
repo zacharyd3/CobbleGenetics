@@ -36,7 +36,7 @@ public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBl
     /** Top of the pedestal, in blocks (matches the block model). */
     private static final float FLOOR = 6 / 16f;
     /** How far each ball sits from the centre, across the front of the case. */
-    private static final float SIDE = 0.2f;
+    private static final float SIDE = 0.17f;
 
     private final Map<String, ItemStack> balls = new HashMap<>();
 
@@ -77,7 +77,7 @@ public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBl
             pose.pushPose();
             pose.translate(0.5, FLOOR, 0.5);
             pose.mulPose(Axis.YP.rotationDegrees(-facing.toYRot()));
-            pose.translate(side, 0.16 + Math.sin(phase / 14) * 0.02, 0);
+            pose.translate(side, 0.09 + Math.sin(phase / 14) * 0.015, 0);
             // Turned a little towards each other
             pose.mulPose(Axis.YP.rotationDegrees(i == 0 ? 25 : -25));
             if (breeding) {
@@ -87,7 +87,8 @@ public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBl
                     pose.mulPose(Axis.ZP.rotationDegrees((float) Math.sin(cycle / 18 * Math.PI * 3) * 18));
                 }
             }
-            pose.scale(1.3f, 1.3f, 1.3f);
+            // About 55% of the first version: Cobblemon ball models are large, and these must clear the glass
+            pose.scale(0.72f, 0.72f, 0.72f);
             Minecraft.getInstance().getItemRenderer().renderStatic(ball, ItemDisplayContext.GROUND, light, overlay,
                     pose, buffers, level, i);
             pose.popPose();
