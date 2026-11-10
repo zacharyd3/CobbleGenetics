@@ -3,7 +3,7 @@
 	default_quest_shape: ""
 	filename: "cobblegenetics_7_advanced"
 	group: "639C8B4E3836D569"
-	icon: { id: "minecraft:knowledge_book" }
+	icon: { id: "cobblegenetics:analyzer_upgrade_5" }
 	id: "379A25411AEF4966"
 	order_index: 7
 	quest_links: [ ]

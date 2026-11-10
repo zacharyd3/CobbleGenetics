@@ -44,8 +44,10 @@ public class GeneticIncubatorBlock extends BaseEntityBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
-    private static final VoxelShape LOWER = Shapes.or(Block.box(0, 0, 0, 16, 3, 16), Block.box(1, 3, 1, 15, 16, 15));
-    private static final VoxelShape UPPER = Shapes.or(Block.box(1, 0, 1, 15, 13, 15), Block.box(0, 13, 0, 16, 16, 16));
+    // Pedestal + glass case / glass case + cap and button (matches the block models)
+    private static final VoxelShape LOWER = Shapes.or(Block.box(0, 0, 0, 16, 6, 16), Block.box(1, 6, 1, 15, 16, 15));
+    private static final VoxelShape UPPER = Shapes.or(Block.box(1, 0, 1, 15, 8, 15), Block.box(0, 8, 0, 16, 14, 16),
+            Block.box(5, 14, 5, 11, 15.5, 11));
 
     public GeneticIncubatorBlock(Properties properties) {
         super(properties);
