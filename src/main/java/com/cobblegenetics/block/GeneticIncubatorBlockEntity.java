@@ -52,8 +52,11 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
         EMPTY, WAITING, BREEDING, EGG_READY
     }
 
-    /** What the client draws for one parent. */
-    public record Display(String species, Set<String> aspects) {
+    /**
+     * What the client draws for one parent: the Poké Ball it was caught in (its species and aspects are kept for
+     * addons and future use, but the case shows the balls: real models never fit every species inside the glass).
+     */
+    public record Display(String species, Set<String> aspects, String ball) {
     }
 
     private Phase phase = Phase.EMPTY;
@@ -186,7 +189,7 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
             }
             parents.add(parent.saveToNBT(player.registryAccess(), new CompoundTag()));
             displays.add(new Display(parent.getSpecies().getResourceIdentifier().toString(),
-                    new LinkedHashSet<>(parent.getAspects())));
+                    new LinkedHashSet<>(parent.getAspects()), ballOf(parent)));
             party.remove(parent);
         }
         owner = player.getUUID();
@@ -240,6 +243,16 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
 
     private boolean isOwner(ServerPlayer player) {
         return owner == null || owner.equals(player.getUUID()) || player.hasPermissions(2);
+    }
+
+    /** Item id of the ball a Pokémon was caught in (a plain Poké Ball when unknown). */
+    private static String ballOf(Pokemon pokemon) {
+        try {
+            var item = pokemon.getCaughtBall().item();
+            return net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item).toString();
+        } catch (RuntimeException e) {
+            return "cobblemon:poke_ball";
+        }
     }
 
     private void takeEgg(ServerPlayer player) {
@@ -405,7 +418,8 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
             for (int j = 0; j < aspectList.size(); j++) {
                 aspects.add(aspectList.getString(j));
             }
-            displays.add(new Display(entry.getString("species"), aspects));
+            String ball = entry.contains("ball") ? entry.getString("ball") : "cobblemon:poke_ball";
+            displays.add(new Display(entry.getString("species"), aspects, ball));
         }
     }
 
@@ -422,6 +436,7 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
         for (Display display : displays) {
             CompoundTag entry = new CompoundTag();
             entry.putString("species", display.species());
+            entry.putString("ball", display.ball());
             ListTag aspects = new ListTag();
             display.aspects().forEach(aspect -> aspects.add(StringTag.valueOf(aspect)));
             entry.put("aspects", aspects);

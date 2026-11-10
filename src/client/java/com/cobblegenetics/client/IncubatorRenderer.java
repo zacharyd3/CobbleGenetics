@@ -3,48 +3,42 @@ package com.cobblegenetics.client;
 import com.cobblegenetics.CobbleGenetics;
 import com.cobblegenetics.block.GeneticIncubatorBlock;
 import com.cobblegenetics.block.GeneticIncubatorBlockEntity;
-import com.cobblemon.mod.common.CobblemonEntities;
-import com.cobblemon.mod.common.api.pokemon.PokemonSpecies;
-import com.cobblemon.mod.common.entity.pokemon.PokemonEntity;
-import com.cobblemon.mod.common.pokemon.Pokemon;
-import com.cobblemon.mod.common.pokemon.Species;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 /**
- * Draws what is inside the Genetic Incubator's glass: the two parents while breeding, the egg once it is ready.
+ * Draws what is inside the Genetic Incubator's glass: each parent's Poké Ball (the one it was caught in) while it waits
+ * and breeds, then the egg once it is ready.
  *
- * <p>The parents are client-only display copies (a PokemonEntity that is never added to the world), drawn through
- * Minecraft's normal entity renderer so they look exactly as in the world - lighting, shiny, CobbleGenetics tints.
- * Nobody can click, battle or catch them: the real Pokémon are stored in the block entity.</p>
+ * <p>The balls stand for the Pokémon instead of their real models: Cobblemon models reach well past their hitboxes
+ * (ears, wings, tails) and vary wildly in size, so no scaling keeps every species inside the case. Balls always fit,
+ * read at a glance, and are cheap to draw. Nobody can click them: the real Pokémon are stored in the block entity.</p>
  */
 public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBlockEntity> {
 
-    /** Room inside the glass for each parent, in blocks: two side by side in the 12/16-wide case, whose glass runs
-     * from the pedestal (6/16) to the cap (1 + 8/16). */
-    private static final float SLOT_WIDTH = 0.36f;
-    private static final float SLOT_HEIGHT = 1.05f;
+    /** Top of the pedestal, in blocks (matches the block model). */
     private static final float FLOOR = 6 / 16f;
+    /** How far each ball sits from the centre, across the front of the case. */
+    private static final float SIDE = 0.2f;
 
-    private final Map<GeneticIncubatorBlockEntity, Shown> shown = new WeakHashMap<>();
-
-    /** The display entities for one incubator, rebuilt when what it shows changes. */
-    private record Shown(List<GeneticIncubatorBlockEntity.Display> displays, PokemonEntity[] entities) {
-    }
+    private final Map<String, ItemStack> balls = new HashMap<>();
 
     public IncubatorRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -57,10 +51,11 @@ public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBl
             return;
         }
         try {
-            if (incubator.phase() == GeneticIncubatorBlockEntity.Phase.BREEDING
-                    || incubator.phase() == GeneticIncubatorBlockEntity.Phase.WAITING) {
-                renderParents(incubator, level, partialTick, pose, buffers, light);
-            } else if (incubator.phase() == GeneticIncubatorBlockEntity.Phase.EGG_READY && !incubator.egg().isEmpty()) {
+            GeneticIncubatorBlockEntity.Phase phase = incubator.phase();
+            if (phase == GeneticIncubatorBlockEntity.Phase.WAITING || phase == GeneticIncubatorBlockEntity.Phase.BREEDING) {
+                renderBalls(incubator, level, partialTick, pose, buffers, light, overlay,
+                        phase == GeneticIncubatorBlockEntity.Phase.BREEDING);
+            } else if (phase == GeneticIncubatorBlockEntity.Phase.EGG_READY && !incubator.egg().isEmpty()) {
                 renderEgg(incubator, level, partialTick, pose, buffers, light, overlay);
             }
         } catch (RuntimeException | LinkageError e) {
@@ -68,31 +63,33 @@ public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBl
         }
     }
 
-    private void renderParents(GeneticIncubatorBlockEntity incubator, Level level, float partialTick, PoseStack pose,
-                               MultiBufferSource buffers, int light) {
-        PokemonEntity[] entities = entities(incubator, level);
+    private void renderBalls(GeneticIncubatorBlockEntity incubator, Level level, float partialTick, PoseStack pose,
+                             MultiBufferSource buffers, int light, int overlay, boolean breeding) {
+        List<GeneticIncubatorBlockEntity.Display> displays = incubator.displays();
         Direction facing = incubator.getBlockState().getValue(GeneticIncubatorBlock.FACING);
-        EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         float time = level.getGameTime() + partialTick;
-        for (int i = 0; i < entities.length; i++) {
-            PokemonEntity entity = entities[i];
-            if (entity == null) {
-                continue;
-            }
-            float width = Math.max(0.1f, entity.getBbWidth());
-            float height = Math.max(0.1f, entity.getBbHeight());
-            float scale = Math.min(1, Math.min(SLOT_WIDTH / width, SLOT_HEIGHT / height));
-            float side = entities.length == 1 ? 0 : (i == 0 ? -0.19f : 0.19f);
+        for (int i = 0; i < displays.size(); i++) {
+            ItemStack ball = ball(displays.get(i).ball());
+            float side = displays.size() == 1 ? 0 : (i == 0 ? -SIDE : SIDE);
+            // Each ball has its own rhythm so the pair doesn't move in lockstep
+            float phase = time + i * 17;
 
             pose.pushPose();
             pose.translate(0.5, FLOOR, 0.5);
-            // Face out of the front of the case, turned a little towards each other, swaying gently
             pose.mulPose(Axis.YP.rotationDegrees(-facing.toYRot()));
-            pose.translate(side, 0, 0);
-            pose.mulPose(Axis.YP.rotationDegrees((i == 0 ? 20 : -20) + (float) Math.sin(time / 30 + i) * 8));
-            pose.scale(scale, scale, scale);
-            entity.tickCount = (int) time;
-            dispatcher.render(entity, 0, 0, 0, 0, partialTick, pose, buffers, light);
+            pose.translate(side, 0.16 + Math.sin(phase / 14) * 0.02, 0);
+            // Turned a little towards each other
+            pose.mulPose(Axis.YP.rotationDegrees(i == 0 ? 25 : -25));
+            if (breeding) {
+                // The capture wobble: three quick shakes, then a pause (about every 2.5 seconds)
+                float cycle = phase % 50;
+                if (cycle < 18) {
+                    pose.mulPose(Axis.ZP.rotationDegrees((float) Math.sin(cycle / 18 * Math.PI * 3) * 18));
+                }
+            }
+            pose.scale(1.3f, 1.3f, 1.3f);
+            Minecraft.getInstance().getItemRenderer().renderStatic(ball, ItemDisplayContext.GROUND, light, overlay,
+                    pose, buffers, level, i);
             pose.popPose();
         }
     }
@@ -111,42 +108,20 @@ public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBl
         pose.popPose();
     }
 
-    private PokemonEntity[] entities(GeneticIncubatorBlockEntity incubator, Level level) {
-        List<GeneticIncubatorBlockEntity.Display> displays = incubator.displays();
-        Shown current = shown.get(incubator);
-        if (current != null && current.displays().equals(displays)) {
-            return current.entities();
-        }
-        PokemonEntity[] entities = new PokemonEntity[displays.size()];
-        for (int i = 0; i < displays.size(); i++) {
-            entities[i] = displayEntity(level, displays.get(i), incubator);
-        }
-        shown.put(incubator, new Shown(List.copyOf(displays), entities));
-        return entities;
-    }
-
-    private static PokemonEntity displayEntity(Level level, GeneticIncubatorBlockEntity.Display display,
-                                               GeneticIncubatorBlockEntity incubator) {
-        Species species = PokemonSpecies.getByIdentifier(ResourceLocation.parse(display.species()));
-        if (species == null) {
-            return null;
-        }
-        Pokemon pokemon = new Pokemon();
-        pokemon.setSpecies(species);
-        pokemon.setForcedAspects(display.aspects());
-        PokemonEntity entity = new PokemonEntity(level, pokemon, CobblemonEntities.POKEMON);
-        entity.getEntityData().set(PokemonEntity.Companion.getSPECIES(), species.getResourceIdentifier().toString());
-        entity.getEntityData().set(PokemonEntity.Companion.getASPECTS(), display.aspects());
-        // Position only matters for lighting lookups and particles: put it where it is drawn
-        var pos = incubator.getBlockPos();
-        entity.setPos(pos.getX() + 0.5, pos.getY() + FLOOR, pos.getZ() + 0.5);
-        entity.setNoGravity(true);
-        return entity;
+    /** The ball item by id, cached; a plain Poké Ball if that ball's mod is gone. */
+    private ItemStack ball(String id) {
+        return balls.computeIfAbsent(id, key -> {
+            ResourceLocation location = ResourceLocation.tryParse(key);
+            Item item = location == null ? Items.AIR : BuiltInRegistries.ITEM.get(location);
+            if (item == Items.AIR) {
+                item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("cobblemon", "poke_ball"));
+            }
+            return new ItemStack(item);
+        });
     }
 
     @Override
     public AABB getRenderBoundingBox(GeneticIncubatorBlockEntity incubator) {
-        // Two blocks tall: without this the parents would vanish when the lower block leaves the screen
         return new AABB(incubator.getBlockPos()).expandTowards(0, 1, 0);
     }
 }
