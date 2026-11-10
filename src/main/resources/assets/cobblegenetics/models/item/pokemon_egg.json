@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cobblegenetics:item/pokemon_egg",
+    "layer1": "cobblegenetics:item/pokemon_egg_spots"
+  }
+}

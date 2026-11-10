@@ -22,10 +22,10 @@
 	chapter.2C88263FACF30DC2.chapter_subtitle: ["How genes pass from parents to offspring"]
 	quest.95C95900440E45BD.title: "The Genetic Incubator"
 	quest.95C95900440E45BD.quest_subtitle: "Breeding, CobbleGenetics style"
-	quest.95C95900440E45BD.quest_desc: ["Use the &bGenetic Incubator&r and pick two compatible party Pokémon (level 15+). It uses one &fEgg&r as the vessel." "" "Compatibility follows the main games: a shared &eegg group&r and opposite genders, or &dDitto&r with almost anything. Each parent then rests for a while."]
+	quest.95C95900440E45BD.quest_desc: ["Place the &bGenetic Incubator&r, right-click it and pick two compatible party Pokémon (level 15+). It uses one chicken &fEgg&r. The pair waits inside the glass for a few minutes, then comes back to your party and leaves a &aPokémon Egg&r inside: right-click to take it." "" "Compatibility follows the main games: a shared &eegg group&r and opposite genders, or &dDitto&r with almost anything. Each parent then rests for a while."]
 	quest.4C3CACB8E8D2B19A.title: "New Generation"
 	quest.4C3CACB8E8D2B19A.quest_subtitle: "Breed two Pokémon"
-	quest.4C3CACB8E8D2B19A.quest_desc: ["The offspring hatches at level 1. Its genes are &oa mix&r of both parents plus some randomness - never a copy of either." "" "Three of its stats (IVs) are also inherited from a random parent."]
+	quest.4C3CACB8E8D2B19A.quest_desc: ["Keep the &aPokémon Egg&r in your inventory and &ewalk&r: it hatches into a level 1 Pokémon. Its tooltip hints how close it is, and a party Pokémon with &6Flame Body&r or &6Magma Armor&r halves the walk." "" "Its genes are &oa mix&r of both parents plus some randomness - never a copy of either. Three of its stats (IVs) also come from a random parent."]
 	quest.AE3352B9C0D17B99.title: "Proud Parent"
 	quest.AE3352B9C0D17B99.quest_subtitle: "Analyse one of the parents"
 	quest.AE3352B9C0D17B99.quest_desc: ["Analyse one of the parents again and keep its numbers in mind (or &bRecord&r it)."]

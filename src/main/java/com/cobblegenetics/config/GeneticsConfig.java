@@ -85,6 +85,20 @@ public final class GeneticsConfig {
     public int incubatorMinParentLevel = 15;
     /** Cooldown per parent, in minutes, before it can be bred again with the Incubator. */
     public int incubatorParentCooldownMinutes = 20;
+    /** Minutes the parents stay inside the Genetic Incubator before the egg is ready. */
+    public double incubatorBreedingMinutes = 5;
+    /**
+     * The Incubator gives a Pokémon Egg that hatches after walking, like the main series. false = when breeding
+     * finishes, the offspring goes straight to the party with its parents.
+     */
+    public boolean incubatorEggs = true;
+    /**
+     * Blocks to walk per egg cycle of the species (Cobblemon's eggCycles: 20 for most starters, 40 for Dratini...).
+     * 40 means a 20-cycle egg needs 800 blocks, about three minutes of walking.
+     */
+    public int eggBlocksPerCycle = 40;
+    /** Abilities in the party that halve the distance, as in the main series (Showdown ids). */
+    public List<String> eggSpeedAbilities = new ArrayList<>(List.of("flamebody", "magmaarmor", "steamengine"));
 
     /**
      * Mods that already randomise the size (scale modifier) of Pokémon. While one is installed, the genetic size gene
@@ -241,6 +255,11 @@ public final class GeneticsConfig {
         }
         incubatorMinParentLevel = clampInt(incubatorMinParentLevel, 1, 100);
         incubatorParentCooldownMinutes = Math.max(0, incubatorParentCooldownMinutes);
+        eggBlocksPerCycle = Math.max(1, eggBlocksPerCycle);
+        incubatorBreedingMinutes = Math.max(0.05, incubatorBreedingMinutes);
+        if (eggSpeedAbilities == null) {
+            eggSpeedAbilities = new ArrayList<>();
+        }
         if (shadowSpeciesBlacklist == null) {
             shadowSpeciesBlacklist = new ArrayList<>();
         }

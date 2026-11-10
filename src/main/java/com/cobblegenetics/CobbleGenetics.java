@@ -38,6 +38,7 @@ public class CobbleGenetics {
         GeneticsTrigger.initialize(modBus);
         ModNetworking.initialize(modBus);
         WorldHooks.register();
+        com.cobblegenetics.breeding.EggHatching.register();
         // NeoForge constructs mods in parallel: Cobblemon's lists (aspect providers, properties, events) are touched
         // on the main thread, in common setup, long before any Pokémon exists
         modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(CobblemonHooks::register));

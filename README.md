@@ -19,7 +19,7 @@ CobbleGenetics is a separate mod from [Fusionmon](https://github.com/zacharyd3/f
 | Size gene | Physical size. |
 | Inheritable traits | Six Mendelian loci (dominant, recessive and co-dominant alleles), such as the rare recessive *Shadowproof*. |
 
-**Breeding and inheritance.** Offspring mix their parents' genes with noise. Each trait takes one allele from each parent. Opposed affinities make offspring unstable, while compatible ones give hybrid vigour. Mutations pass on directly or *latent*, and two latent carriers can make them reappear. Breeding uses the built-in **Genetic Incubator**, because Cobblemon 1.7.3 has no breeding of its own. Breeding addons that fire Cobblemon's egg events are supported too.
+**Breeding and inheritance.** Offspring mix their parents' genes with noise. Each trait takes one allele from each parent. Opposed affinities make offspring unstable, while compatible ones give hybrid vigour. Mutations pass on directly or *latent*, and two latent carriers can make them reappear. Breeding uses the built-in **Genetic Incubator** block, because Cobblemon 1.7.3 has no breeding of its own: the parents stay inside its glass case while breeding, then it produces a Pokémon Egg that hatches after walking (egg cycles per species; Flame Body and Magma Armor halve it). Breeding addons that fire Cobblemon's egg events are supported too.
 
 **Mutations.** 33 data-driven mutations in four categories (physical, elemental, biological, ability) plus negative ones, across five tiers from Common to Legendary. They arise from wild spawns, breeding, evolution, the environment (heat, cold, sea, darkness), Mutagens, purification, and thunderstorm "genetic storms". Rare combinations need other mutations first: *Void Luminescence* requires Melanism plus Bioluminescence. Mutations show as colour tints, glow, size and aspects for resource packs.
 
@@ -38,7 +38,7 @@ CobbleGenetics is a separate mod from [Fusionmon](https://github.com/zacharyd3/f
 | Genetic Analyzer | Analyse a Pokémon (right-click it, or use in the air for a party member). |
 | Analyzer Upgrade (Stability, Heredity, Mutation, Shadow modules) | Raise research to level 2 / 3 / 4 / 5. |
 | Genetic Record | Saved analysis (Record button on the Analyzer screen; uses 1 paper). |
-| Genetic Incubator | Breed two compatible party Pokémon (uses one Egg). |
+| Genetic Incubator (2-block glass case) | Right-click and choose two compatible party Pokémon (uses one chicken Egg). They wait inside for a few minutes, return to your party, and leave a **Pokémon Egg** inside; take it and walk to hatch it, as in the main series. |
 | Mutagen | Force a mutation at the cost of stability. |
 | Gene Stabilizer | Repair corruption damage. |
 | Purifying Scent / Purification Incense | Lower corruption (the Incense only below 60%). |
