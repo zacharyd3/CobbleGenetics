@@ -104,7 +104,7 @@ public final class AnalysisService {
             record.add(line("stability", Component.literal(round(effective) + "")));
             Component affinity = typeName(genome.affinity).copy().append(" (" + GeneticsRules.grade(genome.affinityStrength) + ")");
             profile.add(row("affinity", affinity, (float) (genome.affinityStrength / 100), INFO)
-                    .withNote(affinityNote(genome, config)));
+                    .withNote(affinityNote(pokemon, genome, config)));
             record.add(line("affinity", affinity));
         } else {
             profile.add(locked("stability", 2));
@@ -447,9 +447,14 @@ public final class AnalysisService {
     }
 
     /** Which partners hurt (opposed) and what a different affinity gives (hybrid vigour), plus the Tera drift. */
-    private static Component affinityNote(Genome genome, GeneticsConfig config) {
+    private static Component affinityNote(Pokemon pokemon, Genome genome, GeneticsConfig config) {
         List<String> opposed = GeneticsRules.opposedTo(genome.affinity, config);
         MutableComponent note = Component.empty();
+        double resonance = GeneticsRules.resonance(genome, GeneticsService.typesOf(pokemon), config);
+        note.append(resonance > 1
+                ? Component.translatable("analysis.cobblegenetics.note.resonance", Math.round((resonance - 1) * 100))
+                : Component.translatable("analysis.cobblegenetics.note.no_resonance"));
+        note.append(" ");
         if (!opposed.isEmpty()) {
             MutableComponent names = Component.empty();
             for (String type : opposed) {
@@ -459,10 +464,11 @@ public final class AnalysisService {
                 names.append(typeName(type));
             }
             note.append(Component.translatable("analysis.cobblegenetics.note.affinity_opposed", names,
-                    round(config.incompatibilityPenalty)));
+                    round(config.incompatibilityPenalty * GeneticsRules.affinityFactor(genome, genome))));
             note.append(" ");
         }
-        note.append(Component.translatable("analysis.cobblegenetics.note.affinity", round(config.hybridVigour),
+        note.append(Component.translatable("analysis.cobblegenetics.note.affinity",
+                String.format(Locale.ROOT, "%.1f", config.hybridVigour * GeneticsRules.affinityFactor(genome, genome)),
                 typeName(genome.affinity)));
         return note;
     }

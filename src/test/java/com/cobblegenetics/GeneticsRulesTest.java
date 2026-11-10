@@ -127,12 +127,43 @@ class GeneticsRulesTest {
         Genome b = new Genome();
         b.affinity = "water";
         b.stability = 70;
+        a.affinityStrength = 50;
+        b.affinityStrength = 50;
         assertTrue(GeneticsRules.opposed("fire", "water", CONFIG));
         assertTrue(GeneticsRules.opposed("water", "fire", CONFIG));
         assertFalse(GeneticsRules.opposed("fire", "fire", CONFIG));
         GeneticsRules.Prediction prediction = GeneticsRules.predict(a, b, CONFIG, List.of());
         assertTrue(prediction.incompatible());
         assertTrue(prediction.stability().max() < 70);
+    }
+
+    @Test
+    void affinityStrengthScalesBreedingAndResonance() {
+        Genome weak = new Genome();
+        weak.affinity = "fire";
+        weak.affinityStrength = 0;
+        Genome strong = new Genome();
+        strong.affinity = "fire";
+        strong.affinityStrength = 100;
+        assertEquals(0.5, GeneticsRules.affinityFactor(weak, weak), 1e-9);
+        assertEquals(1.5, GeneticsRules.affinityFactor(strong, strong), 1e-9);
+        // Resonance only with its own type, scaled by strength
+        assertEquals(1 + CONFIG.affinityResonanceExp, GeneticsRules.resonance(strong, List.of("fire"), CONFIG), 1e-9);
+        assertEquals(1, GeneticsRules.resonance(strong, List.of("water"), CONFIG), 1e-9);
+        assertEquals(1, GeneticsRules.resonance(weak, List.of("fire"), CONFIG), 1e-9);
+        // The stronger parent's affinity is passed on far more often
+        Genome water = new Genome();
+        water.affinity = "water";
+        water.affinityStrength = 10;
+        Random random = new Random(5);
+        int fire = 0;
+        for (int i = 0; i < 2000; i++) {
+            if (GeneticsRules.breed(strong, water, random, CONFIG, List.of(), List.of(), id -> null).genome()
+                    .affinity.equals("fire")) {
+                fire++;
+            }
+        }
+        assertTrue(fire > 1700, "fire " + fire);
     }
 
     @Test

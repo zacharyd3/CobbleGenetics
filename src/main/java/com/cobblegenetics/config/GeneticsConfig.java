@@ -80,6 +80,12 @@ public final class GeneticsConfig {
     /** Affinity pairs that are genetically incompatible. Order does not matter. */
     public List<String> opposedAffinities = new ArrayList<>(List.of(
             "fire/water", "grass/fire", "electric/ground", "dark/psychic", "dragon/fairy", "ghost/normal", "ice/fire"));
+    /**
+     * Affinity resonance: a Pokémon whose affinity matches one of its own types gains this much more EXP at affinity
+     * strength 100 (strength 60 = 60 % of it). Affinity strength also scales hybrid vigour and the incompatibility
+     * penalty in breeding (0.5x at strength 0, 1x at 50, 1.5x at 100).
+     */
+    public double affinityResonanceExp = 0.15;
     /** Chance the offspring's affinity is recombined from its own species instead of copied from a parent. */
     public double affinityRecombinationChance = 0.15;
 
@@ -262,6 +268,7 @@ public final class GeneticsConfig {
     void sanitize() {
         potentialIvFloorMax = Math.max(0, Math.min(31, potentialIvFloorMax));
         potentialTrainingChance = Math.max(0, Math.min(1, potentialTrainingChance));
+        affinityResonanceExp = Math.max(0, Math.min(2, affinityResonanceExp));
         potentialTrainingIvMax = Math.max(0, Math.min(31, potentialTrainingIvMax));
         attendantStepsPerSecond = Math.max(0, attendantStepsPerSecond);
         attendantRange = clampInt(attendantRange, 1, 32);

@@ -14,7 +14,7 @@ CobbleGenetics is a separate mod from [Fusionmon](https://github.com/zacharyd3/f
 |------|--------|
 | Genetic Potential | Freshly spawned and hatched Pokémon get a minimum for every IV (up to 12 at potential 100). While training, each level up can raise the lowest IV, up to a ceiling set by potential (31 at potential 100). |
 | Genetic Stability | Low stability means more mutations, a larger share of them harmful, and higher tiers. |
-| Elemental Affinity | A hidden type leaning. Some mutations shift the Tera Type to it. |
+| Elemental Affinity | A hidden type leaning with a strength grade. Matching one of its own types it *resonates* (up to +15% EXP). Strength scales hybrid vigour and the opposed-affinity penalty in breeding, and the stronger parent's affinity is the likelier to pass on. Some mutations shift the Tera Type to it. |
 | Mutation Susceptibility | How often mutation rolls happen. |
 | Size gene | Physical size. |
 | Inheritable traits | Six Mendelian loci (dominant, recessive and co-dominant alleles), such as the rare recessive *Shadowproof*. |
