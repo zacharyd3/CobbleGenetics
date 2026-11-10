@@ -88,6 +88,10 @@ bash ./gradlew build
 
 The jar ends up in `build/libs/`. `bash ./gradlew runClient` / `runServer` start a development game, with Kotlin for Forge added for development only.
 
+### Downloads from GitHub
+
+Every push builds the mod on GitHub Actions: open the **Actions** tab, pick a run, and download the jar under **Artifacts**. To publish a release, set `version` in `gradle.properties`, commit, then push a matching tag (`git tag v0.1.0 && git push origin v0.1.0`). The jar is attached to a new GitHub Release automatically.
+
 ## License
 
 MPL-2.0, like Cobblemon.
