@@ -23,7 +23,8 @@
       "multiplier": 2.0
     },
     {
-      "type": "glow"
+      "type": "glow",
+      "color": "#ff9cc8"
     }
   ]
 }

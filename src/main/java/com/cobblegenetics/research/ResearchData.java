@@ -25,6 +25,8 @@ public final class ResearchData implements INBTSerializable<CompoundTag> {
     public final Set<String> mutationsDiscovered = new LinkedHashSet<>();
     /** Pokémon already counted for "analyses" (re-analysing the same one does not count again). Capped. */
     public final Set<String> analyzedPokemon = new LinkedHashSet<>();
+    /** Best breeding value analysed per species ("cobblemon:pikachu" -> 0-100), the target to beat. Capped. */
+    public final java.util.Map<String, Integer> bestBreedingValue = new java.util.LinkedHashMap<>();
     /** The previously analysed Pokémon, for breeding predictions (not saved). */
     public transient UUID lastAnalyzed;
 
@@ -43,6 +45,9 @@ public final class ResearchData implements INBTSerializable<CompoundTag> {
         ListTag analyzed = new ListTag();
         analyzedPokemon.forEach(id -> analyzed.add(StringTag.valueOf(id)));
         tag.put("analyzed", analyzed);
+        CompoundTag best = new CompoundTag();
+        bestBreedingValue.forEach(best::putInt);
+        tag.put("bestBreedingValue", best);
         return tag;
     }
 
@@ -63,6 +68,18 @@ public final class ResearchData implements INBTSerializable<CompoundTag> {
         ListTag analyzed = tag.getList("analyzed", Tag.TAG_STRING);
         for (int i = 0; i < analyzed.size(); i++) {
             analyzedPokemon.add(analyzed.getString(i));
+        }
+        bestBreedingValue.clear();
+        CompoundTag best = tag.getCompound("bestBreedingValue");
+        for (String species : best.getAllKeys()) {
+            bestBreedingValue.put(species, best.getInt(species));
+        }
+    }
+
+    public void recordBreedingValue(String species, int value) {
+        bestBreedingValue.put(species, value);
+        if (bestBreedingValue.size() > 2000) {
+            bestBreedingValue.remove(bestBreedingValue.keySet().iterator().next());
         }
     }
 

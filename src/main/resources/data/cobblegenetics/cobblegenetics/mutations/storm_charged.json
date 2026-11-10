@@ -24,7 +24,8 @@
       "amount": 3
     },
     {
-      "type": "glow"
+      "type": "glow",
+      "color": "#fff07a"
     }
   ]
 }

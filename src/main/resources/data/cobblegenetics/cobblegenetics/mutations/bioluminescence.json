@@ -18,7 +18,8 @@
   },
   "effects": [
     {
-      "type": "glow"
+      "type": "glow",
+      "color": "#6dffd2"
     },
     {
       "type": "tint",

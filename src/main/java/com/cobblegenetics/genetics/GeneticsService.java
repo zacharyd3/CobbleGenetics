@@ -102,6 +102,46 @@ public final class GeneticsService {
     }
 
     /**
+     * Genetic Potential while training: per level gained, with config.potentialTrainingChance, the lowest IV below the
+     * training ceiling rises by 1 (ties broken at random). Shadow Pokémon do not grow this way.
+     */
+    public static void train(Pokemon pokemon, int levels) {
+        GeneticsConfig config = GeneticsConfig.get();
+        if (config.potentialTrainingChance <= 0 || PokemonGenetics.isShadow(pokemon)) {
+            return;
+        }
+        Genome genome = PokemonGenetics.genome(pokemon);
+        if (genome == null) {
+            return;
+        }
+        int ceiling = GeneticsRules.trainingCeiling(genome, config);
+        var random = java.util.concurrent.ThreadLocalRandom.current();
+        for (int i = 0; i < Math.min(levels, 100); i++) {
+            if (random.nextDouble() >= config.potentialTrainingChance) {
+                continue;
+            }
+            Stat lowest = null;
+            int lowestValue = Integer.MAX_VALUE;
+            int ties = 0;
+            for (Stat stat : MAIN_STATS) {
+                Integer iv = pokemon.getIvs().get(stat);
+                int value = iv == null ? 0 : iv;
+                if (value < lowestValue) {
+                    lowest = stat;
+                    lowestValue = value;
+                    ties = 1;
+                } else if (value == lowestValue && random.nextInt(++ties) == 0) {
+                    lowest = stat;
+                }
+            }
+            if (lowest == null || lowestValue >= ceiling) {
+                return;
+            }
+            pokemon.setIV(lowest, Math.min(31, lowestValue + 1));
+        }
+    }
+
+    /**
      * One-shot effects of the genome: IV floor from potential, genetic size, allele effects and the effects of
      * mutations it was born with. Only for fresh Pokémon; retroactive genomes only get marked as applied.
      */

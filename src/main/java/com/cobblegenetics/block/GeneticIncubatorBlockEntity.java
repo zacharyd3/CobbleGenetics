@@ -70,6 +70,8 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
     private ItemStack egg = ItemStack.EMPTY;
     /** Set while a player is choosing parents, so two players cannot fill the same incubator at once. */
     private UUID choosing;
+    /** Fraction of a step carried between seconds while an attendant tends the Egg (not saved). */
+    private double attendantSteps;
 
     public GeneticIncubatorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlocks.INCUBATOR_ENTITY.get(), pos, state);
@@ -277,6 +279,14 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
     // ------------------------------------------------------------------ breeding
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, GeneticIncubatorBlockEntity incubator) {
+        if (incubator.phase == Phase.EGG_READY && level.getGameTime() % 20 == 0
+                && level instanceof ServerLevel serverLevel) {
+            try {
+                incubator.tendEgg(serverLevel);
+            } catch (RuntimeException e) {
+                CobbleGenetics.failed("a Day Care Attendant tending an Egg", e);
+            }
+        }
         if (incubator.phase == Phase.BREEDING && level.getGameTime() >= incubator.endTime
                 && level instanceof ServerLevel serverLevel) {
             try {
@@ -288,6 +298,46 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
                 incubator.phase = Phase.EMPTY;
                 incubator.changed();
             }
+        }
+    }
+
+    /**
+     * Once a second while an Egg waits: a Day Care Attendant nearby keeps it warm, so it counts down without anyone
+     * walking (config.attendantStepsPerSecond), and hatches straight to the owner's party or PC.
+     */
+    private void tendEgg(ServerLevel level) {
+        double rate = GeneticsConfig.get().attendantStepsPerSecond;
+        if (owner == null || egg.isEmpty() || rate <= 0
+                || !com.cobblegenetics.village.ModVillagers.attendantNear(level, worldPosition)) {
+            return;
+        }
+        var data = egg.get(com.cobblegenetics.item.ModItems.EGG_DATA.get());
+        if (data == null) {
+            return;
+        }
+        attendantSteps += rate;
+        int steps = (int) attendantSteps;
+        attendantSteps -= steps;
+        if (steps <= 0) {
+            return;
+        }
+        int remaining = data.remaining() - steps;
+        if (remaining > 0) {
+            egg.set(com.cobblegenetics.item.ModItems.EGG_DATA.get(), data.withRemaining(remaining));
+            setChanged();
+            if (level.random.nextInt(4) == 0) {
+                level.sendParticles(net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER,
+                        worldPosition.getX() + 0.5, worldPosition.getY() + 0.9, worldPosition.getZ() + 0.5,
+                        2, 0.2, 0.2, 0.2, 0);
+            }
+            return;
+        }
+        if (EggHatching.hatchFor(level, owner, data, worldPosition)) {
+            egg = ItemStack.EMPTY;
+            phase = Phase.EMPTY;
+            owner = null;
+            attendantSteps = 0;
+            changed();
         }
     }
 

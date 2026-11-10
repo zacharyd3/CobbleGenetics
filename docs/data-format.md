@@ -90,7 +90,7 @@ Effects are shared by mutations and alleles. **One-shot** effects change Cobblem
 | `tera_shift` | one-shot | `tera` (type name or `affinity`) | Sets the Tera Type. Config `mutationsCanChangeTeraType`. |
 | `hidden_ability` | one-shot | | Gives the species' hidden ability. Config `mutationsCanModifyAbilities`. |
 | `tint` | visual | `color` | Colour multiplier drawn on the client (aspect `cg-tint-rrggbb`). |
-| `glow` | visual | | Glow particles (aspect `cg-glow`). |
+| `glow` | visual | `color` (optional) | Bioluminescence: the body stays dimly lit in the dark, a faint pulsing halo surrounds it and glow particles drift off (aspects `cg-glow` and, with a colour, `cg-glow-rrggbb`). Without `color` the halo takes the Pokémon's tint colour. |
 | `aspect` | visual | `aspect` | A plain aspect for resource packs (see resource-packs.md). |
 | `exp_multiplier` | passive | `multiplier`, optional `min_temperature` / `max_temperature` | EXP gained, optionally only in some climates. |
 | `erratic_exp` | passive | `min`, `max` | Each EXP gain is multiplied by a random value. |

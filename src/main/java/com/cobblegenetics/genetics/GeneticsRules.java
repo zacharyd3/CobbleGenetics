@@ -95,8 +95,9 @@ public final class GeneticsRules {
         double noise = config.inheritanceNoise;
 
         double potential = mix * mother.potential + (1 - mix) * father.potential + random.nextGaussian() * noise;
+        double affinityFactor = affinityFactor(mother, father);
         if (!incompatible && !mother.affinity.equals(father.affinity)) {
-            potential += config.hybridVigour;
+            potential += config.hybridVigour * affinityFactor;
         }
         child.potential = clamp(potential, 0, 100);
 
@@ -105,7 +106,7 @@ public final class GeneticsRules {
                 + (1 - mix) * (father.stability - father.stabilityDamage * 0.5);
         double stability = parentStability + random.nextGaussian() * noise * 0.8;
         if (incompatible) {
-            stability -= config.incompatibilityPenalty;
+            stability -= config.incompatibilityPenalty * affinityFactor;
         }
         child.stability = clamp(stability, 0, 100);
 
@@ -116,7 +117,10 @@ public final class GeneticsRules {
         if (!childTypes.isEmpty() && random.nextDouble() < config.affinityRecombinationChance) {
             child.affinity = childTypes.get(random.nextInt(childTypes.size()));
         } else {
-            child.affinity = random.nextBoolean() ? mother.affinity : father.affinity;
+            // The stronger affinity is the likelier to be passed on
+            double total = mother.affinityStrength + father.affinityStrength;
+            double motherShare = total <= 0 ? 0.5 : mother.affinityStrength / total;
+            child.affinity = random.nextDouble() < motherShare ? mother.affinity : father.affinity;
         }
         child.affinityStrength = clamp((mother.affinityStrength + father.affinityStrength) / 2
                 + random.nextGaussian() * noise, 0, 100);
@@ -224,13 +228,72 @@ public final class GeneticsRules {
 
     /** Final chance of a mutation roll for a pathway: susceptibility 50 = the base chance, 0 = half, 100 = 1.5x. */
     public static double mutationChance(double base, Genome genome, double instability) {
-        double factor = (0.5 + genome.susceptibility / 100.0) * (1 + instability * 0.5);
-        return clamp(base * factor, 0, 1);
+        return clamp(base * mutationFactor(genome, instability), 0, 1);
     }
 
     /** Minimum IV for freshly generated Pokémon (see config.potentialIvFloorMax). */
     public static int ivFloor(Genome genome, GeneticsConfig config) {
         return (int) Math.round(clamp(genome.potential, 0, 100) / 100.0 * config.potentialIvFloorMax);
+    }
+
+    /**
+     * How strongly two parents' affinities act in breeding, from their average affinity strength: 0.5x at strength
+     * 0, 1x at 50, 1.5x at 100. Scales both hybrid vigour (different, compatible affinities) and the incompatibility
+     * penalty (opposed ones): strong affinities are a bigger reward and a bigger risk.
+     */
+    public static double affinityFactor(Genome a, Genome b) {
+        return 0.5 + clamp((a.affinityStrength + b.affinityStrength) / 2, 0, 100) / 100.0;
+    }
+
+    /**
+     * Resonance: an affinity that matches one of the Pokémon's own types makes it learn faster. EXP multiplier
+     * 1 + strength / 100 * config.affinityResonanceExp (1 when the affinity is off-type).
+     */
+    public static double resonance(Genome genome, Collection<String> ownTypes, GeneticsConfig config) {
+        if (genome.affinity == null || !ownTypes.contains(genome.affinity.toLowerCase(Locale.ROOT))) {
+            return 1;
+        }
+        return 1 + clamp(genome.affinityStrength, 0, 100) / 100.0 * config.affinityResonanceExp;
+    }
+
+    /** IV ceiling that levelling up can raise IVs to (config.potentialTrainingChance). */
+    public static int trainingCeiling(Genome genome, GeneticsConfig config) {
+        return (int) Math.round(clamp(genome.potential, 0, 100) / 100.0 * config.potentialTrainingIvMax);
+    }
+
+    /** Share (0-1) of mutations that come out harmful, as MutationRoller decides it. */
+    public static double harmfulShare(Genome genome, double instability, GeneticsConfig config) {
+        return clamp(config.negativeMutationChance * (1 + instability) * (1 - genome.potential / 200.0), 0, 1);
+    }
+
+    /** How much more (or less) often mutation rolls succeed than the base chance (mutationChance without the base). */
+    public static double mutationFactor(Genome genome, double instability) {
+        return (0.5 + genome.susceptibility / 100.0) * (1 + instability * 0.5);
+    }
+
+    /**
+     * One number for "how good is this Pokémon to breed from", 0-100: mostly potential (better IVs for every baby),
+     * then stability (fewer harmful mutations, stable babies).
+     */
+    public static double breedingValue(Genome genome, double effectiveStability) {
+        return clamp(0.6 * genome.potential + 0.4 * effectiveStability, 0, 100);
+    }
+
+    /** The affinities opposed to this one in config.opposedAffinities. */
+    public static List<String> opposedTo(String affinity, GeneticsConfig config) {
+        List<String> out = new java.util.ArrayList<>();
+        String a = affinity == null ? "" : affinity.toLowerCase(Locale.ROOT);
+        for (String pair : config.opposedAffinities) {
+            String[] parts = pair.toLowerCase(Locale.ROOT).trim().split("/");
+            if (parts.length == 2) {
+                if (parts[0].equals(a) && !out.contains(parts[1])) {
+                    out.add(parts[1]);
+                } else if (parts[1].equals(a) && !out.contains(parts[0])) {
+                    out.add(parts[0]);
+                }
+            }
+        }
+        return out;
     }
 
     /** Letter grade shown by the Analyzer. */
@@ -270,14 +333,15 @@ public final class GeneticsRules {
     public static Prediction predict(Genome a, Genome b, GeneticsConfig config, Collection<TraitLocus> loci) {
         boolean incompatible = opposed(a.affinity, b.affinity, config);
         double noise = config.inheritanceNoise * 2;
-        double vigour = !incompatible && !a.affinity.equals(b.affinity) ? config.hybridVigour : 0;
+        double factor = affinityFactor(a, b);
+        double vigour = !incompatible && !a.affinity.equals(b.affinity) ? config.hybridVigour * factor : 0;
         double lowP = Math.min(a.potential, b.potential) * 0.7 + Math.max(a.potential, b.potential) * 0.3;
         double highP = Math.max(a.potential, b.potential) * 0.7 + Math.min(a.potential, b.potential) * 0.3;
         Range potential = new Range(clamp(lowP - noise + vigour, 0, 100), clamp(highP + noise + vigour, 0, 100));
 
         double sa = a.stability - a.stabilityDamage * 0.5;
         double sb = b.stability - b.stabilityDamage * 0.5;
-        double penalty = incompatible ? config.incompatibilityPenalty : 0;
+        double penalty = incompatible ? config.incompatibilityPenalty * factor : 0;
         double lowS = Math.min(sa, sb) * 0.7 + Math.max(sa, sb) * 0.3 - penalty;
         double highS = Math.max(sa, sb) * 0.7 + Math.min(sa, sb) * 0.3 - penalty;
         Range stability = new Range(clamp(lowS - noise * 0.8, 0, 100), clamp(highS + noise * 0.8, 0, 100));

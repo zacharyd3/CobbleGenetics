@@ -34,7 +34,7 @@ public final class BuiltinEffects {
         EffectTypes.register("all_ivs", json -> new AllIvsEffect(integer(json, "amount", 2)));
         EffectTypes.register("scale", json -> new ScaleEffect((float) number(json, "multiplier", 1.2)));
         EffectTypes.register("tint", json -> new TintEffect(color(str(json, "color", "#ffffff"))));
-        EffectTypes.register("glow", json -> new GlowEffect());
+        EffectTypes.register("glow", json -> new GlowEffect(json.has("color") ? color(str(json, "color", "#ffffff")) : -1));
         EffectTypes.register("aspect", json -> new AspectEffect(str(json, "aspect", "")));
         EffectTypes.register("tera_shift", json -> new TeraShiftEffect(str(json, "tera", "affinity")));
         EffectTypes.register("hidden_ability", json -> new HiddenAbilityEffect());
@@ -123,14 +123,21 @@ public final class BuiltinEffects {
         }
     }
 
-    /** Glowing particles around the Pokémon (client side, aspect "cg-glow"). */
-    public record GlowEffect() implements GeneticEffect {
+    /**
+     * Bioluminescent glow, drawn by the client: the body is lit as if near a light, a faint pulsing halo surrounds it
+     * and a few glow particles drift off. Aspect "cg-glow", plus "cg-glow-rrggbb" when the JSON gives a colour (without
+     * one the halo takes the Pokémon's tint colour). rgb = -1 means no colour.
+     */
+    public record GlowEffect(int rgb) implements GeneticEffect {
         public String type() {
             return "glow";
         }
 
         public void aspects(Set<String> out) {
             out.add("cg-glow");
+            if (rgb >= 0) {
+                out.add(String.format(Locale.ROOT, "cg-glow-%06x", rgb & 0xFFFFFF));
+            }
         }
 
         public Component describe() {

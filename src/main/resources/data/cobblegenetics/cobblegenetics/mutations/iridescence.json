@@ -18,7 +18,8 @@
       "color": "#b8f0ff"
     },
     {
-      "type": "glow"
+      "type": "glow",
+      "color": "#b8f0ff"
     },
     {
       "type": "all_ivs",

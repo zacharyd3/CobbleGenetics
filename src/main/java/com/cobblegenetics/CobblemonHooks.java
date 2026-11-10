@@ -6,6 +6,7 @@ import com.cobblegenetics.config.GeneticsConfig;
 import com.cobblegenetics.data.GeneticsAspects;
 import com.cobblegenetics.data.GeneticsProperties;
 import com.cobblegenetics.data.PokemonGenetics;
+import com.cobblegenetics.genetics.GeneticsRules;
 import com.cobblegenetics.genetics.GeneticsService;
 import com.cobblegenetics.genetics.Genome;
 import com.cobblegenetics.mutation.MutationSource;
@@ -147,6 +148,7 @@ public final class CobblemonHooks {
                 temperature = owner.serverLevel().getBiome(pos).value().getBaseTemperature();
             }
             double multiplier = GeneticsService.expMultiplier(genome, temperature);
+            multiplier *= GeneticsRules.resonance(genome, GeneticsService.typesOf(pokemon), GeneticsConfig.get());
             if (multiplier != 1) {
                 event.setExperience(Math.max(1, (int) Math.round(event.getExperience() * multiplier)));
             }
@@ -159,6 +161,7 @@ public final class CobblemonHooks {
                         * Math.max(1, event.getNewLevel() - event.getOldLevel()), ShadowService.Activity.LEVEL,
                         pokemon.getOwnerPlayer());
             }
+            GeneticsService.train(pokemon, Math.max(1, event.getNewLevel() - event.getOldLevel()));
         }));
 
         // Battles: Shadow encounters, purification by winning, corruption by losing, regeneration

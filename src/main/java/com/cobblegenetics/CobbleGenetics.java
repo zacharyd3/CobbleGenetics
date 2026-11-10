@@ -34,6 +34,7 @@ public class CobbleGenetics {
         GeneticsConfig.load(FMLPaths.CONFIGDIR.get().resolve(MOD_ID + ".json"));
         ModBlocks.initialize(modBus);
         ModItems.initialize(modBus);
+        com.cobblegenetics.village.ModVillagers.initialize(modBus);
         Research.initialize(modBus);
         GeneticsTrigger.initialize(modBus);
         ModNetworking.initialize(modBus);

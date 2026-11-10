@@ -9,7 +9,7 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 /** Registers CobbleGenetics' two messages. Handlers run on the main thread. */
 public final class ModNetworking {
 
-    private static final String PROTOCOL = "1";
+    private static final String PROTOCOL = "2";
 
     private ModNetworking() {
     }

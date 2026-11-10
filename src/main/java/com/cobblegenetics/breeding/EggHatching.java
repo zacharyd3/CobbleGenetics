@@ -139,6 +139,33 @@ public final class EggHatching {
 
     // ------------------------------------------------------------------ hatching
 
+    /**
+     * An Egg hatched by a Day Care Attendant in an Incubator: the baby goes to the owner's party, or PC when full
+     * (online or not, as the Incubator's parents do). Returns false if the Pokémon could not be read (keep the Egg).
+     */
+    public static boolean hatchFor(net.minecraft.server.level.ServerLevel level, UUID owner, EggData data,
+                                   net.minecraft.core.BlockPos pos) {
+        Pokemon pokemon;
+        try {
+            pokemon = Pokemon.Companion.loadFromNBT(level.registryAccess(), data.pokemon());
+        } catch (RuntimeException e) {
+            CobbleGenetics.failed("hatching an egg in an Incubator (unreadable Pokémon)", e);
+            return false;
+        }
+        pokemon.setUuid(UUID.randomUUID());
+        Cobblemon.INSTANCE.getStorage().getParty(owner, level.registryAccess()).add(pokemon);
+        level.playSound(null, pos, SoundEvents.TURTLE_EGG_HATCH, SoundSource.BLOCKS, 1, 1.2f);
+        level.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(ModItems.POKEMON_EGG.get())),
+                pos.getX() + 0.5, pos.getY() + 0.8, pos.getZ() + 0.5, 20, 0.25, 0.25, 0.25, 0.05);
+        ServerPlayer player = level.getServer().getPlayerList().getPlayer(owner);
+        if (player != null) {
+            player.sendSystemMessage(Component.translatable("message.cobblegenetics.egg_hatched_daycare",
+                    pokemon.getDisplayName(false)).withStyle(ChatFormatting.GREEN));
+            CobblemonEvents.HATCH_EGG_POST.post(new HatchEggEvent.Post(player, pokemon));
+        }
+        return true;
+    }
+
     static void hatch(ServerPlayer player, ItemStack stack, EggData data) {
         Pokemon pokemon;
         try {
