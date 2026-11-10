@@ -2,10 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "cobblegenetics_1_genetics"
-	group: ""
+	group: "52E24F4D0DDFF37E"
 	icon: { id: "cobblegenetics:genetic_analyzer" }
 	id: "6C4349CF7827A5B8"
-	order_index: 0
+	order_index: 1
 	quest_links: [ ]
 	quests: [
 		{
