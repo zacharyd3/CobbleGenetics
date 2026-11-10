@@ -151,6 +151,39 @@ public class GeneticIncubatorBlock extends BaseEntityBlock {
         return createTickerHelper(type, ModBlocks.INCUBATOR_ENTITY.get(), GeneticIncubatorBlockEntity::serverTick);
     }
 
+    /** Feeding: right-click with a berry (item tag cobblegenetics:breeding_food) while the pair waits inside. */
+    @Override
+    protected net.minecraft.world.ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level,
+                                                                  BlockPos pos, Player player,
+                                                                  net.minecraft.world.InteractionHand hand,
+                                                                  BlockHitResult hit) {
+        if (!stack.is(GeneticIncubatorBlockEntity.BREEDING_FOOD)) {
+            return net.minecraft.world.ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+        BlockPos lower = state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos : pos.below();
+        if (!(level.getBlockEntity(lower) instanceof GeneticIncubatorBlockEntity incubator)
+                || incubator.phase() != GeneticIncubatorBlockEntity.Phase.WAITING) {
+            return net.minecraft.world.ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+        if (player instanceof ServerPlayer serverPlayer) {
+            incubator.feed(serverPlayer, stack);
+        }
+        return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    /** Love hearts drifting up inside the glass while breeding (client only, from the synced phase). */
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, net.minecraft.util.RandomSource random) {
+        if (state.getValue(HALF) != DoubleBlockHalf.LOWER || random.nextInt(6) != 0) {
+            return;
+        }
+        if (level.getBlockEntity(pos) instanceof GeneticIncubatorBlockEntity incubator
+                && incubator.phase() == GeneticIncubatorBlockEntity.Phase.BREEDING) {
+            level.addParticle(net.minecraft.core.particles.ParticleTypes.HEART, pos.getX() + 0.3 + random.nextDouble() * 0.4,
+                    pos.getY() + 0.9 + random.nextDouble() * 0.6, pos.getZ() + 0.3 + random.nextDouble() * 0.4, 0, 0.02, 0);
+        }
+    }
+
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
                                                BlockHitResult hit) {

@@ -38,7 +38,7 @@ CobbleGenetics is a separate mod from [Fusionmon](https://github.com/zacharyd3/f
 | Genetic Analyzer | Analyse a Pokémon (right-click it, or use in the air for a party member). |
 | Analyzer Upgrade (Stability, Heredity, Mutation, Shadow modules) | Raise research to level 2 / 3 / 4 / 5. |
 | Genetic Record | Saved analysis (Record button on the Analyzer screen; uses 1 paper). |
-| Genetic Incubator (2-block glass case) | Right-click and choose two compatible party Pokémon (uses one chicken Egg). They wait inside for a few minutes, return to your party, and leave a **Pokémon Egg** inside; take it and walk to hatch it, as in the main series. |
+| Genetic Incubator (2-block glass case) | Right-click and choose two party Pokémon, then feed each a berry (love hearts). They breed inside for a few minutes, return to your party, and leave a **Pokémon Egg** inside; take it and walk to hatch it, as in the main series. Two different families make a **fusion baby** when Fusionmon is installed. |
 | Mutagen | Force a mutation at the cost of stability. |
 | Gene Stabilizer | Repair corruption damage. |
 | Purifying Scent / Purification Incense | Lower corruption (the Incense only below 60%). |

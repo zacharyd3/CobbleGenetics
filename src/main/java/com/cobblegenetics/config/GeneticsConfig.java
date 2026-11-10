@@ -85,7 +85,12 @@ public final class GeneticsConfig {
     public int incubatorMinParentLevel = 15;
     /** Cooldown per parent, in minutes, before it can be bred again with the Incubator. */
     public int incubatorParentCooldownMinutes = 20;
-    /** Minutes the parents stay inside the Genetic Incubator before the egg is ready. */
+    /**
+     * Two Pokémon of different evolutionary families can breed, and their egg hatches a fusion of both (head = one
+     * parent's first stage, body = the other's). Needs Fusionmon installed; without it, the main-series rules apply.
+     */
+    public boolean crossSpeciesFusions = true;
+    /** Minutes the parents stay inside the Genetic Incubator (after both were fed) before the egg is ready. */
     public double incubatorBreedingMinutes = 5;
     /**
      * The Incubator gives a Pokémon Egg that hatches after walking, like the main series. false = when breeding
