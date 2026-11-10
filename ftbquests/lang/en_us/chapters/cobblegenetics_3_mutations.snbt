@@ -2,9 +2,9 @@
 	quest.1D988EF8565F6C9D.title: "Something Different"
 	quest.1D988EF8565F6C9D.quest_subtitle: "Identify a mutated Pokémon"
 	quest.1D988EF8565F6C9D.quest_desc: ["Some Pokémon carry &dmutations&r: changes to colour, size, stats, type affinity or abilities." "" "Mutations come in five tiers: &7Common&r, &aUncommon&r, &9Rare&r, &5Epic&r and &6Legendary&r. Look for odd colours, glowing or unusual sizes - then analyse."]
-	quest.98740B3B46C00B85.title: "Mad Science"
-	quest.98740B3B46C00B85.quest_subtitle: "Induce a mutation"
-	quest.98740B3B46C00B85.quest_desc: ["Use a &dMutagen&r on a party Pokémon. It forces a mutation - but costs &cgenetic stability&r, and the result can be harmful." "" "Mutagens are a reliable way to get a mutated Pokémon for breeding experiments."]
+	quest.18740B3B46C00B85.title: "Mad Science"
+	quest.18740B3B46C00B85.quest_subtitle: "Induce a mutation"
+	quest.18740B3B46C00B85.quest_desc: ["Use a &dMutagen&r on a party Pokémon. It forces a mutation - but costs &cgenetic stability&r, and the result can be harmful." "" "Mutagens are a reliable way to get a mutated Pokémon for breeding experiments."]
 	quest.126D2C1A28190D8A.title: "Nature's Experiment"
 	quest.126D2C1A28190D8A.quest_subtitle: "Find a natural mutation"
 	quest.126D2C1A28190D8A.quest_desc: ["Wild Pokémon sometimes spawn mutated. It is more common for genetically unstable ones, and &edouble during thunderstorms&r - a genetic storm."]

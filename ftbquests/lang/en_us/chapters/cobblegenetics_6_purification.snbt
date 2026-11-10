@@ -2,9 +2,9 @@
 	quest.7531EB337473F853.title: "Open Heart"
 	quest.7531EB337473F853.quest_subtitle: "Purify through friendship"
 	quest.7531EB337473F853.quest_desc: ["Every point of friendship a Shadow Pokémon gains also wears away its corruption. Walk with it, feed it, care for it."]
-	quest.F6068254FE5BC041.title: "Battle Bond"
-	quest.F6068254FE5BC041.quest_subtitle: "Win a battle together"
-	quest.F6068254FE5BC041.quest_desc: ["Winning battles together purifies. &cLosing deepens the corruption&r."]
+	quest.76068254FE5BC041.title: "Battle Bond"
+	quest.76068254FE5BC041.quest_subtitle: "Win a battle together"
+	quest.76068254FE5BC041.quest_desc: ["Winning battles together purifies. &cLosing deepens the corruption&r."]
 	quest.3CDBC350B392DE26.title: "Sanctuary"
 	quest.3CDBC350B392DE26.quest_subtitle: "Use a Purification Chamber"
 	quest.3CDBC350B392DE26.quest_desc: ["Place a &dPurification Chamber&r and stay near it with your Shadow Pokémon: passive purification is three times faster."]
@@ -17,9 +17,9 @@
 	quest.0273CBE416368622.title: "After the Storm"
 	quest.0273CBE416368622.quest_subtitle: "Analyse the purified Pokémon"
 	quest.0273CBE416368622.quest_desc: ["Compare its genetic profile with what it was as a Shadow Pokémon."]
-	quest.C42515825CC4B726.title: "Reborn"
-	quest.C42515825CC4B726.quest_subtitle: "A purification-exclusive mutation"
-	quest.C42515825CC4B726.quest_desc: ["Purification can awaken &6Purified Aura&r, &5Umbral Resonance&r (only after very deep corruption) or the legendary &6Heartbound&r (only with very high friendship at the moment of purification)."]
+	quest.442515825CC4B726.title: "Reborn"
+	quest.442515825CC4B726.quest_subtitle: "A purification-exclusive mutation"
+	quest.442515825CC4B726.quest_desc: ["Purification can awaken &6Purified Aura&r, &5Umbral Resonance&r (only after very deep corruption) or the legendary &6Heartbound&r (only with very high friendship at the moment of purification)."]
 	quest.54E1543E8E009E0D.title: "Research Level 5"
 	quest.54E1543E8E009E0D.quest_subtitle: "Shadow Analysis"
 	quest.54E1543E8E009E0D.quest_desc: ["Level 5 shows exact corruption, resistance, how it was purified, and hints at &6rare genetic combinations&r your Pokémon are close to."]

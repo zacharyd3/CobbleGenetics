@@ -4,14 +4,14 @@
 	filename: "cobblegenetics_5_shadow"
 	group: "52E24F4D0DDFF37E"
 	icon: { id: "cobblegenetics:shadow_beacon" }
-	id: "A3DB2B6EF776B2E8"
+	id: "23DB2B6EF776B2E8"
 	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["A530A0BFCA34A198"]
+			dependencies: ["2530A0BFCA34A198"]
 			icon: { id: "cobblegenetics:shadow_beacon" }
-			id: "D244D1F89D102159"
+			id: "5244D1F89D102159"
 			rewards: [
 				{ count: 1, id: "0F096A8402ED9546", item: { count: 1, id: "cobblegenetics:shadow_beacon" }, type: "item" }
 				{ count: 2, id: "5A8698B446F37606", item: { count: 1, id: "cobblegenetics:purifying_scent" }, type: "item" }
@@ -21,20 +21,20 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["D244D1F89D102159"]
+			dependencies: ["5244D1F89D102159"]
 			icon: { id: "cobblegenetics:shadow_beacon" }
-			id: "AA4FAC3AE51D8976"
+			id: "2A4FAC3AE51D8976"
 			rewards: [
-				{ count: 5, id: "BF2D2832A01BD63F", item: { count: 1, id: "cobblemon:great_ball" }, type: "item" }
+				{ count: 5, id: "3F2D2832A01BD63F", item: { count: 1, id: "cobblemon:great_ball" }, type: "item" }
 			]
 			tasks: [{ advancement: "cobblegenetics:shadow_encounter", criterion: "", id: "7F48848BD8171F14", type: "advancement" }]
 			x: 2.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["AA4FAC3AE51D8976"]
+			dependencies: ["2A4FAC3AE51D8976"]
 			icon: { id: "cobblemon:ultra_ball" }
-			id: "BB8DEA5A1160916C"
+			id: "3B8DEA5A1160916C"
 			rewards: [
 				{ count: 3, id: "2DE7EF01DE28301B", item: { count: 1, id: "cobblemon:ultra_ball" }, type: "item" }
 			]
@@ -43,35 +43,35 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["BB8DEA5A1160916C"]
+			dependencies: ["3B8DEA5A1160916C"]
 			icon: { id: "cobblegenetics:genetic_analyzer" }
-			id: "888C833226CDAADD"
+			id: "088C833226CDAADD"
 			rewards: [
-				{ amount: 150, id: "CC9EF7741FDA556A", type: "xp" }
+				{ amount: 150, id: "4C9EF7741FDA556A", type: "xp" }
 			]
 			tasks: [{ advancement: "cobblegenetics:shadow_analyze", criterion: "", id: "374E1B51542494CF", type: "advancement" }]
 			x: 6.0d
 			y: -1.0d
 		}
 		{
-			dependencies: ["BB8DEA5A1160916C"]
+			dependencies: ["3B8DEA5A1160916C"]
 			icon: { id: "cobblegenetics:purifying_scent" }
 			id: "7DE4F3B29C90EB15"
 			rewards: [
-				{ count: 8, id: "B04A178277DA4FAD", item: { count: 1, id: "cobblemon:pecha_berry" }, type: "item" }
+				{ count: 8, id: "304A178277DA4FAD", item: { count: 1, id: "cobblemon:pecha_berry" }, type: "item" }
 			]
-			tasks: [{ count: 4L, id: "8EAB94F371C59E9E", item: { count: 1, id: "cobblegenetics:purifying_scent" }, type: "item" }]
+			tasks: [{ count: 4L, id: "0EAB94F371C59E9E", item: { count: 1, id: "cobblegenetics:purifying_scent" }, type: "item" }]
 			x: 6.0d
 			y: 1.0d
 		}
 		{
-			dependencies: ["888C833226CDAADD" "7DE4F3B29C90EB15"]
+			dependencies: ["088C833226CDAADD" "7DE4F3B29C90EB15"]
 			icon: { id: "cobblegenetics:purifying_scent" }
 			id: "2DACA2F3819C14CE"
 			rewards: [
 				{ count: 4, id: "3A0AF6CBB8E8F319", item: { count: 1, id: "cobblegenetics:purifying_scent" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:purification_start", criterion: "", id: "EEFC5827345B6C24", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:purification_start", criterion: "", id: "6EFC5827345B6C24", type: "advancement" }]
 			x: 8.0d
 			y: 0.0d
 		}

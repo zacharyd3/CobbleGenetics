@@ -9,24 +9,24 @@
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["D674030B43AE134C"]
+			dependencies: ["5674030B43AE134C"]
 			icon: { id: "cobblegenetics:mutagen" }
 			id: "1D988EF8565F6C9D"
 			rewards: [
 				{ count: 1, id: "5729EFBA21B90E4F", item: { count: 1, id: "cobblegenetics:mutagen" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:mutation_first", criterion: "", id: "ED663D30F5415701", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:mutation_first", criterion: "", id: "6D663D30F5415701", type: "advancement" }]
 			x: 0.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["1D988EF8565F6C9D"]
 			icon: { id: "cobblegenetics:mutagen" }
-			id: "98740B3B46C00B85"
+			id: "18740B3B46C00B85"
 			rewards: [
-				{ count: 1, id: "AD5E14B749BBC307", item: { count: 1, id: "cobblegenetics:gene_stabilizer" }, type: "item" }
+				{ count: 1, id: "2D5E14B749BBC307", item: { count: 1, id: "cobblegenetics:gene_stabilizer" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:mutagen", criterion: "", id: "DC55E26C4674C44B", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:mutagen", criterion: "", id: "5C55E26C4674C44B", type: "advancement" }]
 			x: 2.0d
 			y: -1.0d
 		}
@@ -38,12 +38,12 @@
 			rewards: [
 				{ count: 5, id: "561265A384F59022", item: { count: 1, id: "cobblemon:ultra_ball" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:natural_mutation", criterion: "", id: "F17A2E575421D29D", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:natural_mutation", criterion: "", id: "717A2E575421D29D", type: "advancement" }]
 			x: 2.0d
 			y: 1.0d
 		}
 		{
-			dependencies: ["98740B3B46C00B85"]
+			dependencies: ["18740B3B46C00B85"]
 			icon: { id: "cobblegenetics:genetic_incubator" }
 			id: "018B70E251DEA7B8"
 			rewards: [
@@ -59,7 +59,7 @@
 			id: "0C5BB94CFA5F829B"
 			optional: true
 			rewards: [
-				{ count: 2, id: "D53BEEB669FE49C2", item: { count: 1, id: "cobblemon:exp_candy_l" }, type: "item" }
+				{ count: 2, id: "553BEEB669FE49C2", item: { count: 1, id: "cobblemon:exp_candy_l" }, type: "item" }
 			]
 			tasks: [{ advancement: "cobblegenetics:rare_mutation", criterion: "", id: "485E249A731DBBF0", type: "advancement" }]
 			x: 4.0d

@@ -1,16 +1,16 @@
 {
-	quest.980A44BD17520161.title: "Under the Microscope"
-	quest.980A44BD17520161.quest_subtitle: "Study a mutation in detail"
-	quest.980A44BD17520161.quest_desc: ["At research level 4, analyse a mutated Pokémon and read the full effect list of its mutation."]
-	quest.BAD790CA5A9FA3E0.title: "Unstable Genome"
-	quest.BAD790CA5A9FA3E0.quest_subtitle: "Find low genetic stability"
-	quest.BAD790CA5A9FA3E0.quest_desc: ["Analyse a Pokémon whose effective stability is below 35." "" "Mutagens, negative mutations and &5Shadow corruption&r all erode stability. Unstable Pokémon mutate more - and worse. The &bGene Stabilizer&r repairs corruption damage."]
-	quest.F2463623FD7A3A44.title: "Shaped by the Land"
-	quest.F2463623FD7A3A44.quest_subtitle: "An environmental mutation"
-	quest.F2463623FD7A3A44.quest_desc: ["Some mutations only appear in certain places: deserts and the Nether (&cEmber Heart&r), frozen biomes (&bFrost Adapted&r), the sea (&9Tidal Affinity&r), darkness (&3Bioluminescence&r), storms (&eStorm Charged&r)." "" "Wild Pokémon can spawn with them there, and your party slowly adapts to where you travel."]
-	quest.EBA45FA59A8F7A57.title: "Elemental Shift"
-	quest.EBA45FA59A8F7A57.quest_subtitle: "An elemental mutation"
-	quest.EBA45FA59A8F7A57.quest_desc: ["Elemental mutations change a Pokémon's &dTera Type&r and how it fares in different climates."]
+	quest.180A44BD17520161.title: "Under the Microscope"
+	quest.180A44BD17520161.quest_subtitle: "Study a mutation in detail"
+	quest.180A44BD17520161.quest_desc: ["At research level 4, analyse a mutated Pokémon and read the full effect list of its mutation."]
+	quest.3AD790CA5A9FA3E0.title: "Unstable Genome"
+	quest.3AD790CA5A9FA3E0.quest_subtitle: "Find low genetic stability"
+	quest.3AD790CA5A9FA3E0.quest_desc: ["Analyse a Pokémon whose effective stability is below 35." "" "Mutagens, negative mutations and &5Shadow corruption&r all erode stability. Unstable Pokémon mutate more - and worse. The &bGene Stabilizer&r repairs corruption damage."]
+	quest.72463623FD7A3A44.title: "Shaped by the Land"
+	quest.72463623FD7A3A44.quest_subtitle: "An environmental mutation"
+	quest.72463623FD7A3A44.quest_desc: ["Some mutations only appear in certain places: deserts and the Nether (&cEmber Heart&r), frozen biomes (&bFrost Adapted&r), the sea (&9Tidal Affinity&r), darkness (&3Bioluminescence&r), storms (&eStorm Charged&r)." "" "Wild Pokémon can spawn with them there, and your party slowly adapts to where you travel."]
+	quest.6BA45FA59A8F7A57.title: "Elemental Shift"
+	quest.6BA45FA59A8F7A57.quest_subtitle: "An elemental mutation"
+	quest.6BA45FA59A8F7A57.quest_desc: ["Elemental mutations change a Pokémon's &dTera Type&r and how it fares in different climates."]
 	quest.12F1D7D3E9EEAA35.title: "Hidden Talent"
 	quest.12F1D7D3E9EEAA35.quest_subtitle: "An ability mutation"
 	quest.12F1D7D3E9EEAA35.quest_desc: ["Ability mutations unlock hidden abilities, speed up friendship, or shield a Pokémon from corruption."]
