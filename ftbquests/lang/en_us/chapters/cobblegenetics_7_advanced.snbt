@@ -1,0 +1,20 @@
+{
+	quest.949B84C8FCF40E76.title: "Genetic Alchemy"
+	quest.949B84C8FCF40E76.quest_subtitle: "A rare genetic combination"
+	quest.949B84C8FCF40E76.quest_desc: ["Some mutations only appear when others are already present - through breeding or evolution. The research level 5 Analyzer hints when a Pokémon holds some of the factors." "" "Try combining dark pigment with living light..."]
+	quest.42B37C20090A37B0.title: "Unbreakable Heart"
+	quest.42B37C20090A37B0.quest_subtitle: "Shadow-resistant genetics"
+	quest.42B37C20090A37B0.quest_desc: ["Find or breed a Pokémon that resists at least 40% of corruption: the recessive &eShadowproof&r trait, &5Shadow Ward&r or &6Purified Aura&r."]
+	quest.6D8525565A8F09CE.title: "Bloodline"
+	quest.6D8525565A8F09CE.quest_subtitle: "A third-generation offspring"
+	quest.6D8525565A8F09CE.quest_desc: ["Breed the offspring of your offspring's offspring and analyse it."]
+	quest.24D77B3D57CA91D5.title: "Heart Healer"
+	quest.24D77B3D57CA91D5.quest_subtitle: "Purify five Shadow Pokémon"
+	quest.24D77B3D57CA91D5.quest_desc: ["Purify five Shadow Pokémon."]
+	quest.DC8A8AE7165E41E9.title: "Living Encyclopedia"
+	quest.DC8A8AE7165E41E9.quest_subtitle: "Discover 25 mutations"
+	quest.DC8A8AE7165E41E9.quest_desc: ["Analyse Pokémon with 25 different mutations."]
+	quest.F2A0CA46A6C7E856.title: "Once in a Lifetime"
+	quest.F2A0CA46A6C7E856.quest_subtitle: "A Legendary-tier mutation"
+	quest.F2A0CA46A6C7E856.quest_desc: ["The rarest discoveries of all: the bred &6Prismatic Genome&r or the purified &6Heartbound&r."]
+}

@@ -1,0 +1,20 @@
+{
+	quest.1D988EF8565F6C9D.title: "Something Different"
+	quest.1D988EF8565F6C9D.quest_subtitle: "Identify a mutated Pokémon"
+	quest.1D988EF8565F6C9D.quest_desc: ["Some Pokémon carry &dmutations&r: changes to colour, size, stats, type affinity or abilities." "" "Mutations come in five tiers: &7Common&r, &aUncommon&r, &9Rare&r, &5Epic&r and &6Legendary&r. Look for odd colours, glowing or unusual sizes - then analyse."]
+	quest.98740B3B46C00B85.title: "Mad Science"
+	quest.98740B3B46C00B85.quest_subtitle: "Induce a mutation"
+	quest.98740B3B46C00B85.quest_desc: ["Use a &dMutagen&r on a party Pokémon. It forces a mutation - but costs &cgenetic stability&r, and the result can be harmful." "" "Mutagens are a reliable way to get a mutated Pokémon for breeding experiments."]
+	quest.126D2C1A28190D8A.title: "Nature's Experiment"
+	quest.126D2C1A28190D8A.quest_subtitle: "Find a natural mutation"
+	quest.126D2C1A28190D8A.quest_desc: ["Wild Pokémon sometimes spawn mutated. It is more common for genetically unstable ones, and &edouble during thunderstorms&r - a genetic storm."]
+	quest.018B70E251DEA7B8.title: "Passed Down"
+	quest.018B70E251DEA7B8.quest_subtitle: "Get an inherited mutation"
+	quest.018B70E251DEA7B8.quest_desc: ["Breed a mutated Pokémon and analyse its offspring until one inherits the mutation." "" "Parents pass their mutations on directly only sometimes; otherwise the offspring may carry them &olatent&r (hidden). Two carriers can produce one that expresses it again."]
+	quest.0C5BB94CFA5F829B.title: "Rare Specimen"
+	quest.0C5BB94CFA5F829B.quest_subtitle: "A Rare-tier mutation or better"
+	quest.0C5BB94CFA5F829B.quest_desc: ["Find or create a mutation of &9Rare&r tier or higher. Unstable genomes roll higher tiers more often."]
+	quest.22B71D651BED3F6E.title: "Research Level 4"
+	quest.22B71D651BED3F6E.quest_subtitle: "Mutation Science"
+	quest.22B71D651BED3F6E.quest_desc: ["Level 4 shows each mutation's category, origin and exact effects, the hidden allele pairs, latent mutations, and &bbreeding predictions&r: analyse two Pokémon one after the other to see what their offspring could inherit."]
+}
