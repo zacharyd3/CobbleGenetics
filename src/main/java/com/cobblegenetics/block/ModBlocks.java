@@ -22,6 +22,15 @@ public final class ModBlocks {
                     .mapColor(MapColor.QUARTZ).strength(3.0f, 6.0f).sound(SoundType.AMETHYST)
                     .lightLevel(state -> 10).requiresCorrectToolForDrops());
 
+    public static final DeferredBlock<GeneticIncubatorBlock> GENETIC_INCUBATOR = BLOCKS.registerBlock(
+            "genetic_incubator", GeneticIncubatorBlock::new, BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.METAL).strength(2.5f, 6.0f).sound(SoundType.GLASS).noOcclusion()
+                    .lightLevel(state -> 7).isViewBlocking((state, level, pos) -> false));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GeneticIncubatorBlockEntity>>
+            INCUBATOR_ENTITY = BLOCK_ENTITIES.register("genetic_incubator", () -> BlockEntityType.Builder
+            .of(GeneticIncubatorBlockEntity::new, GENETIC_INCUBATOR.get()).build(null));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PurificationChamberBlockEntity>>
             CHAMBER_ENTITY = BLOCK_ENTITIES.register("purification_chamber", () -> BlockEntityType.Builder
             .of(PurificationChamberBlockEntity::new, PURIFICATION_CHAMBER.get()).build(null));

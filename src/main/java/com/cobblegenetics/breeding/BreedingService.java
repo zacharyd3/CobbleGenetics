@@ -27,7 +27,10 @@ import com.cobblemon.mod.common.pokemon.Pokemon;
 import com.cobblemon.mod.common.pokemon.Species;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,8 +45,8 @@ import java.util.concurrent.ThreadLocalRandom;
  * <ol>
  *   <li><b>Breeding addons</b> that fire {@code COLLECT_EGG}: the offspring genome is computed from both parents and
  *       written into the egg's properties ({@code cg_genome=...}), so it survives until the egg hatches.</li>
- *   <li><b>The Genetic Incubator</b> (built in, for packs without a breeding addon): pick two compatible party
- *       Pokémon and the offspring arrives at level 1 in the party (or PC).</li>
+ *   <li><b>The Genetic Incubator</b> block (built in, for packs without a breeding addon): two compatible party
+ *       Pokémon stay inside it for a while, then return with a Pokémon Egg that hatches after walking.</li>
  * </ol>
  * Compatibility follows the main series: shared egg group and opposite genders, or Ditto with anything breedable;
  * the "Undiscovered" egg group cannot breed.
@@ -142,28 +145,34 @@ public final class BreedingService {
         return pokemon.getForm().getEggGroups().contains(EggGroup.UNDISCOVERED);
     }
 
-    /**
-     * Breeds with the Incubator: creates the level 1 offspring, applies inheritance and gives it to the player.
-     * The caller has already checked {@link #incompatibility} and taken the cost.
-     */
-    public static Pokemon incubate(ServerPlayer player, Pokemon a, Pokemon b) {
-        // Offspring species: the mother's line (or the non-Ditto parent), from its first stage
-        Pokemon mother;
-        Pokemon father;
+    /** The pair as (mother, father): the mother's line, or the non-Ditto parent, decides the offspring species. */
+    public static Pokemon[] order(Pokemon a, Pokemon b) {
         if (isDitto(a)) {
-            mother = b;
-            father = a;
-        } else if (isDitto(b)) {
-            mother = a;
-            father = b;
-        } else {
-            mother = a.getGender() == Gender.FEMALE ? a : b;
-            father = mother == a ? b : a;
+            return new Pokemon[]{b, a};
         }
+        if (isDitto(b)) {
+            return new Pokemon[]{a, b};
+        }
+        return a.getGender() == Gender.FEMALE ? new Pokemon[]{a, b} : new Pokemon[]{b, a};
+    }
+
+    /** The finished breeding: offspring Pokémon and whether it was born with a mutation. */
+    public record Offspring(Pokemon child, Pokemon mother, Pokemon father, MutationDef mutation) {
+    }
+
+    /**
+     * Creates the level 1 offspring of two compatible Pokémon, with inheritance (IVs and genome) and a breeding
+     * mutation roll in the surroundings of {@code pos}. Updates both parents' genomes (offspring count) and cooldown;
+     * the caller decides where the parents and the offspring (or its egg) go. {@code owner} may be offline (null).
+     */
+    public static Offspring breed(ServerPlayer owner, ServerLevel level, BlockPos pos, Pokemon a, Pokemon b) {
+        Pokemon[] pair = order(a, b);
+        Pokemon mother = pair[0];
+        Pokemon father = pair[1];
         Species species = baseSpecies(mother.getSpecies());
         PokemonProperties properties = PokemonProperties.Companion.parse(
                 "species=" + species.getResourceIdentifier() + " level=1");
-        Pokemon child = properties.create(player);
+        Pokemon child = owner != null ? properties.create(owner) : properties.create();
 
         // Main-series IV inheritance: three random stats take the IV of a random parent
         Random random = ThreadLocalRandom.current();
@@ -185,22 +194,14 @@ public final class BreedingService {
         MutationDef mutation = null;
         if (GeneticsService.anyFor(MutationSource.BREEDING)) {
             mutation = GeneticsService.roll(child, MutationSource.BREEDING, GeneticsConfig.get().breedingMutationChance,
-                    false, player.serverLevel(), player.blockPosition());
+                    false, level, pos);
         }
 
-        long now = player.serverLevel().getGameTime();
+        long now = level.getGameTime();
         PokemonGenetics.setLastBred(mother, now);
         PokemonGenetics.setLastBred(father, now);
-        Cobblemon.INSTANCE.getStorage().getParty(player).add(child);
-        countBreeding(player, mother, father);
-
-        player.sendSystemMessage(Component.translatable("message.cobblegenetics.bred", mother.getDisplayName(false),
-                father.getDisplayName(false), child.getDisplayName(false)).withStyle(ChatFormatting.GREEN));
-        if (mutation != null) {
-            player.sendSystemMessage(Component.translatable("message.cobblegenetics.bred_mutation")
-                    .withStyle(ChatFormatting.LIGHT_PURPLE));
-        }
-        return child;
+        countBreeding(owner, mother, father);
+        return new Offspring(child, mother, father, mutation);
     }
 
     static Species baseSpecies(Species species) {

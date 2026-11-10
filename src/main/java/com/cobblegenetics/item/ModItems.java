@@ -2,6 +2,8 @@ package com.cobblegenetics.item;
 
 import com.cobblegenetics.CobbleGenetics;
 import com.cobblegenetics.block.ModBlocks;
+import com.cobblegenetics.breeding.EggData;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -16,6 +18,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModItems {
 
     private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CobbleGenetics.MOD_ID);
+    private static final DeferredRegister.DataComponents COMPONENTS =
+            DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, CobbleGenetics.MOD_ID);
     private static final DeferredRegister<CreativeModeTab> TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CobbleGenetics.MOD_ID);
 
@@ -33,8 +37,9 @@ public final class ModItems {
             new Item.Properties().stacksTo(16).rarity(Rarity.RARE));
     public static final DeferredItem<Item> GENETIC_RECORD = ITEMS.registerSimpleItem("genetic_record",
             new Item.Properties().stacksTo(1));
-    public static final DeferredItem<GeneticIncubatorItem> GENETIC_INCUBATOR = ITEMS.registerItem("genetic_incubator",
-            GeneticIncubatorItem::new, new Item.Properties().stacksTo(1));
+    /** Places the two-block Genetic Incubator (same id as the old hand-held Incubator, so existing stacks still work). */
+    public static final DeferredItem<IncubatorBlockItem> GENETIC_INCUBATOR = ITEMS.register("genetic_incubator",
+            () -> new IncubatorBlockItem(ModBlocks.GENETIC_INCUBATOR.get(), new Item.Properties()));
     public static final DeferredItem<MutagenItem> MUTAGEN = ITEMS.registerItem("mutagen", MutagenItem::new,
             new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON));
     public static final DeferredItem<GeneStabilizerItem> GENE_STABILIZER = ITEMS.registerItem("gene_stabilizer",
@@ -46,6 +51,12 @@ public final class ModItems {
             new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON));
     public static final DeferredItem<ShadowBeaconItem> SHADOW_BEACON = ITEMS.registerItem("shadow_beacon",
             ShadowBeaconItem::new, new Item.Properties().stacksTo(16).rarity(Rarity.RARE));
+    /** The offspring inside a Pokémon Egg (see EggData). */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<EggData>> EGG_DATA =
+            COMPONENTS.registerComponentType("egg", builder -> builder.persistent(EggData.CODEC)
+                    .networkSynchronized(EggData.STREAM_CODEC));
+    public static final DeferredItem<PokemonEggItem> POKEMON_EGG = ITEMS.registerItem("pokemon_egg",
+            PokemonEggItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredItem<net.minecraft.world.item.BlockItem> PURIFICATION_CHAMBER =
             ITEMS.registerSimpleBlockItem(ModBlocks.PURIFICATION_CHAMBER);
 
@@ -73,6 +84,7 @@ public final class ModItems {
     }
 
     public static void initialize(IEventBus modBus) {
+        COMPONENTS.register(modBus);
         ITEMS.register(modBus);
         TABS.register(modBus);
     }
