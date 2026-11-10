@@ -88,7 +88,8 @@ public final class AnalysisService {
         Component potentialText = level >= 2
                 ? Component.literal(grade + "  (" + round(genome.potential) + ")")
                 : Component.literal(grade);
-        profile.add(row("potential", potentialText, (float) (genome.potential / 100), gradeColor(genome.potential)));
+        profile.add(row("potential", potentialText, (float) (genome.potential / 100), gradeColor(genome.potential))
+                .withNote(potentialNote(genome, config)));
         record.add(line("potential", potentialText));
         if (level >= 2) {
             MutableComponent stabilityText = Component.literal(round(effective) + "");
@@ -96,18 +97,25 @@ public final class AnalysisService {
                 stabilityText.append(Component.translatable("analysis.cobblegenetics.stability_detail",
                         round(genome.stability), round(genome.stabilityDamage)).withStyle(ChatFormatting.GRAY));
             }
-            profile.add(row("stability", stabilityText, (float) (effective / 100), gradeColor(effective)));
+            double instability = GeneticsRules.instability(effective);
+            profile.add(row("stability", stabilityText, (float) (effective / 100), gradeColor(effective))
+                    .withNote(Component.translatable("analysis.cobblegenetics.note.stability",
+                            percent(GeneticsRules.harmfulShare(genome, instability, config)))));
             record.add(line("stability", Component.literal(round(effective) + "")));
             Component affinity = typeName(genome.affinity).copy().append(" (" + GeneticsRules.grade(genome.affinityStrength) + ")");
-            profile.add(row("affinity", affinity, (float) (genome.affinityStrength / 100), INFO));
+            profile.add(row("affinity", affinity, (float) (genome.affinityStrength / 100), INFO)
+                    .withNote(affinityNote(genome, config)));
             record.add(line("affinity", affinity));
         } else {
             profile.add(locked("stability", 2));
             profile.add(locked("affinity", 2));
         }
         if (level >= 3) {
+            double factor = GeneticsRules.mutationFactor(genome, GeneticsRules.instability(effective));
             profile.add(row("susceptibility", Component.literal(round(genome.susceptibility) + ""),
-                    (float) (genome.susceptibility / 100), genome.susceptibility > 60 ? BAD : MID));
+                    (float) (genome.susceptibility / 100), genome.susceptibility > 60 ? BAD : MID)
+                    .withNote(Component.translatable("analysis.cobblegenetics.note.susceptibility",
+                            String.format(Locale.ROOT, "%.1f", factor))));
             String size = genome.size > 0.35 ? "large" : genome.size < -0.35 ? "small" : "average";
             profile.add(row("size", Component.translatable("analysis.cobblegenetics.size." + size), -1, INFO));
             record.add(line("susceptibility", Component.literal(round(genome.susceptibility) + "")));
@@ -265,10 +273,18 @@ public final class AnalysisService {
         LAST.put(player.getUUID(), new LastAnalysis(pokemon.getUuid(), pokemon.getDisplayName(false), genome.copy(),
                 record));
 
+        double value = level >= 2 ? GeneticsRules.breedingValue(genome, effective) : genome.potential;
+        Component breedingValue = Component.literal(GeneticsRules.grade(value) + " (" + round(value) + ")")
+                .withStyle(Style.EMPTY.withColor(gradeColor(value) & 0xFFFFFF));
+        Component best = bestOfSpecies(player, pokemon, (int) Math.round(value));
+        var type = pokemon.getPrimaryType();
         boolean canRecord = !pokemon.isWild();
         if (player.connection.hasChannel(AnalysisPayload.TYPE)) {
-            PacketDistributor.sendToPlayer(player, new AnalysisPayload(pokemon.getUuid(), title, subtitle, level,
-                    canRecord, sections));
+            PacketDistributor.sendToPlayer(player, new AnalysisPayload(pokemon.getUuid(),
+                    pokemon.getDisplayName(false), pokemon.getLevel(), subtitle,
+                    pokemon.getSpecies().getResourceIdentifier().toString(), new java.util.LinkedHashSet<>(
+                    pokemon.getAspects()), type == null ? "normal" : type.getName().toLowerCase(Locale.ROOT),
+                    breedingValue, best, level, canRecord, sections));
         } else {
             // A client without the mod (should not happen: the mod is required on both sides) still gets the gist
             player.sendSystemMessage(title);
@@ -417,6 +433,62 @@ public final class AnalysisService {
         return rows;
     }
 
+    // ------------------------------------------------------------------ what the numbers mean
+
+    /** "Babies start with every IV of at least X · levelling can raise IVs up to Y". */
+    private static Component potentialNote(Genome genome, GeneticsConfig config) {
+        MutableComponent note = Component.translatable("analysis.cobblegenetics.note.potential",
+                GeneticsRules.ivFloor(genome, config));
+        if (config.potentialTrainingChance > 0) {
+            note.append(Component.translatable("analysis.cobblegenetics.note.training",
+                    GeneticsRules.trainingCeiling(genome, config)));
+        }
+        return note;
+    }
+
+    /** Which partners hurt (opposed) and what a different affinity gives (hybrid vigour), plus the Tera drift. */
+    private static Component affinityNote(Genome genome, GeneticsConfig config) {
+        List<String> opposed = GeneticsRules.opposedTo(genome.affinity, config);
+        MutableComponent note = Component.empty();
+        if (!opposed.isEmpty()) {
+            MutableComponent names = Component.empty();
+            for (String type : opposed) {
+                if (!names.getSiblings().isEmpty()) {
+                    names.append(", ");
+                }
+                names.append(typeName(type));
+            }
+            note.append(Component.translatable("analysis.cobblegenetics.note.affinity_opposed", names,
+                    round(config.incompatibilityPenalty)));
+            note.append(" ");
+        }
+        note.append(Component.translatable("analysis.cobblegenetics.note.affinity", round(config.hybridVigour),
+                typeName(genome.affinity)));
+        return note;
+    }
+
+    /**
+     * The best breeding value of this species the player has analysed, so there is always a next target; a better one
+     * becomes the new best ("Without research level 2 stability is unknown: the value is potential alone").
+     */
+    private static Component bestOfSpecies(ServerPlayer player, Pokemon pokemon, int score) {
+        String species = pokemon.getSpecies().getResourceIdentifier().toString();
+        ResearchData research = Research.of(player);
+        Integer best = research.bestBreedingValue.get(species);
+        if (best == null || score > best) {
+            research.recordBreedingValue(species, score);
+            Research.save(player, research);
+            return Component.translatable(best == null ? "analysis.cobblegenetics.first_of"
+                    : "analysis.cobblegenetics.new_best", pokemon.getSpecies().getTranslatedName());
+        }
+        return Component.translatable("analysis.cobblegenetics.best_of", pokemon.getSpecies().getTranslatedName(),
+                GeneticsRules.grade(best) + " (" + best + ")");
+    }
+
+    private static String percent(double share) {
+        return Math.round(share * 100) + "%";
+    }
+
     // ------------------------------------------------------------------ Genetic Record
 
     /** "Record" button: writes the last analysis onto a Genetic Record, using one paper. */
@@ -471,16 +543,18 @@ public final class AnalysisService {
     }
 
     private static Row row(String key, Component value, float bar, int color) {
-        return new Row(Component.translatable("analysis.cobblegenetics." + key), value, bar, color, false);
+        return new Row(Component.translatable("analysis.cobblegenetics." + key), value, bar, color, false,
+                Component.empty());
     }
 
     private static Row row(Component label, Component value, float bar, int color) {
-        return new Row(label, value, bar, color, false);
+        return new Row(label, value, bar, color, false, Component.empty());
     }
 
     private static Row locked(String key, int level) {
         return new Row(Component.translatable("analysis.cobblegenetics." + key),
-                Component.translatable("analysis.cobblegenetics.locked", level), -1, 0xFF666666, true);
+                Component.translatable("analysis.cobblegenetics.locked", level), -1, 0xFF666666, true,
+                Component.empty());
     }
 
     private static Component line(String key, Component value) {

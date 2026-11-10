@@ -5,173 +5,313 @@ import com.cobblegenetics.network.AnalysisPayload.Row;
 import com.cobblegenetics.network.AnalysisPayload.Section;
 import com.cobblegenetics.network.RecordRequestPayload;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Mth;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
- * Genetic Analyzer report. Everything shown was decided on the server (research level filtering), this only lays it
- * out: a dark rounded panel in the spirit of Cobblemon's UI, sections with headers, label/value rows with optional
- * bars, and greyed "requires research level N" rows that tell the player what the next level unlocks.
+ * Genetic Analyzer report in the style of the Pokédex / Fusion Album. Everything shown was decided on the server
+ * (research level filtering); this only lays it out.
+ *
+ * <p>Left panel: the report, scrolling (section bands, label + value rows with bars, and under each gene a note on
+ * what it means for this Pokémon), with Record and Guide on its bottom bar. Right panel: the Pokémon in 3D on its
+ * type's platform with a cry button, its breeding value on the dark bar, how it compares with the best of its species
+ * the player has analysed, and the research level.</p>
  */
-public class AnalyzerScreen extends Screen {
+public class AnalyzerScreen extends DexScreen {
 
-    private static final int PANEL_WIDTH = 300;
-    private static final int ROW_HEIGHT = 12;
-    private static final int BAR_HEIGHT = 3;
-    private static final int HEADER_HEIGHT = 34;
-    private static final int FOOTER_HEIGHT = 26;
+    // Inside the right panel (pokedex_screen_info_overlay), as the Fusion Album
+    private static final int NAME_TAB = 23;
+    private static final int PORTRAIT_Y = 12;
+    private static final int PORTRAIT_HEIGHT = 82;
+    private static final int TYPES_Y = 96;
+    private static final int INFO_Y = 107;
+    private static final int BOTTOM_Y = 152;
+    private static final int PLATFORM_WIDTH = 85;
+    private static final int PLATFORM_HEIGHT = 22;
+    private static final int CRY_WIDTH = 22;
+    private static final int CRY_HEIGHT = 10;
 
-    private static final int BACKGROUND = 0xF0171A21;
-    private static final int BORDER = 0xFF3B8E8A;
-    private static final int SECTION = 0xFF7FD6C9;
+    private static final int PAD = 3;
+    private static final int INNER = PANEL_WIDTH - PAD - 5;
+    private static final int INDENT = 6;
 
     private final AnalysisPayload payload;
-    /** Laid-out lines: either a section header, a row, or a wrapped continuation. */
+    private final PokemonPortrait portrait;
     private final List<Line> lines = new ArrayList<>();
     private int scroll;
-    private int left;
-    private int top;
-    private int panelHeight;
+    private int contentHeight;
+    private boolean recorded;
 
-    private record Line(Component header, Row row, FormattedCharSequence wrapped, int height) {
+    private enum Kind { HEADER, ROW, TEXT, BAR, GAP }
+
+    /** A laid-out line of the report. */
+    private record Line(Kind kind, Component label, FormattedCharSequence text, int color, Row row, int height) {
     }
 
     public AnalyzerScreen(AnalysisPayload payload) {
         super(Component.translatable("gui.cobblegenetics.analyzer"));
         this.payload = payload;
+        this.portrait = PokemonPortrait.of(payload.species(), payload.aspects());
     }
 
     @Override
     protected void init() {
-        panelHeight = Math.min(height - 20, 260);
-        left = (width - PANEL_WIDTH) / 2;
-        top = (height - panelHeight) / 2;
+        super.init();
         layout();
-        int buttonY = top + panelHeight - FOOTER_HEIGHT + 4;
-        if (payload.canRecord()) {
-            addRenderableWidget(Button.builder(Component.translatable("gui.cobblegenetics.record"), button -> {
-                        PacketDistributor.sendToServer(new RecordRequestPayload(payload.pokemon()));
-                        button.active = false;
-                    }).bounds(left + 8, buttonY, 100, 18)
-                    .tooltip(net.minecraft.client.gui.components.Tooltip.create(
-                            Component.translatable("gui.cobblegenetics.record.tooltip")))
-                    .build());
-        }
-        addRenderableWidget(Button.builder(Component.translatable("gui.done"), button -> onClose())
-                .bounds(left + PANEL_WIDTH - 88, buttonY, 80, 18).build());
+        clampScroll();
     }
 
     private void layout() {
         lines.clear();
-        int valueWidth = PANEL_WIDTH - 24 - 110;
         for (Section section : payload.sections()) {
-            lines.add(new Line(section.title(), null, null, 16));
+            lines.add(new Line(Kind.HEADER, section.title(), null, WHITE, null, 11));
             for (Row row : section.rows()) {
-                List<FormattedCharSequence> wrapped = font.split(row.value(), valueWidth);
-                int height = ROW_HEIGHT + (row.bar() >= 0 ? BAR_HEIGHT + 2 : 0);
-                lines.add(new Line(null, row, wrapped.isEmpty() ? FormattedCharSequence.EMPTY : wrapped.get(0), height));
-                for (int i = 1; i < wrapped.size(); i++) {
-                    lines.add(new Line(null, null, wrapped.get(i), ROW_HEIGHT - 2));
+                int valueColor = row.locked() ? 0xFF8FA9B1 : onLight(row.color());
+                int labelColor = row.locked() ? 0xFF8FA9B1 : TEXT_MUTED;
+                int labelWidth = font.width(row.label());
+                if (labelWidth + 6 + font.width(row.value()) <= INNER) {
+                    lines.add(new Line(Kind.ROW, row.label(), row.value().getVisualOrderText(), valueColor, row, 10));
+                } else {
+                    lines.add(new Line(Kind.ROW, row.label(), null, labelColor, row, 10));
+                    for (FormattedCharSequence part : font.split(row.value(), INNER - INDENT)) {
+                        lines.add(new Line(Kind.TEXT, null, part, valueColor, null, 9));
+                    }
+                }
+                if (row.bar() >= 0 && !row.locked()) {
+                    lines.add(new Line(Kind.BAR, null, null, row.color() | 0xFF000000, row, 4));
+                }
+                if (!row.note().getString().isEmpty()) {
+                    for (FormattedCharSequence part : font.split(row.note(), INNER - INDENT)) {
+                        lines.add(new Line(Kind.TEXT, null, part, 0xFF6F98A5, null, 9));
+                    }
+                    lines.add(new Line(Kind.GAP, null, null, 0, null, 2));
                 }
             }
-            lines.add(new Line(null, null, null, 4));
+            lines.add(new Line(Kind.GAP, null, null, 0, null, 3));
         }
-    }
-
-    private int contentHeight() {
-        int total = 0;
-        for (Line line : lines) {
-            total += line.height();
-        }
-        return total;
+        contentHeight = lines.stream().mapToInt(Line::height).sum();
     }
 
     private int viewHeight() {
-        return panelHeight - HEADER_HEIGHT - FOOTER_HEIGHT;
+        return PANEL_HEIGHT - 2 * BAR;
     }
+
+    private void clampScroll() {
+        scroll = Mth.clamp(scroll, 0, Math.max(0, contentHeight - viewHeight()));
+    }
+
+    // ------------------------------------------------------------------ drawing
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        renderBackground(graphics, mouseX, mouseY, partialTick);
+        renderFrame(graphics);
+        renderReport(graphics, mouseX, mouseY);
+        renderPokemon(graphics, mouseX, mouseY, partialTick);
         super.render(graphics, mouseX, mouseY, partialTick);
     }
 
-    @Override
-    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        super.renderBackground(graphics, mouseX, mouseY, partialTick);
-        // Panel with a 1px teal border and a slightly lighter header band
-        graphics.fill(left - 1, top - 1, left + PANEL_WIDTH + 1, top + panelHeight + 1, BORDER);
-        graphics.fill(left, top, left + PANEL_WIDTH, top + panelHeight, BACKGROUND);
-        graphics.fill(left, top, left + PANEL_WIDTH, top + HEADER_HEIGHT - 4, 0xF0222833);
+    private void renderReport(GuiGraphics graphics, int mouseX, int mouseY) {
+        int x = left + LEFT_X;
+        int y = top + PANEL_Y;
+        plainPanel(graphics, x, y);
+        graphics.drawString(font, Component.translatable("gui.cobblegenetics.report"), x + 4, y + 2, WHITE, false);
 
-        graphics.drawString(font, payload.title(), left + 10, top + 7, 0xFFFFFFFF, false);
-        graphics.drawString(font, payload.subtitle(), left + 10, top + 19, 0xFF9AA4B2, false);
-        Component badge = Component.translatable("gui.cobblegenetics.research_badge", payload.researchLevel());
-        int badgeWidth = font.width(badge) + 10;
-        int badgeX = left + PANEL_WIDTH - badgeWidth - 8;
-        graphics.fill(badgeX, top + 8, badgeX + badgeWidth, top + 20, 0xFF2F6F6B);
-        graphics.drawString(font, badge, badgeX + 5, top + 10, 0xFFE6FFFB, false);
-
-        int viewTop = top + HEADER_HEIGHT;
+        int viewTop = y + BAR;
         int viewBottom = viewTop + viewHeight();
-        graphics.enableScissor(left, viewTop, left + PANEL_WIDTH, viewBottom);
-        int y = viewTop - scroll;
+        graphics.enableScissor(x, viewTop, x + PANEL_WIDTH, viewBottom);
+        int lineY = viewTop + 1 - scroll;
         for (Line line : lines) {
-            if (y + line.height() >= viewTop && y <= viewBottom) {
-                drawLine(graphics, line, y);
+            if (lineY + line.height() >= viewTop && lineY <= viewBottom) {
+                drawLine(graphics, line, x, lineY);
             }
-            y += line.height();
+            lineY += line.height();
         }
         graphics.disableScissor();
 
-        int content = contentHeight();
-        if (content > viewHeight()) {
-            int barHeight = Math.max(12, viewHeight() * viewHeight() / content);
-            int barY = viewTop + (viewHeight() - barHeight) * scroll / Math.max(1, content - viewHeight());
-            graphics.fill(left + PANEL_WIDTH - 4, barY, left + PANEL_WIDTH - 2, barY + barHeight, 0x80FFFFFF);
+        if (contentHeight > viewHeight()) {
+            int track = viewHeight();
+            int thumb = Math.max(8, track * track / contentHeight);
+            int thumbY = viewTop + (track - thumb) * scroll / Math.max(1, contentHeight - track);
+            graphics.fill(x + PANEL_WIDTH - 3, thumbY, x + PANEL_WIDTH - 1, thumbY + thumb, DARK);
         }
+
+        // Bottom bar: Record (owned Pokémon only) and the guide
+        int barY = y + PANEL_HEIGHT - BAR;
+        if (payload.canRecord()) {
+            barButton(graphics, recordText(), x, barY, mouseX, mouseY, !recorded);
+        }
+        Component guide = Component.translatable("gui.cobblegenetics.guide.short");
+        barButton(graphics, guide, guideX(), barY, mouseX, mouseY, true);
     }
 
-    private void drawLine(GuiGraphics graphics, Line line, int y) {
-        if (line.header() != null) {
-            graphics.drawString(font, line.header(), left + 10, y + 5, SECTION, false);
-            graphics.fill(left + 10, y + 14, left + PANEL_WIDTH - 10, y + 15, 0x403B8E8A);
-            return;
-        }
-        int valueX = left + 12 + 110;
-        if (line.row() == null) {
-            if (line.wrapped() != null) {
-                graphics.drawString(font, line.wrapped(), valueX, y, 0xFFCCCCCC, false);
+    private void drawLine(GuiGraphics graphics, Line line, int x, int y) {
+        switch (line.kind()) {
+            case HEADER -> {
+                graphics.fill(x, y, x + PANEL_WIDTH, y + 10, SELECTED);
+                graphics.drawString(font, line.label(), x + PAD + 1, y + 1, WHITE, false);
             }
-            return;
-        }
-        Row row = line.row();
-        int labelColor = row.locked() ? 0xFF666666 : 0xFFB8C2CE;
-        graphics.drawString(font, row.label(), left + 12, y + 1, labelColor, false);
-        graphics.drawString(font, line.wrapped(), valueX, y + 1, row.locked() ? 0xFF777777 : row.color(), false);
-        if (row.bar() >= 0) {
-            int barWidth = PANEL_WIDTH - 24 - 110;
-            int barY = y + ROW_HEIGHT;
-            graphics.fill(valueX, barY, valueX + barWidth, barY + BAR_HEIGHT, 0xFF2A2F38);
-            int filled = Math.round(barWidth * Math.max(0, Math.min(1, row.bar())));
-            graphics.fill(valueX, barY, valueX + filled, barY + BAR_HEIGHT, row.color() | 0xFF000000);
+            case ROW -> {
+                Row row = line.row();
+                int labelColor = row.locked() ? 0xFF8FA9B1 : TEXT_DARK;
+                if (line.text() == null) {
+                    graphics.drawString(font, fit(font, row.label(), INNER), x + PAD, y, labelColor, false);
+                } else {
+                    graphics.drawString(font, row.label(), x + PAD, y, labelColor, false);
+                    graphics.drawString(font, line.text(), x + PAD + INNER - font.width(line.text()), y, line.color(),
+                            false);
+                }
+            }
+            case TEXT -> graphics.drawString(font, line.text(), x + PAD + INDENT, y, line.color(), false);
+            case BAR -> {
+                graphics.fill(x + PAD, y, x + PAD + INNER, y + 2, 0xFFC9E7EE);
+                int filled = Math.round(INNER * Mth.clamp(line.row().bar(), 0, 1));
+                graphics.fill(x + PAD, y, x + PAD + filled, y + 2, line.color());
+            }
+            case GAP -> {
+            }
         }
     }
 
-    @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-        int max = Math.max(0, contentHeight() - viewHeight());
-        scroll = (int) Math.max(0, Math.min(max, scroll - scrollY * 14));
-        return true;
+    private void renderPokemon(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        int x = left + RIGHT_X;
+        int y = top + PANEL_Y;
+        graphics.blit(INFO, x, y, 0, 0, PANEL_WIDTH, PANEL_HEIGHT, PANEL_WIDTH, PANEL_HEIGHT);
+
+        // Dark tab: the level; light part: the name
+        graphics.drawCenteredString(font, String.valueOf(payload.level()), x + NAME_TAB / 2 + 1, y + 2, WHITE);
+        graphics.drawString(font, fit(font, payload.name(), PANEL_WIDTH - NAME_TAB - 6), x + NAME_TAB + 4, y + 2,
+                TEXT_DARK, false);
+
+        // Portrait: its type's platform and the model on it
+        int portraitTop = y + PORTRAIT_Y;
+        int platformY = portraitTop + PORTRAIT_HEIGHT - PLATFORM_HEIGHT - 2;
+        graphics.blit(cobblemon("platform_base_" + payload.primaryType().toLowerCase(Locale.ROOT)),
+                x + (PANEL_WIDTH - PLATFORM_WIDTH) / 2, platformY, PLATFORM_WIDTH, PLATFORM_HEIGHT,
+                0, 0, 113, 30, 113, 30);
+        if (portrait != null) {
+            portrait.render(graphics, x + 1, portraitTop, PANEL_WIDTH - 2, PORTRAIT_HEIGHT - PLATFORM_HEIGHT / 2,
+                    partialTick);
+            // In front of the model (it writes depth)
+            graphics.pose().pushPose();
+            graphics.pose().translate(0, 0, 300);
+            graphics.blit(CRY_BUTTON, cryX(), cryY(), CRY_WIDTH, CRY_HEIGHT, 0, 0, 44, 20, 44, 20);
+            if (overCry(mouseX, mouseY)) {
+                graphics.fill(cryX(), cryY(), cryX() + CRY_WIDTH, cryY() + CRY_HEIGHT, 0x40FFFFFF);
+            }
+            graphics.pose().popPose();
+        }
+
+        // Dark bar: the breeding value
+        Component value = Component.translatable("analysis.cobblegenetics.breeding_value", payload.breedingValue());
+        graphics.drawCenteredString(font, fit(font, value, PANEL_WIDTH - 6), x + PANEL_WIDTH / 2, y + TYPES_Y + 2,
+                WHITE);
+
+        // Light part: species and wild/owned, then the target to beat
+        int infoY = y + INFO_Y + 3;
+        graphics.drawCenteredString(font, fit(font, payload.subtitle(), PANEL_WIDTH - 6), x + PANEL_WIDTH / 2, infoY,
+                TEXT_MUTED);
+        List<FormattedCharSequence> best = font.split(payload.best(), PANEL_WIDTH - 8);
+        int bestY = infoY + 13;
+        for (int i = 0; i < Math.min(3, best.size()); i++) {
+            FormattedCharSequence line = best.get(i);
+            graphics.drawString(font, line, x + (PANEL_WIDTH - font.width(line)) / 2, bestY + i * 10, TEXT_DARK,
+                    false);
+        }
+
+        // Bottom bar: research level
+        graphics.drawCenteredString(font, Component.translatable("gui.cobblegenetics.research_level",
+                payload.researchLevel()), x + PANEL_WIDTH / 2, y + BOTTOM_Y + 2, WHITE);
+
+        if (overCry(mouseX, mouseY)) {
+            graphics.renderTooltip(font, Component.translatable("gui.cobblegenetics.cry"), mouseX, mouseY);
+        } else if (mouseX >= x && mouseX < x + PANEL_WIDTH && mouseY >= y + TYPES_Y && mouseY < y + TYPES_Y + BAR) {
+            graphics.renderTooltip(font, font.split(Component.translatable(
+                    "gui.cobblegenetics.breeding_value.tooltip"), 180), mouseX, mouseY);
+        }
+    }
+
+    // ------------------------------------------------------------------ input
+
+    private Component recordText() {
+        return Component.translatable("gui.cobblegenetics.record");
+    }
+
+    private int guideX() {
+        return left + LEFT_X + PANEL_WIDTH - font.width(Component.translatable("gui.cobblegenetics.guide.short")) - 8;
+    }
+
+    private int cryX() {
+        return left + RIGHT_X + PANEL_WIDTH - CRY_WIDTH - 3;
+    }
+
+    private int cryY() {
+        return top + PANEL_Y + PORTRAIT_Y + 2;
+    }
+
+    private boolean overCry(double mx, double my) {
+        return portrait != null && mx >= cryX() && mx < cryX() + CRY_WIDTH && my >= cryY() && my < cryY() + CRY_HEIGHT;
+    }
+
+    private boolean inReport(double mx, double my) {
+        int x = left + LEFT_X;
+        int y = top + PANEL_Y + BAR;
+        return mx >= x && mx < x + PANEL_WIDTH && my >= y && my < y + viewHeight();
     }
 
     @Override
-    public boolean isPauseScreen() {
+    public boolean mouseClicked(double mx, double my, int button) {
+        if (super.mouseClicked(mx, my, button)) {
+            return true;
+        }
+        int barY = top + PANEL_Y + PANEL_HEIGHT - BAR;
+        if (button == 0 && my >= barY && my < barY + BAR) {
+            int x = left + LEFT_X;
+            if (payload.canRecord() && !recorded && mx >= x && mx < x + font.width(recordText()) + 8) {
+                PacketDistributor.sendToServer(new RecordRequestPayload(payload.pokemon()));
+                recorded = true;
+                return true;
+            }
+            if (mx >= guideX() && mx < left + LEFT_X + PANEL_WIDTH) {
+                minecraft.setScreen(new GuideScreen(this, payload.researchLevel()));
+                return true;
+            }
+        }
+        if (button == 0 && overCry(mx, my)) {
+            portrait.cry();
+            return true;
+        }
         return false;
+    }
+
+    @Override
+    public boolean mouseScrolled(double mx, double my, double scrollX, double scrollY) {
+        if (inReport(mx, my)) {
+            scroll -= (int) (scrollY * 12);
+            clampScroll();
+            return true;
+        }
+        return super.mouseScrolled(mx, my, scrollX, scrollY);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (keyCode == GLFW.GLFW_KEY_UP || keyCode == GLFW.GLFW_KEY_DOWN) {
+            scroll += keyCode == GLFW.GLFW_KEY_UP ? -12 : 12;
+            clampScroll();
+            return true;
+        }
+        if (keyCode == GLFW.GLFW_KEY_SPACE && portrait != null) {
+            portrait.cry();
+            return true;
+        }
+        return super.keyPressed(keyCode, scanCode, modifiers);
     }
 }

@@ -69,7 +69,7 @@ public final class MutationRoller {
             return byWeight(combinations, random);
         }
 
-        double negativeChance = config.negativeMutationChance * (1 + instability) * (1 - genome.potential / 200.0);
+        double negativeChance = com.cobblegenetics.genetics.GeneticsRules.harmfulShare(genome, instability, config);
         boolean negative = random.nextDouble() < negativeChance;
         List<MutationDef> pool = eligible.stream().filter(def -> def.negative() == negative).toList();
         if (pool.isEmpty()) {

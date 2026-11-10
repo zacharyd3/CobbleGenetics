@@ -159,6 +159,7 @@ public final class CobblemonHooks {
                         * Math.max(1, event.getNewLevel() - event.getOldLevel()), ShadowService.Activity.LEVEL,
                         pokemon.getOwnerPlayer());
             }
+            GeneticsService.train(pokemon, Math.max(1, event.getNewLevel() - event.getOldLevel()));
         }));
 
         // Battles: Shadow encounters, purification by winning, corruption by losing, regeneration

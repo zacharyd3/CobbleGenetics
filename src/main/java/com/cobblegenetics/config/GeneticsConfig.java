@@ -55,6 +55,13 @@ public final class GeneticsConfig {
      * that receive a genome later never have their IVs touched.
      */
     public int potentialIvFloorMax = 12;
+    /**
+     * Genetic Potential also matters while a Pokémon is trained: at each level up, with this chance, its lowest IV
+     * rises by 1 if it is below the Pokémon's training ceiling (potential / 100 * potentialTrainingIvMax). 0 disables.
+     */
+    public double potentialTrainingChance = 0.35;
+    /** Training ceiling at potential 100 (potential 50 = half of it). Never above 31. */
+    public int potentialTrainingIvMax = 31;
     /** Size gene range: scale modifier = 1 + size * this (size is -1..1). 0 disables genetic size. */
     public double sizeVariance = 0.12;
     /** Chance that a rolled affinity is not one of the species' own types. */
@@ -102,6 +109,13 @@ public final class GeneticsConfig {
      * 40 means a 20-cycle egg needs 800 blocks, about three minutes of walking.
      */
     public int eggBlocksPerCycle = 40;
+    /**
+     * Villagers next to an Incubator can take the Day Care Attendant job. An Egg left in an Incubator with an attendant
+     * within attendantRange blocks hatches on its own, attendantStepsPerSecond "blocks" per second (walking is about 4).
+     */
+    public boolean daycareAttendants = true;
+    public double attendantStepsPerSecond = 1;
+    public int attendantRange = 8;
     /** Abilities in the party that halve the distance, as in the main series (Showdown ids). */
     public List<String> eggSpeedAbilities = new ArrayList<>(List.of("flamebody", "magmaarmor", "steamengine"));
 
@@ -247,6 +261,10 @@ public final class GeneticsConfig {
     /** Keeps values inside sensible ranges, so a typo cannot crash spawning or breeding. */
     void sanitize() {
         potentialIvFloorMax = Math.max(0, Math.min(31, potentialIvFloorMax));
+        potentialTrainingChance = Math.max(0, Math.min(1, potentialTrainingChance));
+        potentialTrainingIvMax = Math.max(0, Math.min(31, potentialTrainingIvMax));
+        attendantStepsPerSecond = Math.max(0, attendantStepsPerSecond);
+        attendantRange = clampInt(attendantRange, 1, 32);
         maxMutations = Math.max(0, maxMutations);
         shadowMinCorruption = clampInt(shadowMinCorruption, 1, 100);
         shadowMaxCorruption = clampInt(shadowMaxCorruption, shadowMinCorruption, 100);

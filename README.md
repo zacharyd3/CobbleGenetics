@@ -12,7 +12,7 @@ CobbleGenetics is a separate mod from [Fusionmon](https://github.com/zacharyd3/f
 
 | Gene | Effect |
 |------|--------|
-| Genetic Potential | Freshly spawned and hatched Pokémon get a minimum for every IV (up to 12 at potential 100). |
+| Genetic Potential | Freshly spawned and hatched Pokémon get a minimum for every IV (up to 12 at potential 100). While training, each level up can raise the lowest IV, up to a ceiling set by potential (31 at potential 100). |
 | Genetic Stability | Low stability means more mutations, a larger share of them harmful, and higher tiers. |
 | Elemental Affinity | A hidden type leaning. Some mutations shift the Tera Type to it. |
 | Mutation Susceptibility | How often mutation rolls happen. |
@@ -21,13 +21,15 @@ CobbleGenetics is a separate mod from [Fusionmon](https://github.com/zacharyd3/f
 
 **Breeding and inheritance.** Offspring mix their parents' genes with noise. Each trait takes one allele from each parent. Opposed affinities make offspring unstable, while compatible ones give hybrid vigour. Mutations pass on directly or *latent*, and two latent carriers can make them reappear. Breeding uses the built-in **Genetic Incubator** block, because Cobblemon 1.7.3 has no breeding of its own: the parents stay inside its glass case while breeding, then it produces a Pokémon Egg that hatches after walking (egg cycles per species; Flame Body and Magma Armor halve it). Breeding addons that fire Cobblemon's egg events are supported too.
 
+**Day Care Attendants.** An unemployed villager near a Genetic Incubator takes the Day Care Attendant job (apron included). Leave an Egg in the Incubator and the attendant hatches it over time, sending the baby to your party or PC, so you don't have to walk. Attendants trade berries, Purifying Scent, Gene Stabilizers, Mutagens and Purification Incense.
+
 **Mutations.** 33 data-driven mutations in four categories (physical, elemental, biological, ability) plus negative ones, across five tiers from Common to Legendary. They arise from wild spawns, breeding, evolution, the environment (heat, cold, sea, darkness), Mutagens, purification, and thunderstorm "genetic storms". Rare combinations need other mutations first: *Void Luminescence* requires Melanism plus Bioluminescence. Mutations show as colour tints, glow, size and aspects for resource packs.
 
 **Shadow Pokémon.** Rare corrupted Pokémon with five corruption states, a darkened look, a purple aura, darkness around the most corrupted wild ones, a lower catch rate, no evolution or breeding, and damped friendship. Corruption drains genetic stability and leaves lasting damage.
 
 **Purification.** A gradual process with feedback at every 10%. Corruption falls through time together (more when the Pokémon is sent out), winning battles, friendship, levelling, Purifying Scent and Incense, and the Purification Chamber. Purified Pokémon gain friendship and stability, and can receive purification-only mutations.
 
-**Genetic Analyzer.** Use it on any Pokémon in the world, or on a party member. It shows a report gated by **five research levels**. Levels rise from milestones or from Analyzer Upgrades. Level 4 adds breeding predictions between the last two analysed Pokémon, and level 5 adds exact Shadow analysis and hints at rare combinations.
+**Genetic Analyzer.** Use it on any Pokémon in the world, or on a party member. It opens a Pokédex-style report gated by **five research levels**: the Pokémon in 3D on its type's platform, every gene with a note on what it means for that Pokémon ("its babies start with every IV at 7 or more"), a **breeding value** grade and the best of that species you have analysed so far, to give you a target to beat. A **? Guide** page explains each gene, with topics unlocking as research grows. Levels rise from milestones or from Analyzer Upgrades. Level 4 adds breeding predictions between the last two analysed Pokémon, and level 5 adds exact Shadow analysis and hints at rare combinations.
 
 **FTB Quests.** Seven chapters and 43 quests, all completed by real gameplay through the mod's advancement criterion. See [`ftbquests/`](ftbquests/README.md).
 
