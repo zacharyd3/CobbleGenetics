@@ -59,7 +59,8 @@ public class GuideScreen extends DexScreen {
         Topic topic = TOPICS.get(selected);
         Component text = unlocked(topic) ? Component.translatable("guide.cobblegenetics." + topic.id() + ".body")
                 : Component.translatable("gui.cobblegenetics.guide.locked", topic.level());
-        body = font.split(text, PANEL_WIDTH - 10);
+        // Narrower than the panel: room for the margin and the scrollbar on the right
+        body = font.split(text, PANEL_WIDTH - 14);
     }
 
     private int viewHeight() {
@@ -115,7 +116,7 @@ public class GuideScreen extends DexScreen {
         }
         graphics.drawCenteredString(font, Component.translatable("gui.cobblegenetics.research_level", researchLevel),
                 rx + PANEL_WIDTH / 2, y + PANEL_HEIGHT - BAR + 2, WHITE);
-        super.render(graphics, mouseX, mouseY, partialTick);
+        renderWidgets(graphics, mouseX, mouseY, partialTick);
     }
 
     @Override
