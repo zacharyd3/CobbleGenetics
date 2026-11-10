@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:inherited_trait",
+  "display": {
+    "icon": {
+      "id": "minecraft:amethyst_shard"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.rare_trait.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.rare_trait.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "rare_trait"
+      }
+    }
+  }
+}

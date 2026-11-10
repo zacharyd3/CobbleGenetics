@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "cobblegenetics:analyzer_upgrade_4"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "cobblemon:black_tumblestone"
+    }
+  ],
+  "result": {
+    "id": "cobblegenetics:analyzer_upgrade_5",
+    "count": 1
+  }
+}

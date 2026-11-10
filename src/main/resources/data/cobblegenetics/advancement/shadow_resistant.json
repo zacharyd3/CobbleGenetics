@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:research_5",
+  "display": {
+    "icon": {
+      "id": "minecraft:shield"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.shadow_resistant.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.shadow_resistant.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "shadow_resistant"
+      }
+    }
+  }
+}

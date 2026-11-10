@@ -1,0 +1,27 @@
+{
+  "parent": "cobblegenetics:purification_start",
+  "display": {
+    "icon": {
+      "id": "cobblegenetics:purifying_scent"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.corruption_40.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.corruption_40.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "corruption",
+        "max_count": 40
+      }
+    }
+  }
+}

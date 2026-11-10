@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "cobblegenetics:analyzer_upgrade_2"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:emerald"
+    },
+    {
+      "item": "cobblemon:tumblestone"
+    }
+  ],
+  "result": {
+    "id": "cobblegenetics:analyzer_upgrade_3",
+    "count": 1
+  }
+}

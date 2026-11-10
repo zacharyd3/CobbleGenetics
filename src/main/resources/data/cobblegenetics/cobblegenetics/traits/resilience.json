@@ -1,0 +1,29 @@
+{
+  "name": "Resilience",
+  "alleles": [
+    {
+      "id": "R",
+      "name": "Typical",
+      "dominance": 2,
+      "frequency": 0.95,
+      "effects": []
+    },
+    {
+      "id": "s",
+      "name": "Shadowproof",
+      "description": "A rare recessive gene that shields the heart from corruption.",
+      "dominance": 1,
+      "frequency": 0.05,
+      "effects": [
+        {
+          "type": "corruption_resistance",
+          "amount": 0.4
+        },
+        {
+          "type": "purification_speed",
+          "multiplier": 1.25
+        }
+      ]
+    }
+  ]
+}

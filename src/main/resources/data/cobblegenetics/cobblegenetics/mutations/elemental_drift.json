@@ -1,0 +1,24 @@
+{
+  "name": "Elemental Drift",
+  "description": "Its elemental affinity has overtaken its body's nature.",
+  "category": "elemental",
+  "tier": "rare",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "conditions": {
+    "min_instability": 0.3
+  },
+  "effects": [
+    {
+      "type": "tera_shift",
+      "tera": "affinity"
+    }
+  ]
+}

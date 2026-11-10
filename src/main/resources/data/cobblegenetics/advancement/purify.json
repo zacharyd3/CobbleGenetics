@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:corruption_40",
+  "display": {
+    "icon": {
+      "id": "minecraft:beacon"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.purify.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.purify.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "purify"
+      }
+    }
+  }
+}

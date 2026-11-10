@@ -1,0 +1,38 @@
+{
+  "name": "Stature",
+  "alleles": [
+    {
+      "id": "T",
+      "name": "Typical",
+      "dominance": 2,
+      "frequency": 0.8,
+      "effects": []
+    },
+    {
+      "id": "g",
+      "name": "Towering",
+      "description": "Grows larger than its kin.",
+      "dominance": 1,
+      "frequency": 0.1,
+      "effects": [
+        {
+          "type": "scale",
+          "multiplier": 1.15
+        }
+      ]
+    },
+    {
+      "id": "d",
+      "name": "Petite",
+      "description": "Stays smaller than its kin.",
+      "dominance": 1,
+      "frequency": 0.1,
+      "effects": [
+        {
+          "type": "scale",
+          "multiplier": 0.87
+        }
+      ]
+    }
+  ]
+}

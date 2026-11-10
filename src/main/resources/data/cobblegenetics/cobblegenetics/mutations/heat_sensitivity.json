@@ -1,0 +1,23 @@
+{
+  "name": "Heat Sensitivity",
+  "description": "Wilts in hot climates: learns more slowly there.",
+  "category": "elemental",
+  "tier": "uncommon",
+  "negative": true,
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "effects": [
+    {
+      "type": "exp_multiplier",
+      "multiplier": 0.8,
+      "min_temperature": 1.0
+    }
+  ]
+}

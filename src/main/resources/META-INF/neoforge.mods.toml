@@ -1,0 +1,40 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "MPL-2.0"
+issueTrackerURL = "https://github.com/zacharyd3/CobbleGenetics/issues"
+
+[[mods]]
+modId = "cobblegenetics"
+version = "${version}"
+displayName = "CobbleGenetics"
+authors = "zacharyd3"
+displayURL = "https://github.com/zacharyd3/CobbleGenetics"
+description = '''
+Individual genetics, mutations and Shadow Pokémon for Cobblemon. Every Pokémon gets its own genetic profile; breed for rare traits, discover mutations, and purify corrupted Shadow Pokémon. Includes a research progression for FTB Quests.
+'''
+
+# Client-only mixin (render tint); the server side uses only Cobblemon's events, aspects and properties
+[[mixins]]
+config = "cobblegenetics.client.mixins.json"
+
+[[dependencies.cobblegenetics]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.cobblegenetics]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.21.2)"
+ordering = "NONE"
+side = "BOTH"
+
+# Built and checked against Cobblemon 1.7.3 (the version of Cobbleverse / All the Mons)
+[[dependencies.cobblegenetics]]
+modId = "cobblemon"
+type = "required"
+versionRange = "[1.7.3,1.8)"
+ordering = "AFTER"
+side = "BOTH"

@@ -1,0 +1,24 @@
+{
+  "name": "Albinism",
+  "description": "Pigment never formed: pale, almost white colouring.",
+  "category": "physical",
+  "tier": "uncommon",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.35,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "excludes": [
+    "cobblegenetics:melanism"
+  ],
+  "effects": [
+    {
+      "type": "tint",
+      "color": "#f4efe8"
+    }
+  ]
+}

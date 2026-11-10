@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "cobblegenetics:purifying_scent"
+    },
+    {
+      "item": "cobblemon:cleanse_tag"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    }
+  ],
+  "result": {
+    "id": "cobblegenetics:purification_incense",
+    "count": 1
+  }
+}

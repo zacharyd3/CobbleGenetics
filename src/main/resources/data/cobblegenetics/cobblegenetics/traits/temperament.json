@@ -1,0 +1,42 @@
+{
+  "name": "Temperament",
+  "alleles": [
+    {
+      "id": "B",
+      "name": "Balanced",
+      "dominance": 2,
+      "frequency": 0.62,
+      "effects": []
+    },
+    {
+      "id": "A",
+      "name": "Affectionate",
+      "description": "Bonds with its trainer quickly.",
+      "dominance": 2,
+      "frequency": 0.28,
+      "effects": [
+        {
+          "type": "friendship_multiplier",
+          "multiplier": 1.2
+        }
+      ]
+    },
+    {
+      "id": "w",
+      "name": "Wary",
+      "description": "Slow to trust, but hard to corrupt.",
+      "dominance": 1,
+      "frequency": 0.1,
+      "effects": [
+        {
+          "type": "friendship_multiplier",
+          "multiplier": 0.85
+        },
+        {
+          "type": "corruption_resistance",
+          "amount": 0.15
+        }
+      ]
+    }
+  ]
+}

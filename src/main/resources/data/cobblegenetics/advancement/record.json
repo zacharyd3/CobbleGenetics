@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:analyze_first",
+  "display": {
+    "icon": {
+      "id": "cobblegenetics:genetic_record"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.record.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.record.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "record"
+      }
+    }
+  }
+}

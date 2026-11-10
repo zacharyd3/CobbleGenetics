@@ -1,0 +1,20 @@
+{
+  "name": "Latent Potential",
+  "description": "Unlocks the hidden ability of its species.",
+  "category": "ability",
+  "tier": "rare",
+  "weight": 8,
+  "inheritable": true,
+  "inherit_chance": 0.25,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "effects": [
+    {
+      "type": "hidden_ability"
+    }
+  ]
+}

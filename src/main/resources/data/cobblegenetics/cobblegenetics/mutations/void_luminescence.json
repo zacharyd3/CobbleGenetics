@@ -1,0 +1,33 @@
+{
+  "name": "Void Luminescence",
+  "description": "Dark pigment and living light fused into something new.",
+  "category": "physical",
+  "tier": "epic",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "breeding",
+    "evolution"
+  ],
+  "conditions": {
+    "requires_mutations": [
+      "cobblegenetics:melanism",
+      "cobblegenetics:bioluminescence"
+    ]
+  },
+  "effects": [
+    {
+      "type": "tint",
+      "color": "#5b3fa8"
+    },
+    {
+      "type": "glow"
+    },
+    {
+      "type": "iv",
+      "stat": "special_attack",
+      "amount": 4
+    }
+  ]
+}

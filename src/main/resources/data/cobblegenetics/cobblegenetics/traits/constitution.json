@@ -1,0 +1,31 @@
+{
+  "name": "Constitution",
+  "alleles": [
+    {
+      "id": "C",
+      "name": "Standard",
+      "dominance": 2,
+      "frequency": 0.88,
+      "effects": []
+    },
+    {
+      "id": "h",
+      "name": "Hardy",
+      "description": "Unusually tough body.",
+      "dominance": 1,
+      "frequency": 0.12,
+      "effects": [
+        {
+          "type": "iv",
+          "stat": "hp",
+          "amount": 3
+        },
+        {
+          "type": "iv",
+          "stat": "defence",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

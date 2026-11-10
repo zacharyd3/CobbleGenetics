@@ -1,0 +1,27 @@
+{
+  "parent": "cobblegenetics:research_5",
+  "display": {
+    "icon": {
+      "id": "cobblegenetics:genetic_incubator"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.generation_3.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.generation_3.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "analyze_offspring",
+        "min_count": 3
+      }
+    }
+  }
+}

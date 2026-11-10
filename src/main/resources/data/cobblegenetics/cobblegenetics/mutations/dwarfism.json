@@ -1,0 +1,29 @@
+{
+  "name": "Dwarfism",
+  "description": "A miniature specimen, nimble for its size.",
+  "category": "physical",
+  "tier": "uncommon",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "excludes": [
+    "cobblegenetics:gigantism"
+  ],
+  "effects": [
+    {
+      "type": "scale",
+      "multiplier": 0.75
+    },
+    {
+      "type": "iv",
+      "stat": "speed",
+      "amount": 3
+    }
+  ]
+}

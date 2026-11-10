@@ -1,0 +1,28 @@
+{
+  "name": "Iridescence",
+  "description": "Its colours shimmer like a soap bubble.",
+  "category": "physical",
+  "tier": "epic",
+  "weight": 6,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "effects": [
+    {
+      "type": "tint",
+      "color": "#b8f0ff"
+    },
+    {
+      "type": "glow"
+    },
+    {
+      "type": "all_ivs",
+      "amount": 1
+    }
+  ]
+}

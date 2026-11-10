@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "cobblegenetics:block/purification_chamber_top",
+    "bottom": "cobblegenetics:block/purification_chamber_bottom",
+    "side": "cobblegenetics:block/purification_chamber_side"
+  }
+}

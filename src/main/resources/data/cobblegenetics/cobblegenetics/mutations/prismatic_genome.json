@@ -1,0 +1,37 @@
+{
+  "name": "Prismatic Genome",
+  "description": "A genome so ordered it refracts light. Bred from lustrous, shimmering lines.",
+  "category": "physical",
+  "tier": "legendary",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.15,
+  "sources": [
+    "breeding"
+  ],
+  "conditions": {
+    "requires_mutations": [
+      "cobblegenetics:iridescence"
+    ],
+    "requires_traits": [
+      "luster:l"
+    ]
+  },
+  "effects": [
+    {
+      "type": "tint",
+      "color": "#ffffff"
+    },
+    {
+      "type": "glow"
+    },
+    {
+      "type": "all_ivs",
+      "amount": 3
+    },
+    {
+      "type": "stability",
+      "amount": 15
+    }
+  ]
+}

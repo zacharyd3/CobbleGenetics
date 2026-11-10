@@ -1,0 +1,27 @@
+{
+  "parent": "cobblegenetics:research_2",
+  "display": {
+    "icon": {
+      "id": "cobblegenetics:analyzer_upgrade_3"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.research_3.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.research_3.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "research_level",
+        "min_count": 3
+      }
+    }
+  }
+}

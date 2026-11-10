@@ -1,0 +1,27 @@
+{
+  "parent": "cobblegenetics:study_mutation",
+  "display": {
+    "icon": {
+      "id": "minecraft:nether_star"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.epic_mutation.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.epic_mutation.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "mutation",
+        "tier": "epic"
+      }
+    }
+  }
+}

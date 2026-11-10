@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:purify",
+  "display": {
+    "icon": {
+      "id": "minecraft:end_crystal"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.purified_mutation.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.purified_mutation.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "purified_mutation"
+      }
+    }
+  }
+}

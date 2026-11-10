@@ -1,0 +1,24 @@
+{
+  "name": "Melanism",
+  "description": "An excess of dark pigment.",
+  "category": "physical",
+  "tier": "uncommon",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.35,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "excludes": [
+    "cobblegenetics:albinism"
+  ],
+  "effects": [
+    {
+      "type": "tint",
+      "color": "#4a4458"
+    }
+  ]
+}

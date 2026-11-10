@@ -1,0 +1,29 @@
+{
+  "name": "Gigantism",
+  "description": "Grows far beyond the size of its species.",
+  "category": "physical",
+  "tier": "rare",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "excludes": [
+    "cobblegenetics:dwarfism"
+  ],
+  "effects": [
+    {
+      "type": "scale",
+      "multiplier": 1.3
+    },
+    {
+      "type": "iv",
+      "stat": "hp",
+      "amount": 2
+    }
+  ]
+}

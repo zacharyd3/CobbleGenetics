@@ -1,0 +1,30 @@
+{
+  "name": "Storm Charged",
+  "description": "Born of a genetic storm: lightning lives in its cells.",
+  "category": "elemental",
+  "tier": "rare",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "event",
+    "environment"
+  ],
+  "conditions": {
+    "weather": "thunder"
+  },
+  "effects": [
+    {
+      "type": "tera_shift",
+      "tera": "electric"
+    },
+    {
+      "type": "iv",
+      "stat": "speed",
+      "amount": 3
+    },
+    {
+      "type": "glow"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Metabolism",
+  "alleles": [
+    {
+      "id": "M",
+      "name": "Steady",
+      "dominance": 2,
+      "frequency": 0.8,
+      "effects": []
+    },
+    {
+      "id": "q",
+      "name": "Quick",
+      "description": "Learns from every battle a little faster.",
+      "dominance": 1,
+      "frequency": 0.2,
+      "effects": [
+        {
+          "type": "exp_multiplier",
+          "multiplier": 1.1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:research_2",
+  "display": {
+    "icon": {
+      "id": "cobblegenetics:mutagen"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.mutation_first.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.mutation_first.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "mutation"
+      }
+    }
+  }
+}

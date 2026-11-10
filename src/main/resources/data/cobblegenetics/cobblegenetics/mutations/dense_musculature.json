@@ -1,0 +1,27 @@
+{
+  "name": "Dense Musculature",
+  "description": "Muscle fibres packed far tighter than normal.",
+  "category": "biological",
+  "tier": "uncommon",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "effects": [
+    {
+      "type": "iv",
+      "stat": "attack",
+      "amount": 4
+    },
+    {
+      "type": "iv",
+      "stat": "defence",
+      "amount": 2
+    }
+  ]
+}
