@@ -13,7 +13,7 @@
 			icon: { id: "cobblegenetics:genetic_incubator" }
 			id: "15C95900440E45BD"
 			rewards: [
-				{ count: 4, id: "432914975A4A6EA0", item: { count: 1, id: "minecraft:egg" }, type: "item" }
+				{ count: 6, id: "607BBC6FA9ACC860", item: { count: 1, id: "cobblemon:oran_berry" }, type: "item" }
 			]
 			tasks: [{ count: 1L, id: "77F5376BAC4CE9E4", item: { count: 1, id: "cobblegenetics:genetic_incubator" }, type: "item" }]
 			x: 0.0d
@@ -21,7 +21,7 @@
 		}
 		{
 			dependencies: ["15C95900440E45BD"]
-			icon: { id: "minecraft:egg" }
+			icon: { id: "cobblegenetics:pokemon_egg" }
 			id: "4C3CACB8E8D2B19A"
 			rewards: [
 				{ count: 3, id: "0AEAA48A74AF2739", item: { count: 1, id: "cobblemon:exp_candy_m" }, type: "item" }

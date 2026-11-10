@@ -68,7 +68,7 @@
 			id: "5674030B43AE134C"
 			rewards: [
 				{ count: 1, id: "10DD2DC6F307A0DD", item: { count: 1, id: "cobblegenetics:genetic_incubator" }, type: "item" }
-				{ count: 4, id: "0735C078A648D372", item: { count: 1, id: "minecraft:egg" }, type: "item" }
+				{ count: 6, id: "11DFFF792C319C37", item: { count: 1, id: "cobblemon:oran_berry" }, type: "item" }
 			]
 			shape: "hexagon"
 			tasks: [{ advancement: "cobblegenetics:research_2", criterion: "", id: "2DAFE0207075F559", type: "advancement" }]
