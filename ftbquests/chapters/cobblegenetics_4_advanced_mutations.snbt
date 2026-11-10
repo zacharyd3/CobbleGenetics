@@ -2,8 +2,8 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "cobblegenetics_4_advanced_mutations"
-	group: "52E24F4D0DDFF37E"
-	icon: { id: "minecraft:brewing_stand" }
+	group: "639C8B4E3836D569"
+	icon: { id: "cobblegenetics:analyzer_upgrade_4" }
 	id: "69BD8C82EC8F98AC"
 	order_index: 4
 	quest_links: [ ]
@@ -11,7 +11,7 @@
 		{
 			dependencies: ["22B71D651BED3F6E"]
 			icon: { id: "cobblegenetics:genetic_analyzer" }
-			id: "980A44BD17520161"
+			id: "180A44BD17520161"
 			rewards: [
 				{ amount: 200, id: "33D803699F9A96AD", type: "xp" }
 			]
@@ -20,61 +20,61 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["980A44BD17520161"]
+			dependencies: ["180A44BD17520161"]
 			icon: { id: "minecraft:tnt" }
-			id: "BAD790CA5A9FA3E0"
+			id: "3AD790CA5A9FA3E0"
 			rewards: [
 				{ count: 2, id: "483ED20A36B8AF33", item: { count: 1, id: "cobblegenetics:gene_stabilizer" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:unstable", criterion: "", id: "F1BF3F047FA8BED2", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:unstable", criterion: "", id: "71BF3F047FA8BED2", type: "advancement" }]
 			x: 2.0d
 			y: -1.0d
 		}
 		{
-			dependencies: ["980A44BD17520161"]
+			dependencies: ["180A44BD17520161"]
 			icon: { id: "minecraft:magma_block" }
-			id: "F2463623FD7A3A44"
+			id: "72463623FD7A3A44"
 			optional: true
 			rewards: [
 				{ count: 2, id: "6426005F8623ACF5", item: { count: 1, id: "cobblemon:exp_candy_l" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:environmental_mutation", criterion: "", id: "944B84C9441E67B5", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:environmental_mutation", criterion: "", id: "144B84C9441E67B5", type: "advancement" }]
 			x: 2.0d
 			y: 1.0d
 		}
 		{
-			dependencies: ["980A44BD17520161"]
+			dependencies: ["180A44BD17520161"]
 			icon: { id: "minecraft:blaze_powder" }
-			id: "EBA45FA59A8F7A57"
+			id: "6BA45FA59A8F7A57"
 			optional: true
 			rewards: [
-				{ count: 1, id: "D8179ED81B956B9B", item: { count: 1, id: "cobblemon:exp_candy_l" }, type: "item" }
+				{ count: 1, id: "58179ED81B956B9B", item: { count: 1, id: "cobblemon:exp_candy_l" }, type: "item" }
 			]
 			tasks: [{ advancement: "cobblegenetics:elemental_mutation", criterion: "", id: "768232BAD005FED1", type: "advancement" }]
 			x: 4.0d
 			y: -1.0d
 		}
 		{
-			dependencies: ["980A44BD17520161"]
+			dependencies: ["180A44BD17520161"]
 			icon: { id: "minecraft:enchanted_book" }
 			id: "12F1D7D3E9EEAA35"
 			optional: true
 			rewards: [
-				{ count: 1, id: "F49AFAFEF57FFC95", item: { count: 1, id: "cobblemon:ability_capsule" }, type: "item" }
+				{ count: 1, id: "749AFAFEF57FFC95", item: { count: 1, id: "cobblemon:ability_capsule" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:ability_mutation", criterion: "", id: "89E0613DCAB494DF", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:ability_mutation", criterion: "", id: "09E0613DCAB494DF", type: "advancement" }]
 			x: 4.0d
 			y: 1.0d
 		}
 		{
-			dependencies: ["980A44BD17520161"]
+			dependencies: ["180A44BD17520161"]
 			icon: { id: "minecraft:writable_book" }
 			id: "2D48DDDB88E6B401"
 			optional: true
 			rewards: [
 				{ count: 3, id: "101ABB3743B0B248", item: { count: 1, id: "cobblegenetics:mutagen" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:mutations_10", criterion: "", id: "981B1DDEAC0CCD1C", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:mutations_10", criterion: "", id: "181B1DDEAC0CCD1C", type: "advancement" }]
 			x: 6.0d
 			y: 0.0d
 		}

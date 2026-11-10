@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:block/block",
-  "render_type": "minecraft:cutout",
+  "render_type": "minecraft:translucent",
+  "ambientocclusion": false,
   "textures": {
-    "particle": "cobblegenetics:block/incubator_metal",
-    "metal": "cobblegenetics:block/incubator_metal",
-    "panel": "cobblegenetics:block/incubator_panel",
-    "glass": "minecraft:block/glass"
+    "particle": "cobblegenetics:block/incubator_base",
+    "base": "cobblegenetics:block/incubator_base",
+    "floor": "cobblegenetics:block/incubator_floor",
+    "pillar": "cobblegenetics:block/incubator_pillar",
+    "glass": "cobblegenetics:block/incubator_glass"
   },
   "elements": [
     {
@@ -16,57 +18,192 @@
       ],
       "to": [
         16,
-        3,
+        6,
         16
       ],
       "faces": {
         "north": {
-          "texture": "#metal"
+          "texture": "#base",
+          "uv": [
+            0,
+            3,
+            16,
+            9
+          ]
         },
         "south": {
-          "texture": "#metal"
+          "texture": "#base",
+          "uv": [
+            0,
+            3,
+            16,
+            9
+          ]
         },
         "east": {
-          "texture": "#metal"
+          "texture": "#base",
+          "uv": [
+            0,
+            3,
+            16,
+            9
+          ]
         },
         "west": {
-          "texture": "#metal"
+          "texture": "#base",
+          "uv": [
+            0,
+            3,
+            16,
+            9
+          ]
         },
         "up": {
-          "texture": "#metal"
+          "texture": "#floor"
         },
         "down": {
-          "texture": "#metal"
-        }
-      }
-    },
-    {
-      "from": [
-        4,
-        0.5,
-        -0.01
-      ],
-      "to": [
-        12,
-        2.5,
-        0
-      ],
-      "faces": {
-        "north": {
-          "texture": "#panel"
+          "texture": "#floor"
         }
       }
     },
     {
       "from": [
         1,
+        6,
+        1
+      ],
+      "to": [
         3,
+        16,
+        3
+      ],
+      "faces": {
+        "north": {
+          "texture": "#pillar"
+        },
+        "south": {
+          "texture": "#pillar"
+        },
+        "east": {
+          "texture": "#pillar"
+        },
+        "west": {
+          "texture": "#pillar"
+        },
+        "up": {
+          "texture": "#pillar"
+        },
+        "down": {
+          "texture": "#pillar"
+        }
+      }
+    },
+    {
+      "from": [
+        13,
+        6,
         1
       ],
       "to": [
         15,
         16,
+        3
+      ],
+      "faces": {
+        "north": {
+          "texture": "#pillar"
+        },
+        "south": {
+          "texture": "#pillar"
+        },
+        "east": {
+          "texture": "#pillar"
+        },
+        "west": {
+          "texture": "#pillar"
+        },
+        "up": {
+          "texture": "#pillar"
+        },
+        "down": {
+          "texture": "#pillar"
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        6,
+        13
+      ],
+      "to": [
+        3,
+        16,
         15
+      ],
+      "faces": {
+        "north": {
+          "texture": "#pillar"
+        },
+        "south": {
+          "texture": "#pillar"
+        },
+        "east": {
+          "texture": "#pillar"
+        },
+        "west": {
+          "texture": "#pillar"
+        },
+        "up": {
+          "texture": "#pillar"
+        },
+        "down": {
+          "texture": "#pillar"
+        }
+      }
+    },
+    {
+      "from": [
+        13,
+        6,
+        13
+      ],
+      "to": [
+        15,
+        16,
+        15
+      ],
+      "faces": {
+        "north": {
+          "texture": "#pillar"
+        },
+        "south": {
+          "texture": "#pillar"
+        },
+        "east": {
+          "texture": "#pillar"
+        },
+        "west": {
+          "texture": "#pillar"
+        },
+        "up": {
+          "texture": "#pillar"
+        },
+        "down": {
+          "texture": "#pillar"
+        }
+      }
+    },
+    {
+      "from": [
+        2,
+        6,
+        2
+      ],
+      "to": [
+        14,
+        16,
+        14
       ],
       "faces": {
         "north": {

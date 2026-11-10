@@ -2,19 +2,19 @@
 	quest.06B1CD143EBBDF22.title: "The Genetic Analyzer"
 	quest.06B1CD143EBBDF22.quest_subtitle: "Your window into Pokémon biology"
 	quest.06B1CD143EBBDF22.quest_desc: ["Craft a &bGenetic Analyzer&r (iron, glass, redstone and a Poké Ball - check JEI)." "" "&eRight-click&r any Pokémon in the world with it - wild or yours - or use it in the air to pick a Pokémon from your party."]
-	quest.D6ED2CE7E35621C1.title: "First Sample"
-	quest.D6ED2CE7E35621C1.quest_subtitle: "Analyse a Pokémon"
-	quest.D6ED2CE7E35621C1.quest_desc: ["Every Pokémon now carries its own &dgenetic profile&r, rolled when it was born." "" "The first thing you can read is its &6Genetic Potential&r, graded &aS&r, &aA&r, &eB&r, &eC&r or &cD&r. Wild Pokémon with high potential are born with better minimum stats (IVs)."]
+	quest.56ED2CE7E35621C1.title: "First Sample"
+	quest.56ED2CE7E35621C1.quest_subtitle: "Analyse a Pokémon"
+	quest.56ED2CE7E35621C1.quest_desc: ["Every Pokémon now carries its own &dgenetic profile&r, rolled when it was born." "" "The first thing you can read is its &6Genetic Potential&r, graded &aS&r, &aA&r, &eB&r, &eC&r or &cD&r. Wild Pokémon with high potential are born with better minimum stats (IVs)."]
 	quest.642477C5A394EAFA.title: "No Two Alike"
 	quest.642477C5A394EAFA.quest_subtitle: "Analyse three different Pokémon"
 	quest.642477C5A394EAFA.quest_desc: ["Analyse a few Pokémon of the &osame species&r and compare them: their genes differ." "" "Greyed-out rows show what higher &bGenetic Research&r levels will reveal. Research rises as you study more Pokémon, or with &bAnalyzer Upgrades&r (use the one this quest gives you)."]
-	quest.87A4E4049F91EDDA.title: "Born for Greatness"
-	quest.87A4E4049F91EDDA.quest_subtitle: "Find above-average Genetic Potential"
-	quest.87A4E4049F91EDDA.quest_desc: ["Find a Pokémon with &6Genetic Potential 70+&r (grade A or S)." "" "Tip: potential is partly inherited. Two high-potential parents tend to have high-potential offspring."]
+	quest.07A4E4049F91EDDA.title: "Born for Greatness"
+	quest.07A4E4049F91EDDA.quest_subtitle: "Find above-average Genetic Potential"
+	quest.07A4E4049F91EDDA.quest_desc: ["Find a Pokémon with &6Genetic Potential 70+&r (grade A or S)." "" "Tip: potential is partly inherited. Two high-potential parents tend to have high-potential offspring."]
 	quest.7BF8CEA614B0EBD2.title: "For the Archive"
 	quest.7BF8CEA614B0EBD2.quest_subtitle: "Record a genetic profile"
 	quest.7BF8CEA614B0EBD2.quest_desc: ["Press &bRecord Profile&r on the Analyzer screen of one of &oyour&r Pokémon. It writes the analysis onto a &bGenetic Record&r, using one paper." "" "Records are handy to compare parents before breeding."]
-	quest.D674030B43AE134C.title: "Research Level 2"
-	quest.D674030B43AE134C.quest_subtitle: "Stability & Affinity"
-	quest.D674030B43AE134C.quest_desc: ["At level 2 the Analyzer shows:" "&b- Genetic Stability&r: how resistant the genome is to change. Low stability means more mutations, and more of them harmful." "&b- Elemental Affinity&r: a hidden leaning towards a type, not always the Pokémon's own." "" "Your reward opens the next chapters: &aHeredity&r and &dMutations&r."]
+	quest.5674030B43AE134C.title: "Research Level 2"
+	quest.5674030B43AE134C.quest_subtitle: "Stability & Affinity"
+	quest.5674030B43AE134C.quest_desc: ["At level 2 the Analyzer shows:" "&b- Genetic Stability&r: how resistant the genome is to change. Low stability means more mutations, and more of them harmful." "&b- Elemental Affinity&r: a hidden leaning towards a type, not always the Pokémon's own." "" "Your reward opens the next chapters: &aHeredity&r and &dMutations&r."]
 }

@@ -34,10 +34,11 @@ import java.util.WeakHashMap;
  */
 public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBlockEntity> {
 
-    /** Room inside the glass for each parent, in blocks (two side by side in a 14/16-wide, ~1.7-high case). */
-    private static final float SLOT_WIDTH = 0.42f;
-    private static final float SLOT_HEIGHT = 1.45f;
-    private static final float FLOOR = 3 / 16f;
+    /** Room inside the glass for each parent, in blocks: two side by side in the 12/16-wide case, whose glass runs
+     * from the pedestal (6/16) to the cap (1 + 8/16). */
+    private static final float SLOT_WIDTH = 0.36f;
+    private static final float SLOT_HEIGHT = 1.05f;
+    private static final float FLOOR = 6 / 16f;
 
     private final Map<GeneticIncubatorBlockEntity, Shown> shown = new WeakHashMap<>();
 
@@ -80,7 +81,7 @@ public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBl
             float width = Math.max(0.1f, entity.getBbWidth());
             float height = Math.max(0.1f, entity.getBbHeight());
             float scale = Math.min(1, Math.min(SLOT_WIDTH / width, SLOT_HEIGHT / height));
-            float side = entities.length == 1 ? 0 : (i == 0 ? -0.22f : 0.22f);
+            float side = entities.length == 1 ? 0 : (i == 0 ? -0.19f : 0.19f);
 
             pose.pushPose();
             pose.translate(0.5, FLOOR, 0.5);
@@ -99,11 +100,11 @@ public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBl
                            MultiBufferSource buffers, int light, int overlay) {
         float time = level.getGameTime() + partialTick;
         pose.pushPose();
-        pose.translate(0.5, 0.55 + Math.sin(time / 12) * 0.04, 0.5);
+        pose.translate(0.5, 0.78 + Math.sin(time / 12) * 0.04, 0.5);
         pose.mulPose(Axis.YP.rotationDegrees(time * 2));
         // A gentle wobble, as eggs do in the games
         pose.mulPose(Axis.ZP.rotationDegrees((float) Math.sin(time / 5) * 6));
-        pose.scale(0.9f, 0.9f, 0.9f);
+        pose.scale(0.8f, 0.8f, 0.8f);
         Minecraft.getInstance().getItemRenderer().renderStatic(incubator.egg(), ItemDisplayContext.GROUND, light,
                 overlay, pose, buffers, level, 0);
         pose.popPose();

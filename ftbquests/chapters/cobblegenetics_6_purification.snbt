@@ -2,9 +2,9 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "cobblegenetics_6_purification"
-	group: "52E24F4D0DDFF37E"
-	icon: { id: "minecraft:beacon" }
-	id: "EBBDA0EFF43C4727"
+	group: "639C8B4E3836D569"
+	icon: { id: "cobblegenetics:purification_chamber" }
+	id: "6BBDA0EFF43C4727"
 	order_index: 6
 	quest_links: [ ]
 	quests: [
@@ -22,11 +22,11 @@
 		{
 			dependencies: ["2DACA2F3819C14CE"]
 			icon: { id: "minecraft:iron_sword" }
-			id: "F6068254FE5BC041"
+			id: "76068254FE5BC041"
 			rewards: [
 				{ count: 3, id: "485F7459DDB177C9", item: { count: 1, id: "cobblemon:exp_candy_m" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:purify_battle", criterion: "", id: "BDE01E3B358C4372", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:purify_battle", criterion: "", id: "3DE01E3B358C4372", type: "advancement" }]
 			x: 0.0d
 			y: 1.0d
 		}
@@ -36,20 +36,20 @@
 			id: "3CDBC350B392DE26"
 			optional: true
 			rewards: [
-				{ count: 1, id: "C8A2144CDDB274B9", item: { count: 1, id: "cobblegenetics:purification_incense" }, type: "item" }
+				{ count: 1, id: "48A2144CDDB274B9", item: { count: 1, id: "cobblegenetics:purification_incense" }, type: "item" }
 			]
 			tasks: [{ count: 1L, id: "15B619A5E106CF66", item: { count: 1, id: "cobblegenetics:purification_chamber" }, type: "item" } { advancement: "cobblegenetics:purify_chamber", criterion: "", id: "30140B7494FD016F", type: "advancement" }]
 			x: 2.0d
 			y: -2.0d
 		}
 		{
-			dependencies: ["7531EB337473F853" "F6068254FE5BC041"]
+			dependencies: ["7531EB337473F853" "76068254FE5BC041"]
 			icon: { id: "cobblegenetics:purifying_scent" }
 			id: "0F9BDAF20385F71D"
 			rewards: [
 				{ count: 2, id: "6E3F84F72596F561", item: { count: 1, id: "cobblegenetics:purification_incense" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:corruption_40", criterion: "", id: "B6CDE1692BE48C20", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:corruption_40", criterion: "", id: "36CDE1692BE48C20", type: "advancement" }]
 			x: 2.0d
 			y: 0.0d
 		}
@@ -58,8 +58,8 @@
 			icon: { id: "minecraft:beacon" }
 			id: "36EAFD803A8560EF"
 			rewards: [
-				{ count: 1, id: "D42A0385DCB44E4C", item: { count: 1, id: "cobblegenetics:analyzer_upgrade_5" }, type: "item" }
-				{ count: 3, id: "9F5DBFA8D6F808E8", item: { count: 1, id: "cobblemon:rare_candy" }, type: "item" }
+				{ count: 1, id: "542A0385DCB44E4C", item: { count: 1, id: "cobblegenetics:analyzer_upgrade_5" }, type: "item" }
+				{ count: 3, id: "1F5DBFA8D6F808E8", item: { count: 1, id: "cobblemon:rare_candy" }, type: "item" }
 			]
 			shape: "hexagon"
 			tasks: [{ advancement: "cobblegenetics:purify", criterion: "", id: "26B5CAB76EE86779", type: "advancement" }]
@@ -80,12 +80,12 @@
 		{
 			dependencies: ["36EAFD803A8560EF"]
 			icon: { id: "minecraft:end_crystal" }
-			id: "C42515825CC4B726"
+			id: "442515825CC4B726"
 			optional: true
 			rewards: [
-				{ count: 1, id: "F35937B9F834F03B", item: { count: 1, id: "cobblemon:master_ball" }, type: "item" }
+				{ count: 1, id: "735937B9F834F03B", item: { count: 1, id: "cobblemon:master_ball" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:purified_mutation", criterion: "", id: "A9FAC031C7163D01", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:purified_mutation", criterion: "", id: "29FAC031C7163D01", type: "advancement" }]
 			x: 6.0d
 			y: 1.0d
 		}
@@ -97,7 +97,7 @@
 				{ count: 3, id: "2F17A6D176EB841C", item: { count: 1, id: "cobblemon:exp_candy_l" }, type: "item" }
 			]
 			shape: "hexagon"
-			tasks: [{ advancement: "cobblegenetics:research_5", criterion: "", id: "99B897A48E28C0B5", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:research_5", criterion: "", id: "19B897A48E28C0B5", type: "advancement" }]
 			x: 8.0d
 			y: 0.0d
 		}

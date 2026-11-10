@@ -2,79 +2,79 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "cobblegenetics_7_advanced"
-	group: "52E24F4D0DDFF37E"
-	icon: { id: "minecraft:knowledge_book" }
-	id: "B79A25411AEF4966"
+	group: "639C8B4E3836D569"
+	icon: { id: "cobblegenetics:analyzer_upgrade_5" }
+	id: "379A25411AEF4966"
 	order_index: 7
 	quest_links: [ ]
 	quests: [
 		{
 			dependencies: ["54E1543E8E009E0D"]
 			icon: { id: "minecraft:brewing_stand" }
-			id: "949B84C8FCF40E76"
+			id: "149B84C8FCF40E76"
 			rewards: [
-				{ count: 3, id: "82A334907478538C", item: { count: 1, id: "cobblegenetics:mutagen" }, type: "item" }
-				{ count: 2, id: "BCDA00EBADEE202E", item: { count: 1, id: "cobblemon:exp_candy_l" }, type: "item" }
+				{ count: 3, id: "02A334907478538C", item: { count: 1, id: "cobblegenetics:mutagen" }, type: "item" }
+				{ count: 2, id: "3CDA00EBADEE202E", item: { count: 1, id: "cobblemon:exp_candy_l" }, type: "item" }
 			]
 			tasks: [{ advancement: "cobblegenetics:combination", criterion: "", id: "026778878B2C21A3", type: "advancement" }]
 			x: 0.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["949B84C8FCF40E76"]
+			dependencies: ["149B84C8FCF40E76"]
 			icon: { id: "minecraft:shield" }
 			id: "42B37C20090A37B0"
 			optional: true
 			rewards: [
-				{ count: 2, id: "A98EE1713E48BB38", item: { count: 1, id: "cobblegenetics:purification_incense" }, type: "item" }
+				{ count: 2, id: "298EE1713E48BB38", item: { count: 1, id: "cobblegenetics:purification_incense" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:shadow_resistant", criterion: "", id: "EB29727931D1DD3A", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:shadow_resistant", criterion: "", id: "6B29727931D1DD3A", type: "advancement" }]
 			x: 2.0d
 			y: -1.0d
 		}
 		{
-			dependencies: ["949B84C8FCF40E76"]
+			dependencies: ["149B84C8FCF40E76"]
 			icon: { id: "cobblegenetics:genetic_incubator" }
 			id: "6D8525565A8F09CE"
 			optional: true
 			rewards: [
-				{ count: 1, id: "B0AD69EB96C7F04D", item: { count: 1, id: "cobblemon:ability_patch" }, type: "item" }
+				{ count: 1, id: "30AD69EB96C7F04D", item: { count: 1, id: "cobblemon:ability_patch" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:generation_3", criterion: "", id: "FF740A9DDCD3F30B", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:generation_3", criterion: "", id: "7F740A9DDCD3F30B", type: "advancement" }]
 			x: 2.0d
 			y: 1.0d
 		}
 		{
-			dependencies: ["949B84C8FCF40E76"]
+			dependencies: ["149B84C8FCF40E76"]
 			icon: { id: "minecraft:beacon" }
 			id: "24D77B3D57CA91D5"
 			optional: true
 			rewards: [
 				{ count: 1, id: "1E50BEC073A8E682", item: { count: 1, id: "cobblemon:master_ball" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:purify_5", criterion: "", id: "CE9CCFB208FDE36F", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:purify_5", criterion: "", id: "4E9CCFB208FDE36F", type: "advancement" }]
 			x: 4.0d
 			y: -1.0d
 		}
 		{
-			dependencies: ["949B84C8FCF40E76"]
+			dependencies: ["149B84C8FCF40E76"]
 			icon: { id: "minecraft:knowledge_book" }
-			id: "DC8A8AE7165E41E9"
+			id: "5C8A8AE7165E41E9"
 			optional: true
 			rewards: [
 				{ count: 1, id: "54541C1A9A82180C", item: { count: 1, id: "cobblemon:master_ball" }, type: "item" }
 			]
-			tasks: [{ advancement: "cobblegenetics:mutations_25", criterion: "", id: "F136CF8FED2C75E0", type: "advancement" }]
+			tasks: [{ advancement: "cobblegenetics:mutations_25", criterion: "", id: "7136CF8FED2C75E0", type: "advancement" }]
 			x: 4.0d
 			y: 1.0d
 		}
 		{
-			dependencies: ["949B84C8FCF40E76"]
+			dependencies: ["149B84C8FCF40E76"]
 			icon: { id: "minecraft:dragon_egg" }
-			id: "F2A0CA46A6C7E856"
+			id: "72A0CA46A6C7E856"
 			optional: true
 			rewards: [
-				{ count: 2, id: "A6C1292E6935F1F6", item: { count: 1, id: "cobblemon:master_ball" }, type: "item" }
+				{ count: 2, id: "26C1292E6935F1F6", item: { count: 1, id: "cobblemon:master_ball" }, type: "item" }
 			]
 			shape: "gear"
 			tasks: [{ advancement: "cobblegenetics:legendary_mutation", criterion: "", id: "4DCD7CFBFA3F3514", type: "advancement" }]
