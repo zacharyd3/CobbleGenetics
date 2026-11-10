@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:natural_mutation",
+  "display": {
+    "icon": {
+      "id": "minecraft:magma_block"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.environmental_mutation.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.environmental_mutation.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "environmental_mutation"
+      }
+    }
+  }
+}

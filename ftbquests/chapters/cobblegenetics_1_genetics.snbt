@@ -1,0 +1,79 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "cobblegenetics_1_genetics"
+	group: ""
+	icon: { id: "cobblegenetics:genetic_analyzer" }
+	id: "6C4349CF7827A5B8"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			icon: { id: "cobblegenetics:genetic_analyzer" }
+			id: "06B1CD143EBBDF22"
+			rewards: [
+				{ count: 8, id: "0C337FC6D3249C34", item: { count: 1, id: "minecraft:paper" }, type: "item" }
+			]
+			tasks: [{ count: 1L, id: "45982BB4F682FB3E", item: { count: 1, id: "cobblegenetics:genetic_analyzer" }, type: "item" }]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["06B1CD143EBBDF22"]
+			icon: { id: "cobblegenetics:genetic_analyzer" }
+			id: "D6ED2CE7E35621C1"
+			rewards: [
+				{ count: 2, id: "9BB47150AE87BB07", item: { count: 1, id: "cobblemon:exp_candy_m" }, type: "item" }
+			]
+			tasks: [{ advancement: "cobblegenetics:analyze_first", criterion: "", id: "3B05F9129F41EC9B", type: "advancement" }]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["D6ED2CE7E35621C1"]
+			icon: { id: "cobblemon:poke_ball" }
+			id: "642477C5A394EAFA"
+			rewards: [
+				{ count: 1, id: "3967BAF2CF4481A2", item: { count: 1, id: "cobblegenetics:analyzer_upgrade_2" }, type: "item" }
+			]
+			tasks: [{ advancement: "cobblegenetics:analyze_3", criterion: "", id: "C45F7D05CA5C42AF", type: "advancement" }]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["D6ED2CE7E35621C1"]
+			icon: { id: "minecraft:gold_ingot" }
+			id: "87A4E4049F91EDDA"
+			rewards: [
+				{ count: 2, id: "E9A09874F615042C", item: { count: 1, id: "cobblemon:rare_candy" }, type: "item" }
+			]
+			tasks: [{ advancement: "cobblegenetics:high_potential", criterion: "", id: "F1FB09A39E4EA1E2", type: "advancement" }]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["D6ED2CE7E35621C1"]
+			icon: { id: "cobblegenetics:genetic_record" }
+			id: "7BF8CEA614B0EBD2"
+			rewards: [
+				{ amount: 100, id: "F0BDF949012CFF94", type: "xp" }
+			]
+			tasks: [{ advancement: "cobblegenetics:record", criterion: "", id: "0C84DFD60E76F0B5", type: "advancement" }]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["642477C5A394EAFA"]
+			icon: { id: "cobblegenetics:analyzer_upgrade_2" }
+			id: "D674030B43AE134C"
+			rewards: [
+				{ count: 1, id: "10DD2DC6F307A0DD", item: { count: 1, id: "cobblegenetics:genetic_incubator" }, type: "item" }
+				{ count: 4, id: "8735C078A648D372", item: { count: 1, id: "minecraft:egg" }, type: "item" }
+			]
+			shape: "hexagon"
+			tasks: [{ advancement: "cobblegenetics:research_2", criterion: "", id: "2DAFE0207075F559", type: "advancement" }]
+			x: 6.0d
+			y: -1.0d
+		}
+	]
+}

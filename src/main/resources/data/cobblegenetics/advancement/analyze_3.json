@@ -1,0 +1,27 @@
+{
+  "parent": "cobblegenetics:analyze_first",
+  "display": {
+    "icon": {
+      "id": "cobblegenetics:genetic_analyzer"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.analyze_3.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.analyze_3.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "analyze",
+        "min_count": 3
+      }
+    }
+  }
+}

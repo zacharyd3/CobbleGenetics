@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:research_5",
+  "display": {
+    "icon": {
+      "id": "minecraft:brewing_stand"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.combination.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.combination.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "combination"
+      }
+    }
+  }
+}

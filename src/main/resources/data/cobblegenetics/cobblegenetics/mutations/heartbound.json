@@ -1,0 +1,29 @@
+{
+  "name": "Heartbound",
+  "description": "Purified with absolute trust: a once-in-a-lifetime bond.",
+  "category": "ability",
+  "tier": "legendary",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.1,
+  "sources": [
+    "purification"
+  ],
+  "conditions": {
+    "requires_shadow_history": true,
+    "min_friendship": 200
+  },
+  "effects": [
+    {
+      "type": "all_ivs",
+      "amount": 2
+    },
+    {
+      "type": "friendship_multiplier",
+      "multiplier": 2.0
+    },
+    {
+      "type": "glow"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:research_4",
+  "display": {
+    "icon": {
+      "id": "cobblegenetics:genetic_analyzer"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.study_mutation.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.study_mutation.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "study_mutation"
+      }
+    }
+  }
+}

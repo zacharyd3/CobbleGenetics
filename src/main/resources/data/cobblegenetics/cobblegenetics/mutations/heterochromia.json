@@ -1,0 +1,21 @@
+{
+  "name": "Heterochromia",
+  "description": "Its eyes are two different colours. Visible with a resource pack that supports the aspect cg-heterochromia.",
+  "category": "physical",
+  "tier": "common",
+  "weight": 14,
+  "inheritable": true,
+  "inherit_chance": 0.4,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "effects": [
+    {
+      "type": "aspect",
+      "aspect": "cg-heterochromia"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Genetic Drift",
+  "description": "Its genome is slowly coming apart.",
+  "category": "biological",
+  "tier": "common",
+  "negative": true,
+  "weight": 12,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "effects": [
+    {
+      "type": "stability",
+      "amount": -10
+    }
+  ]
+}

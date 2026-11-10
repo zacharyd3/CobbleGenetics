@@ -1,0 +1,25 @@
+{
+  "name": "Tiger Markings",
+  "description": "Unusual dark stripes across its body. Resource packs can draw them with the aspect cg-markings.",
+  "category": "physical",
+  "tier": "common",
+  "weight": 12,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "effects": [
+    {
+      "type": "aspect",
+      "aspect": "cg-markings"
+    },
+    {
+      "type": "tint",
+      "color": "#ffd9a8"
+    }
+  ]
+}

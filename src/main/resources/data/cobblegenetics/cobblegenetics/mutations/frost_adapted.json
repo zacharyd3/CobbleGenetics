@@ -1,0 +1,28 @@
+{
+  "name": "Frost Adapted",
+  "description": "Adapted to bitter cold: it thrives where others struggle.",
+  "category": "elemental",
+  "tier": "uncommon",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "environment",
+    "natural",
+    "breeding"
+  ],
+  "conditions": {
+    "max_temperature": 0.2
+  },
+  "effects": [
+    {
+      "type": "exp_multiplier",
+      "multiplier": 1.15,
+      "max_temperature": 0.3
+    },
+    {
+      "type": "tint",
+      "color": "#d6ecff"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Empathic Bond",
+  "description": "Feels its trainer's emotions: friendship grows much faster.",
+  "category": "ability",
+  "tier": "uncommon",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "effects": [
+    {
+      "type": "friendship_multiplier",
+      "multiplier": 1.5
+    }
+  ]
+}

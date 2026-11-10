@@ -1,0 +1,25 @@
+{
+  "name": "Shadow Ward",
+  "description": "Its genome actively rejects Shadow corruption.",
+  "category": "ability",
+  "tier": "epic",
+  "weight": 6,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "effects": [
+    {
+      "type": "corruption_resistance",
+      "amount": 0.6
+    },
+    {
+      "type": "purification_speed",
+      "multiplier": 1.5
+    }
+  ]
+}

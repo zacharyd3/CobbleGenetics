@@ -1,0 +1,32 @@
+{
+  "name": "Ember Heart",
+  "description": "Heat from its surroundings awakened a fire within.",
+  "category": "elemental",
+  "tier": "rare",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "environment",
+    "natural",
+    "evolution"
+  ],
+  "conditions": {
+    "min_temperature": 1.5
+  },
+  "effects": [
+    {
+      "type": "tera_shift",
+      "tera": "fire"
+    },
+    {
+      "type": "exp_multiplier",
+      "multiplier": 1.15,
+      "min_temperature": 1.0
+    },
+    {
+      "type": "tint",
+      "color": "#ffb38a"
+    }
+  ]
+}

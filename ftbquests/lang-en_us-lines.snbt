@@ -1,0 +1,152 @@
+	chapter.6C4349CF7827A5B8.title: "Genetics 101"
+	chapter.6C4349CF7827A5B8.chapter_subtitle: ["Every Pokémon is genetically unique"]
+	quest.06B1CD143EBBDF22.title: "The Genetic Analyzer"
+	quest.06B1CD143EBBDF22.quest_subtitle: "Your window into Pokémon biology"
+	quest.06B1CD143EBBDF22.quest_desc: ["Craft a &bGenetic Analyzer&r (iron, glass, redstone and a Poké Ball - check JEI)." "" "&eRight-click&r any Pokémon in the world with it - wild or yours - or use it in the air to pick a Pokémon from your party."]
+	quest.D6ED2CE7E35621C1.title: "First Sample"
+	quest.D6ED2CE7E35621C1.quest_subtitle: "Analyse a Pokémon"
+	quest.D6ED2CE7E35621C1.quest_desc: ["Every Pokémon now carries its own &dgenetic profile&r, rolled when it was born." "" "The first thing you can read is its &6Genetic Potential&r, graded &aS&r, &aA&r, &eB&r, &eC&r or &cD&r. Wild Pokémon with high potential are born with better minimum stats (IVs)."]
+	quest.642477C5A394EAFA.title: "No Two Alike"
+	quest.642477C5A394EAFA.quest_subtitle: "Analyse three different Pokémon"
+	quest.642477C5A394EAFA.quest_desc: ["Analyse a few Pokémon of the &osame species&r and compare them: their genes differ." "" "Greyed-out rows show what higher &bGenetic Research&r levels will reveal. Research rises as you study more Pokémon, or with &bAnalyzer Upgrades&r (use the one this quest gives you)."]
+	quest.87A4E4049F91EDDA.title: "Born for Greatness"
+	quest.87A4E4049F91EDDA.quest_subtitle: "Find above-average Genetic Potential"
+	quest.87A4E4049F91EDDA.quest_desc: ["Find a Pokémon with &6Genetic Potential 70+&r (grade A or S)." "" "Tip: potential is partly inherited. Two high-potential parents tend to have high-potential offspring."]
+	quest.7BF8CEA614B0EBD2.title: "For the Archive"
+	quest.7BF8CEA614B0EBD2.quest_subtitle: "Record a genetic profile"
+	quest.7BF8CEA614B0EBD2.quest_desc: ["Press &bRecord Profile&r on the Analyzer screen of one of &oyour&r Pokémon. It writes the analysis onto a &bGenetic Record&r, using one paper." "" "Records are handy to compare parents before breeding."]
+	quest.D674030B43AE134C.title: "Research Level 2"
+	quest.D674030B43AE134C.quest_subtitle: "Stability & Affinity"
+	quest.D674030B43AE134C.quest_desc: ["At level 2 the Analyzer shows:" "&b- Genetic Stability&r: how resistant the genome is to change. Low stability means more mutations, and more of them harmful." "&b- Elemental Affinity&r: a hidden leaning towards a type, not always the Pokémon's own." "" "Your reward opens the next chapters: &aHeredity&r and &dMutations&r."]
+	chapter.2C88263FACF30DC2.title: "Heredity"
+	chapter.2C88263FACF30DC2.chapter_subtitle: ["How genes pass from parents to offspring"]
+	quest.95C95900440E45BD.title: "The Genetic Incubator"
+	quest.95C95900440E45BD.quest_subtitle: "Breeding, CobbleGenetics style"
+	quest.95C95900440E45BD.quest_desc: ["Use the &bGenetic Incubator&r and pick two compatible party Pokémon (level 15+). It uses one &fEgg&r as the vessel." "" "Compatibility follows the main games: a shared &eegg group&r and opposite genders, or &dDitto&r with almost anything. Each parent then rests for a while."]
+	quest.4C3CACB8E8D2B19A.title: "New Generation"
+	quest.4C3CACB8E8D2B19A.quest_subtitle: "Breed two Pokémon"
+	quest.4C3CACB8E8D2B19A.quest_desc: ["The offspring hatches at level 1. Its genes are &oa mix&r of both parents plus some randomness - never a copy of either." "" "Three of its stats (IVs) are also inherited from a random parent."]
+	quest.AE3352B9C0D17B99.title: "Proud Parent"
+	quest.AE3352B9C0D17B99.quest_subtitle: "Analyse one of the parents"
+	quest.AE3352B9C0D17B99.quest_desc: ["Analyse one of the parents again and keep its numbers in mind (or &bRecord&r it)."]
+	quest.7DB8930071B094AE.title: "Family Resemblance"
+	quest.7DB8930071B094AE.quest_subtitle: "Analyse the offspring"
+	quest.7DB8930071B094AE.quest_desc: ["Now analyse the offspring. Its potential and stability sit between its parents', and its &bOrigin&r shows its generation." "" "Use the &bHeredity Module&r to reach research level 3 and see &dInherited Traits&r."]
+	quest.623898E7FF8509CB.title: "It Runs in the Family"
+	quest.623898E7FF8509CB.quest_subtitle: "Identify an inherited trait"
+	quest.623898E7FF8509CB.quest_desc: ["At research level 3, analyse a bred Pokémon and read its &dInherited Traits&r." "" "Each trait has two copies (alleles), one from each parent. A &orecessive&r allele only shows when a Pokémon carries two copies - so rare traits can hide for generations and reappear."]
+	quest.129462637227545C.title: "Skipped a Generation"
+	quest.129462637227545C.quest_subtitle: "Breed out a rare recessive trait"
+	quest.129462637227545C.quest_desc: ["Breed an offspring that expresses a &6rare recessive&r trait (highlighted in gold), such as &eShadowproof&r or &eLustrous&r." "" "Tip: at research level 4 the Analyzer shows the hidden allele pairs, and analysing two Pokémon one after the other predicts what their offspring could get."]
+	quest.A530A0BFCA34A198.title: "Research Level 3"
+	quest.A530A0BFCA34A198.quest_subtitle: "Heredity"
+	quest.A530A0BFCA34A198.quest_desc: ["Level 3 adds &bMutation Susceptibility&r, size genes and inherited traits." "" "Your next step: the &5Shadow Research&r chapter."]
+	chapter.6A6E624E40E54022.title: "Mutations"
+	chapter.6A6E624E40E54022.chapter_subtitle: ["When genes change"]
+	quest.1D988EF8565F6C9D.title: "Something Different"
+	quest.1D988EF8565F6C9D.quest_subtitle: "Identify a mutated Pokémon"
+	quest.1D988EF8565F6C9D.quest_desc: ["Some Pokémon carry &dmutations&r: changes to colour, size, stats, type affinity or abilities." "" "Mutations come in five tiers: &7Common&r, &aUncommon&r, &9Rare&r, &5Epic&r and &6Legendary&r. Look for odd colours, glowing or unusual sizes - then analyse."]
+	quest.98740B3B46C00B85.title: "Mad Science"
+	quest.98740B3B46C00B85.quest_subtitle: "Induce a mutation"
+	quest.98740B3B46C00B85.quest_desc: ["Use a &dMutagen&r on a party Pokémon. It forces a mutation - but costs &cgenetic stability&r, and the result can be harmful." "" "Mutagens are a reliable way to get a mutated Pokémon for breeding experiments."]
+	quest.126D2C1A28190D8A.title: "Nature's Experiment"
+	quest.126D2C1A28190D8A.quest_subtitle: "Find a natural mutation"
+	quest.126D2C1A28190D8A.quest_desc: ["Wild Pokémon sometimes spawn mutated. It is more common for genetically unstable ones, and &edouble during thunderstorms&r - a genetic storm."]
+	quest.018B70E251DEA7B8.title: "Passed Down"
+	quest.018B70E251DEA7B8.quest_subtitle: "Get an inherited mutation"
+	quest.018B70E251DEA7B8.quest_desc: ["Breed a mutated Pokémon and analyse its offspring until one inherits the mutation." "" "Parents pass their mutations on directly only sometimes; otherwise the offspring may carry them &olatent&r (hidden). Two carriers can produce one that expresses it again."]
+	quest.0C5BB94CFA5F829B.title: "Rare Specimen"
+	quest.0C5BB94CFA5F829B.quest_subtitle: "A Rare-tier mutation or better"
+	quest.0C5BB94CFA5F829B.quest_desc: ["Find or create a mutation of &9Rare&r tier or higher. Unstable genomes roll higher tiers more often."]
+	quest.22B71D651BED3F6E.title: "Research Level 4"
+	quest.22B71D651BED3F6E.quest_subtitle: "Mutation Science"
+	quest.22B71D651BED3F6E.quest_desc: ["Level 4 shows each mutation's category, origin and exact effects, the hidden allele pairs, latent mutations, and &bbreeding predictions&r: analyse two Pokémon one after the other to see what their offspring could inherit."]
+	chapter.69BD8C82EC8F98AC.title: "Advanced Mutation Research"
+	chapter.69BD8C82EC8F98AC.chapter_subtitle: ["Instability, environments and rare tiers"]
+	quest.980A44BD17520161.title: "Under the Microscope"
+	quest.980A44BD17520161.quest_subtitle: "Study a mutation in detail"
+	quest.980A44BD17520161.quest_desc: ["At research level 4, analyse a mutated Pokémon and read the full effect list of its mutation."]
+	quest.BAD790CA5A9FA3E0.title: "Unstable Genome"
+	quest.BAD790CA5A9FA3E0.quest_subtitle: "Find low genetic stability"
+	quest.BAD790CA5A9FA3E0.quest_desc: ["Analyse a Pokémon whose effective stability is below 35." "" "Mutagens, negative mutations and &5Shadow corruption&r all erode stability. Unstable Pokémon mutate more - and worse. The &bGene Stabilizer&r repairs corruption damage."]
+	quest.F2463623FD7A3A44.title: "Shaped by the Land"
+	quest.F2463623FD7A3A44.quest_subtitle: "An environmental mutation"
+	quest.F2463623FD7A3A44.quest_desc: ["Some mutations only appear in certain places: deserts and the Nether (&cEmber Heart&r), frozen biomes (&bFrost Adapted&r), the sea (&9Tidal Affinity&r), darkness (&3Bioluminescence&r), storms (&eStorm Charged&r)." "" "Wild Pokémon can spawn with them there, and your party slowly adapts to where you travel."]
+	quest.EBA45FA59A8F7A57.title: "Elemental Shift"
+	quest.EBA45FA59A8F7A57.quest_subtitle: "An elemental mutation"
+	quest.EBA45FA59A8F7A57.quest_desc: ["Elemental mutations change a Pokémon's &dTera Type&r and how it fares in different climates."]
+	quest.12F1D7D3E9EEAA35.title: "Hidden Talent"
+	quest.12F1D7D3E9EEAA35.quest_subtitle: "An ability mutation"
+	quest.12F1D7D3E9EEAA35.quest_desc: ["Ability mutations unlock hidden abilities, speed up friendship, or shield a Pokémon from corruption."]
+	quest.2D48DDDB88E6B401.title: "Mutation Catalogue"
+	quest.2D48DDDB88E6B401.quest_subtitle: "Discover 10 mutations"
+	quest.2D48DDDB88E6B401.quest_desc: ["Analyse Pokémon with 10 different mutations."]
+	quest.56BFF9A644C7A8A3.title: "Epic Discovery"
+	quest.56BFF9A644C7A8A3.quest_subtitle: "An Epic-tier mutation"
+	quest.56BFF9A644C7A8A3.quest_desc: ["Find an &5Epic&r mutation. Some can only be bred: they need other mutations to be present first..."]
+	chapter.A3DB2B6EF776B2E8.title: "Shadow Research"
+	chapter.A3DB2B6EF776B2E8.chapter_subtitle: ["Corrupted Pokémon"]
+	quest.D244D1F89D102159.title: "A Dark Signal"
+	quest.D244D1F89D102159.quest_subtitle: "Shadow Pokémon exist"
+	quest.D244D1F89D102159.quest_desc: ["Some Pokémon are &5Shadow Pokémon&r: their hearts are sealed by corruption. They are dark, wrapped in a purple aura, and the most corrupted ones spread darkness around them." "" "They appear rarely in the wild - more at night, much more on a &5new moon&r - and in special places. Use the &5Shadow Beacon&r to call one to you."]
+	quest.AA4FAC3AE51D8976.title: "Darkness Stirs"
+	quest.AA4FAC3AE51D8976.quest_subtitle: "Encounter a Shadow Pokémon"
+	quest.AA4FAC3AE51D8976.quest_desc: ["Battle a wild Shadow Pokémon, or analyse one in the wild."]
+	quest.BB8DEA5A1160916C.title: "Snagged"
+	quest.BB8DEA5A1160916C.quest_subtitle: "Capture a Shadow Pokémon"
+	quest.BB8DEA5A1160916C.quest_desc: ["Shadow Pokémon are harder to catch and arrive with &cno friendship&r. They cannot evolve or breed until purified."]
+	quest.888C833226CDAADD.title: "Measuring the Dark"
+	quest.888C833226CDAADD.quest_subtitle: "Analyse its corruption"
+	quest.888C833226CDAADD.quest_desc: ["The Analyzer shows the &5corruption&r state: Dormant, Unstable, Aggressive, Highly Corrupted or Fully Corrupted." "" "Corruption &cdrains genetic stability&r, and every 20% it reaches leaves lasting damage. The more corrupted, the harder its heart is to reach: friendship grows slowly."]
+	quest.7DE4F3B29C90EB15.title: "Purification Supplies"
+	quest.7DE4F3B29C90EB15.quest_subtitle: "Prepare to heal"
+	quest.7DE4F3B29C90EB15.quest_desc: ["Craft &dPurifying Scents&r: a bottle, a Pecha Berry and a small flower."]
+	quest.2DACA2F3819C14CE.title: "First Light"
+	quest.2DACA2F3819C14CE.quest_subtitle: "Begin purification"
+	quest.2DACA2F3819C14CE.quest_desc: ["Lower your Shadow Pokémon's corruption for the first time: keep it in your party, use a Scent, battle together, or earn its friendship."]
+	chapter.EBBDA0EFF43C4727.title: "Purification"
+	chapter.EBBDA0EFF43C4727.chapter_subtitle: ["Opening a sealed heart"]
+	quest.7531EB337473F853.title: "Open Heart"
+	quest.7531EB337473F853.quest_subtitle: "Purify through friendship"
+	quest.7531EB337473F853.quest_desc: ["Every point of friendship a Shadow Pokémon gains also wears away its corruption. Walk with it, feed it, care for it."]
+	quest.F6068254FE5BC041.title: "Battle Bond"
+	quest.F6068254FE5BC041.quest_subtitle: "Win a battle together"
+	quest.F6068254FE5BC041.quest_desc: ["Winning battles together purifies. &cLosing deepens the corruption&r."]
+	quest.3CDBC350B392DE26.title: "Sanctuary"
+	quest.3CDBC350B392DE26.quest_subtitle: "Use a Purification Chamber"
+	quest.3CDBC350B392DE26.quest_desc: ["Place a &dPurification Chamber&r and stay near it with your Shadow Pokémon: passive purification is three times faster."]
+	quest.0F9BDAF20385F71D.title: "Halfway Home"
+	quest.0F9BDAF20385F71D.quest_subtitle: "Corruption 40% or less"
+	quest.0F9BDAF20385F71D.quest_desc: ["Bring its corruption down to 40% or less. &dPurification Incense&r is strong, but only works below 60%: it finishes the job, it cannot replace it."]
+	quest.36EAFD803A8560EF.title: "Heart Opened"
+	quest.36EAFD803A8560EF.quest_subtitle: "Purify a Shadow Pokémon"
+	quest.36EAFD803A8560EF.quest_desc: ["At 0% corruption the heart opens: big friendship and stability boosts, half its genetic damage repaired - and sometimes a &6purification-exclusive mutation&r that no breeding can produce."]
+	quest.0273CBE416368622.title: "After the Storm"
+	quest.0273CBE416368622.quest_subtitle: "Analyse the purified Pokémon"
+	quest.0273CBE416368622.quest_desc: ["Compare its genetic profile with what it was as a Shadow Pokémon."]
+	quest.C42515825CC4B726.title: "Reborn"
+	quest.C42515825CC4B726.quest_subtitle: "A purification-exclusive mutation"
+	quest.C42515825CC4B726.quest_desc: ["Purification can awaken &6Purified Aura&r, &5Umbral Resonance&r (only after very deep corruption) or the legendary &6Heartbound&r (only with very high friendship at the moment of purification)."]
+	quest.54E1543E8E009E0D.title: "Research Level 5"
+	quest.54E1543E8E009E0D.quest_subtitle: "Shadow Analysis"
+	quest.54E1543E8E009E0D.quest_desc: ["Level 5 shows exact corruption, resistance, how it was purified, and hints at &6rare genetic combinations&r your Pokémon are close to."]
+	chapter.B79A25411AEF4966.title: "Advanced Genetic Research"
+	chapter.B79A25411AEF4966.chapter_subtitle: ["The frontier of Pokémon biology"]
+	quest.949B84C8FCF40E76.title: "Genetic Alchemy"
+	quest.949B84C8FCF40E76.quest_subtitle: "A rare genetic combination"
+	quest.949B84C8FCF40E76.quest_desc: ["Some mutations only appear when others are already present - through breeding or evolution. The research level 5 Analyzer hints when a Pokémon holds some of the factors." "" "Try combining dark pigment with living light..."]
+	quest.42B37C20090A37B0.title: "Unbreakable Heart"
+	quest.42B37C20090A37B0.quest_subtitle: "Shadow-resistant genetics"
+	quest.42B37C20090A37B0.quest_desc: ["Find or breed a Pokémon that resists at least 40% of corruption: the recessive &eShadowproof&r trait, &5Shadow Ward&r or &6Purified Aura&r."]
+	quest.6D8525565A8F09CE.title: "Bloodline"
+	quest.6D8525565A8F09CE.quest_subtitle: "A third-generation offspring"
+	quest.6D8525565A8F09CE.quest_desc: ["Breed the offspring of your offspring's offspring and analyse it."]
+	quest.24D77B3D57CA91D5.title: "Heart Healer"
+	quest.24D77B3D57CA91D5.quest_subtitle: "Purify five Shadow Pokémon"
+	quest.24D77B3D57CA91D5.quest_desc: ["Purify five Shadow Pokémon."]
+	quest.DC8A8AE7165E41E9.title: "Living Encyclopedia"
+	quest.DC8A8AE7165E41E9.quest_subtitle: "Discover 25 mutations"
+	quest.DC8A8AE7165E41E9.quest_desc: ["Analyse Pokémon with 25 different mutations."]
+	quest.F2A0CA46A6C7E856.title: "Once in a Lifetime"
+	quest.F2A0CA46A6C7E856.quest_subtitle: "A Legendary-tier mutation"
+	quest.F2A0CA46A6C7E856.quest_desc: ["The rarest discoveries of all: the bred &6Prismatic Genome&r or the purified &6Heartbound&r."]

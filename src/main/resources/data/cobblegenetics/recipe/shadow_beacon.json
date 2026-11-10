@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ODO",
+    "DSD",
+    "ODO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "D": {
+      "item": "minecraft:ink_sac"
+    },
+    "S": {
+      "item": "cobblemon:spell_tag"
+    }
+  },
+  "result": {
+    "id": "cobblegenetics:shadow_beacon",
+    "count": 1
+  }
+}

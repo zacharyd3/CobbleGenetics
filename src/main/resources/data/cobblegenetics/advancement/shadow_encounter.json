@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:research_3",
+  "display": {
+    "icon": {
+      "id": "cobblegenetics:shadow_beacon"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.shadow_encounter.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.shadow_encounter.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "shadow_encounter"
+      }
+    }
+  }
+}

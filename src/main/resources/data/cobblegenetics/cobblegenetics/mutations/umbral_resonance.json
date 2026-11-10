@@ -1,0 +1,31 @@
+{
+  "name": "Umbral Resonance",
+  "description": "Darkness it overcame left an echo in its genes.",
+  "category": "elemental",
+  "tier": "epic",
+  "weight": 8,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "purification"
+  ],
+  "conditions": {
+    "requires_shadow_history": true,
+    "min_peak_corruption": 80
+  },
+  "effects": [
+    {
+      "type": "tera_shift",
+      "tera": "dark"
+    },
+    {
+      "type": "iv",
+      "stat": "special_attack",
+      "amount": 4
+    },
+    {
+      "type": "tint",
+      "color": "#3d2b5e"
+    }
+  ]
+}

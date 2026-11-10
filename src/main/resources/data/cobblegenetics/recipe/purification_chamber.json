@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "QAQ",
+    "ACA",
+    "QQQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "minecraft:quartz_block"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "C": {
+      "item": "cobblemon:cleanse_tag"
+    }
+  },
+  "result": {
+    "id": "cobblegenetics:purification_chamber",
+    "count": 1
+  }
+}

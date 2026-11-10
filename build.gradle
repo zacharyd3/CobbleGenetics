@@ -1,0 +1,86 @@
+plugins {
+	id 'java'
+	id 'net.neoforged.moddev' version "${moddev_version}"
+}
+
+base {
+	archivesName = project.mod_id
+}
+
+repositories {
+	maven {
+		name = "Cobblemon"
+		url = "https://maven.impactdev.net/repository/development/"
+	}
+	maven {
+		name = "Kotlin for Forge"
+		url = "https://thedarkcolour.github.io/KotlinForForge/"
+		content { includeGroup "thedarkcolour" }
+	}
+}
+
+sourceSets {
+	main {
+		// Client-only code lives in src/client but compiles together with common code (ModDevGradle does not
+		// split sides). Common code must never reference these classes: they don't exist on a dedicated server.
+		java.srcDir 'src/client/java'
+	}
+}
+
+neoForge {
+	version = project.neo_version
+
+	runs {
+		client {
+			client()
+		}
+		server {
+			server()
+			programArgument "--nogui"
+			gameDirectory = project.file("run/server")
+		}
+	}
+
+	mods {
+		"${mod_id}" {
+			sourceSet sourceSets.main
+		}
+	}
+}
+
+dependencies {
+	implementation "com.cobblemon:neoforge:${project.cobblemon_version}"
+	compileOnly "org.jetbrains.kotlin:kotlin-stdlib:${project.kotlin_version}"
+	// Cobblemon is written in Kotlin and needs Kotlin for Forge to load. Its 1.7.3 POM does not declare it, so runClient
+	// / runServer get it here (same version as the target modpack). Not bundled: players already have it
+	runtimeOnly "thedarkcolour:kotlinforforge-neoforge:${project.kff_version}"
+
+	// The rule classes are plain Java and are tested without starting Minecraft; these two libraries are normally
+	// provided by the game at runtime
+	testImplementation "org.junit.jupiter:junit-jupiter:5.11.3"
+	testRuntimeOnly "com.google.code.gson:gson:2.11.0"
+	testRuntimeOnly "org.slf4j:slf4j-api:2.0.9"
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+test {
+	useJUnitPlatform()
+}
+
+processResources {
+	def version = project.version
+	inputs.property "version", version
+	filteringCharset = "UTF-8"
+	filesMatching("META-INF/neoforge.mods.toml") {
+		expand "version": version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+	it.options.encoding = "UTF-8"
+}
+
+java {
+	toolchain.languageVersion = JavaLanguageVersion.of(21)
+}

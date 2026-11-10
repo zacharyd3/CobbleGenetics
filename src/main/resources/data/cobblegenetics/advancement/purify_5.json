@@ -1,0 +1,27 @@
+{
+  "parent": "cobblegenetics:research_5",
+  "display": {
+    "icon": {
+      "id": "minecraft:beacon"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.purify_5.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.purify_5.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "purify",
+        "min_count": 5
+      }
+    }
+  }
+}

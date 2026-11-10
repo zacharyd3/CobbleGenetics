@@ -1,0 +1,31 @@
+{
+  "name": "Tidal Affinity",
+  "description": "Its genes resonate with the sea.",
+  "category": "elemental",
+  "tier": "uncommon",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "environment",
+    "natural"
+  ],
+  "conditions": {
+    "biomes": [
+      "#minecraft:is_ocean",
+      "#minecraft:is_beach",
+      "#minecraft:is_river"
+    ]
+  },
+  "effects": [
+    {
+      "type": "tera_shift",
+      "tera": "water"
+    },
+    {
+      "type": "iv",
+      "stat": "special_defence",
+      "amount": 2
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:breed_first",
+  "display": {
+    "icon": {
+      "id": "cobblegenetics:genetic_analyzer"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.analyze_offspring.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.analyze_offspring.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "analyze_offspring"
+      }
+    }
+  }
+}

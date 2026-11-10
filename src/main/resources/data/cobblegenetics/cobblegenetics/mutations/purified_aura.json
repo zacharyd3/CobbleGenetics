@@ -1,0 +1,32 @@
+{
+  "name": "Purified Aura",
+  "description": "A heart that was opened shines brighter than before.",
+  "category": "ability",
+  "tier": "rare",
+  "weight": 14,
+  "inheritable": true,
+  "inherit_chance": 0.2,
+  "sources": [
+    "purification"
+  ],
+  "conditions": {
+    "requires_shadow_history": true
+  },
+  "effects": [
+    {
+      "type": "aspect",
+      "aspect": "cg-purified-aura"
+    },
+    {
+      "type": "glow"
+    },
+    {
+      "type": "friendship_multiplier",
+      "multiplier": 1.3
+    },
+    {
+      "type": "corruption_resistance",
+      "amount": 0.5
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Robust Constitution",
+  "description": "Unusually high stamina.",
+  "category": "biological",
+  "tier": "common",
+  "weight": 14,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "effects": [
+    {
+      "type": "iv",
+      "stat": "hp",
+      "amount": 4
+    }
+  ]
+}

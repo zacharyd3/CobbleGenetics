@@ -1,0 +1,37 @@
+{
+  "name": "Titan Strain",
+  "description": "Generations of giants produced a true titan.",
+  "category": "biological",
+  "tier": "epic",
+  "weight": 10,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "breeding",
+    "evolution"
+  ],
+  "conditions": {
+    "requires_mutations": [
+      "cobblegenetics:gigantism"
+    ],
+    "requires_traits": [
+      "stature:g"
+    ]
+  },
+  "effects": [
+    {
+      "type": "scale",
+      "multiplier": 1.15
+    },
+    {
+      "type": "iv",
+      "stat": "attack",
+      "amount": 3
+    },
+    {
+      "type": "iv",
+      "stat": "hp",
+      "amount": 3
+    }
+  ]
+}

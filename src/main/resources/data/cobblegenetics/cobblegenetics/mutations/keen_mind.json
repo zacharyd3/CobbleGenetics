@@ -1,0 +1,22 @@
+{
+  "name": "Keen Mind",
+  "description": "An unusually developed brain.",
+  "category": "biological",
+  "tier": "common",
+  "weight": 12,
+  "inheritable": true,
+  "inherit_chance": 0.3,
+  "sources": [
+    "natural",
+    "breeding",
+    "evolution",
+    "item"
+  ],
+  "effects": [
+    {
+      "type": "iv",
+      "stat": "special_attack",
+      "amount": 3
+    }
+  ]
+}

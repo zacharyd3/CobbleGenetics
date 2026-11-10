@@ -1,0 +1,29 @@
+{
+  "name": "Luster",
+  "alleles": [
+    {
+      "id": "N",
+      "name": "Ordinary",
+      "dominance": 2,
+      "frequency": 0.9,
+      "effects": []
+    },
+    {
+      "id": "l",
+      "name": "Lustrous",
+      "description": "A faint golden sheen.",
+      "dominance": 1,
+      "frequency": 0.1,
+      "effects": [
+        {
+          "type": "tint",
+          "color": "#fff1b8"
+        },
+        {
+          "type": "aspect",
+          "aspect": "cg-lustrous"
+        }
+      ]
+    }
+  ]
+}

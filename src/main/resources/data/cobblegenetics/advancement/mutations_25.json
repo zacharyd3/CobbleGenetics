@@ -1,0 +1,27 @@
+{
+  "parent": "cobblegenetics:research_5",
+  "display": {
+    "icon": {
+      "id": "minecraft:knowledge_book"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.mutations_25.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.mutations_25.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "mutation",
+        "min_count": 25
+      }
+    }
+  }
+}

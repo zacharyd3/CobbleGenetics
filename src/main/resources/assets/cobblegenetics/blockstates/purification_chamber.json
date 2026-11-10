@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "cobblegenetics:block/purification_chamber"
+    }
+  }
+}

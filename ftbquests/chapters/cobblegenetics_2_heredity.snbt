@@ -1,0 +1,91 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "cobblegenetics_2_heredity"
+	group: ""
+	icon: { id: "cobblegenetics:genetic_incubator" }
+	id: "2C88263FACF30DC2"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["D674030B43AE134C"]
+			icon: { id: "cobblegenetics:genetic_incubator" }
+			id: "95C95900440E45BD"
+			rewards: [
+				{ count: 4, id: "432914975A4A6EA0", item: { count: 1, id: "minecraft:egg" }, type: "item" }
+			]
+			tasks: [{ count: 1L, id: "77F5376BAC4CE9E4", item: { count: 1, id: "cobblegenetics:genetic_incubator" }, type: "item" }]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["95C95900440E45BD"]
+			icon: { id: "minecraft:egg" }
+			id: "4C3CACB8E8D2B19A"
+			rewards: [
+				{ count: 3, id: "0AEAA48A74AF2739", item: { count: 1, id: "cobblemon:exp_candy_m" }, type: "item" }
+			]
+			tasks: [{ advancement: "cobblegenetics:breed_first", criterion: "", id: "D50CEB1DC62A04E5", type: "advancement" }]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4C3CACB8E8D2B19A"]
+			icon: { id: "cobblegenetics:genetic_analyzer" }
+			id: "AE3352B9C0D17B99"
+			rewards: [
+				{ amount: 100, id: "6D3479BF3BF13CF8", type: "xp" }
+			]
+			tasks: [{ advancement: "cobblegenetics:analyze_parent", criterion: "", id: "EA47A19719F70837", type: "advancement" }]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["4C3CACB8E8D2B19A"]
+			icon: { id: "cobblegenetics:genetic_analyzer" }
+			id: "7DB8930071B094AE"
+			rewards: [
+				{ count: 1, id: "4EDC3381F65F5F56", item: { count: 1, id: "cobblegenetics:analyzer_upgrade_3" }, type: "item" }
+			]
+			tasks: [{ advancement: "cobblegenetics:analyze_offspring", criterion: "", id: "AD4C4F2D5A80784F", type: "advancement" }]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["7DB8930071B094AE"]
+			icon: { id: "minecraft:amethyst_shard" }
+			id: "623898E7FF8509CB"
+			rewards: [
+				{ count: 1, id: "B3B1E7C5115996B8", item: { count: 1, id: "cobblemon:exp_candy_l" }, type: "item" }
+			]
+			tasks: [{ advancement: "cobblegenetics:inherited_trait", criterion: "", id: "BC84EE2028A94C68", type: "advancement" }]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["623898E7FF8509CB"]
+			icon: { id: "minecraft:amethyst_cluster" }
+			id: "129462637227545C"
+			optional: true
+			rewards: [
+				{ count: 1, id: "8BCC38B8E55A1CE1", item: { count: 1, id: "cobblemon:ability_capsule" }, type: "item" }
+			]
+			tasks: [{ advancement: "cobblegenetics:rare_trait", criterion: "", id: "6859ABC77D8196DF", type: "advancement" }]
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["AE3352B9C0D17B99" "7DB8930071B094AE"]
+			icon: { id: "cobblegenetics:analyzer_upgrade_3" }
+			id: "A530A0BFCA34A198"
+			rewards: [
+				{ count: 2, id: "4C06B700079BB003", item: { count: 1, id: "cobblegenetics:mutagen" }, type: "item" }
+			]
+			shape: "hexagon"
+			tasks: [{ advancement: "cobblegenetics:research_3", criterion: "", id: "D431EB769EA3DB75", type: "advancement" }]
+			x: 6.0d
+			y: -1.0d
+		}
+	]
+}
