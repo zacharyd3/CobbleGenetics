@@ -20,11 +20,17 @@ Quests that hinge on rare luck (a natural mutation, a rare recessive trait, Epic
 
 ## Install (modpack makers)
 
-1. Copy the files in `chapters/` to `config/ftbquests/quests/chapters/`.
-2. Open `config/ftbquests/quests/lang/en_us.snbt` and paste the lines of `lang-en_us-lines.snbt` just before its last `}`. **Do not replace that file**: it holds the text of every other quest in the pack. If your pack uses *FTB Quests Lang Splitter*, run `/ftbquests reload` after pasting and let it split the lines as it does for the rest of the pack.
-3. As an op, in game: `/ftbquests reload`.
+Do these steps **with the game or server closed**. FTB Quests rewrites its lang files from memory when it saves, so text pasted while it runs can be lost.
 
-The ids are fixed, so pasting the chapters again overwrites the first copy instead of duplicating it. Rewards are ordinary item rewards. Change them freely with the in-game editor.
+1. Copy the files in `chapters/` to `config/ftbquests/quests/chapters/`. The chapters join the **Cobblemon** chapter group (`52E24F4D0DDFF37E`), after Fusionmon. Change `group` in each file if your pack's group id differs.
+2. Add the quest text. Pick the layout your pack uses:
+   * **`config/ftbquests/quests/lang/en_us/` is a folder** (packs with *FTB Quests Lang Splitter*, which has `chapters/`, `chapter.snbt`, `chapter_group.snbt`...):
+     * copy the files in `lang/en_us/chapters/` to `config/ftbquests/quests/lang/en_us/chapters/`;
+     * paste the lines of `lang/en_us/chapter-lines.snbt` into `config/ftbquests/quests/lang/en_us/chapter.snbt`, just before its last `}`.
+   * **`config/ftbquests/quests/lang/en_us.snbt` is a single file:** paste the lines of `lang-en_us-lines.snbt` into it, just before its last `}`.
+
+   Never put the files from `chapters/` (step 1) in the lang folder: they define quests, not text.
+3. Start the game. If it was already running, use `/ftbquests reload` without editing any quest first.
 
 ## Progression notes
 

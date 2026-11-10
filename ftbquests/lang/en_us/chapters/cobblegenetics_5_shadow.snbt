@@ -1,0 +1,20 @@
+{
+	quest.D244D1F89D102159.title: "A Dark Signal"
+	quest.D244D1F89D102159.quest_subtitle: "Shadow Pokémon exist"
+	quest.D244D1F89D102159.quest_desc: ["Some Pokémon are &5Shadow Pokémon&r: their hearts are sealed by corruption. They are dark, wrapped in a purple aura, and the most corrupted ones spread darkness around them." "" "They appear rarely in the wild - more at night, much more on a &5new moon&r - and in special places. Use the &5Shadow Beacon&r to call one to you."]
+	quest.AA4FAC3AE51D8976.title: "Darkness Stirs"
+	quest.AA4FAC3AE51D8976.quest_subtitle: "Encounter a Shadow Pokémon"
+	quest.AA4FAC3AE51D8976.quest_desc: ["Battle a wild Shadow Pokémon, or analyse one in the wild."]
+	quest.BB8DEA5A1160916C.title: "Snagged"
+	quest.BB8DEA5A1160916C.quest_subtitle: "Capture a Shadow Pokémon"
+	quest.BB8DEA5A1160916C.quest_desc: ["Shadow Pokémon are harder to catch and arrive with &cno friendship&r. They cannot evolve or breed until purified."]
+	quest.888C833226CDAADD.title: "Measuring the Dark"
+	quest.888C833226CDAADD.quest_subtitle: "Analyse its corruption"
+	quest.888C833226CDAADD.quest_desc: ["The Analyzer shows the &5corruption&r state: Dormant, Unstable, Aggressive, Highly Corrupted or Fully Corrupted." "" "Corruption &cdrains genetic stability&r, and every 20% it reaches leaves lasting damage. The more corrupted, the harder its heart is to reach: friendship grows slowly."]
+	quest.7DE4F3B29C90EB15.title: "Purification Supplies"
+	quest.7DE4F3B29C90EB15.quest_subtitle: "Prepare to heal"
+	quest.7DE4F3B29C90EB15.quest_desc: ["Craft &dPurifying Scents&r: a bottle, a Pecha Berry and a small flower."]
+	quest.2DACA2F3819C14CE.title: "First Light"
+	quest.2DACA2F3819C14CE.quest_subtitle: "Begin purification"
+	quest.2DACA2F3819C14CE.quest_desc: ["Lower your Shadow Pokémon's corruption for the first time: keep it in your party, use a Scent, battle together, or earn its friendship."]
+}
