@@ -138,6 +138,11 @@ public final class GeneticsService {
                 return;
             }
             pokemon.setIV(lowest, Math.min(31, lowestValue + 1));
+            ServerPlayer owner = pokemon.getOwnerPlayer();
+            if (owner != null) {
+                com.cobblegenetics.advancement.GeneticsTrigger.trigger(owner,
+                        com.cobblegenetics.advancement.GeneticsTrigger.Action.POTENTIAL_TRAINING, lowestValue + 1);
+            }
         }
     }
 

@@ -31,7 +31,7 @@ CobbleGenetics is a separate mod from [Fusionmon](https://github.com/zacharyd3/f
 
 **Genetic Analyzer.** Use it on any Pokémon in the world, or on a party member. It opens a Pokédex-style report gated by **five research levels**: the Pokémon in 3D on its type's platform, every gene with a note on what it means for that Pokémon ("its babies start with every IV at 7 or more"), a **breeding value** grade and the best of that species you have analysed so far, to give you a target to beat. A **? Guide** page explains each gene, with topics unlocking as research grows. Levels rise from milestones or from Analyzer Upgrades. Level 4 adds breeding predictions between the last two analysed Pokémon, and level 5 adds exact Shadow analysis and hints at rare combinations.
 
-**FTB Quests.** Seven chapters and 43 quests, all completed by real gameplay through the mod's advancement criterion. See [`ftbquests/`](ftbquests/README.md).
+**FTB Quests.** Seven chapters and 47 quests, all completed by real gameplay through the mod's advancement criterion. See [`ftbquests/`](ftbquests/README.md).
 
 ## Items
 

@@ -75,5 +75,27 @@
 			x: 6.0d
 			y: -1.0d
 		}
+		{
+			dependencies: ["56ED2CE7E35621C1"]
+			icon: { id: "minecraft:experience_bottle" }
+			id: "3F1A6C2E9B7D4058"
+			rewards: [
+				{ count: 2, id: "1D7C3A9E5B2F4086", item: { count: 1, id: "cobblemon:exp_candy_m" }, type: "item" }
+			]
+			tasks: [{ advancement: "cobblegenetics:potential_training", criterion: "", id: "6E2B8D4F1A3C5079", type: "advancement" }]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["5674030B43AE134C"]
+			icon: { id: "minecraft:amethyst_shard" }
+			id: "58C4E1B7A2D93F60"
+			rewards: [
+				{ amount: 100, id: "7B3E1F9A4C6D2058", type: "xp" }
+			]
+			tasks: [{ advancement: "cobblegenetics:resonance", criterion: "", id: "2A9F6D3B8C1E4705", type: "advancement" }]
+			x: 8.0d
+			y: -1.0d
+		}
 	]
 }

@@ -1,0 +1,26 @@
+{
+  "parent": "cobblegenetics:analyze_first",
+  "display": {
+    "icon": {
+      "id": "minecraft:experience_bottle"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.potential_training.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.potential_training.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "potential_training"
+      }
+    }
+  }
+}
