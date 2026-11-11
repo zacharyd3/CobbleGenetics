@@ -107,17 +107,25 @@ public final class GeneticsService {
      */
     public static void train(Pokemon pokemon, int levels) {
         GeneticsConfig config = GeneticsConfig.get();
-        if (config.potentialTrainingChance <= 0 || PokemonGenetics.isShadow(pokemon)) {
+        if (PokemonGenetics.isShadow(pokemon)) {
+            return;
+        }
+        // Optional relics (Training Weights): a better chance and a higher ceiling for the owner's Pokémon
+        ServerPlayer trainer = pokemon.getOwnerPlayer();
+        var hooks = com.cobblegenetics.compat.RelicHooks.get();
+        double chance = config.potentialTrainingChance + (trainer == null ? 0 : hooks.trainingChance(trainer));
+        if (chance <= 0) {
             return;
         }
         Genome genome = PokemonGenetics.genome(pokemon);
         if (genome == null) {
             return;
         }
-        int ceiling = GeneticsRules.trainingCeiling(genome, config);
+        int ceiling = Math.min(31, GeneticsRules.trainingCeiling(genome, config)
+                + (trainer == null ? 0 : hooks.trainingCeiling(trainer)));
         var random = java.util.concurrent.ThreadLocalRandom.current();
         for (int i = 0; i < Math.min(levels, 100); i++) {
-            if (random.nextDouble() >= config.potentialTrainingChance) {
+            if (random.nextDouble() >= chance) {
                 continue;
             }
             Stat lowest = null;
@@ -142,6 +150,7 @@ public final class GeneticsService {
             if (owner != null) {
                 com.cobblegenetics.advancement.GeneticsTrigger.trigger(owner,
                         com.cobblegenetics.advancement.GeneticsTrigger.Action.POTENTIAL_TRAINING, lowestValue + 1);
+                hooks.trained(owner);
             }
         }
     }

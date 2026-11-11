@@ -54,6 +54,7 @@ CobbleGenetics extends Cobblemon. It does not replace any Cobblemon class, and i
 | `advancement` | the `cobblegenetics:genetics` criterion used by advancements and FTB Quests |
 | `item`, `block`, `network`, `command` | content, Analyzer payloads, admin commands |
 | `client` | Analyzer screen and its guide (Pokédex look, 3D portrait), render tint and glow (mixin), payload handler |
+| `compat` | `RelicHooks` (neutral defaults the core calls) and `compat/relics`: the six relics, loaded only with Relics installed |
 | `village` | Day Care Aide profession (job site: the Incubator's lower half), its trades |
 
 ## How to extend

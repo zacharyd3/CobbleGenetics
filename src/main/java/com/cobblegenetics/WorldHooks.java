@@ -125,6 +125,12 @@ public final class WorldHooks {
         if (player.isSpectator()) {
             return;
         }
+        var hooks = com.cobblegenetics.compat.RelicHooks.get();
+        double environmentChance = config.environmentExposureMutationChance * Math.max(0,
+                hooks.environmentChance(player));
+        if (exposure) {
+            hooks.environmentCheck(player);
+        }
         boolean chamber = PurificationChamberBlockEntity.near(GlobalPos.of(player.level().dimension(),
                 player.blockPosition()), config.chamberRadius);
         for (Pokemon pokemon : Cobblemon.INSTANCE.getStorage().getParty(player)) {
@@ -142,9 +148,10 @@ public final class WorldHooks {
                 }
             } else if (exposure && PokemonGenetics.hasGenome(pokemon)) {
                 var def = GeneticsService.roll(pokemon, MutationSource.ENVIRONMENT,
-                        config.environmentExposureMutationChance, false, player.serverLevel(),
+                        environmentChance, false, player.serverLevel(),
                         GeneticsService.positionOf(pokemon, player));
                 if (def != null) {
+                    hooks.environmentMutation(player);
                     player.displayClientMessage(net.minecraft.network.chat.Component.translatable(
                             "message.cobblegenetics.exposure", pokemon.getDisplayName(false)), true);
                 }

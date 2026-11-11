@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "cobblegenetics:heirloom_locket",
+      "required": false
+    }
+  ]
+}

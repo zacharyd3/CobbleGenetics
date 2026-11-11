@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "cobblegenetics:glowcap_lantern",
+      "required": false
+    }
+  ]
+}

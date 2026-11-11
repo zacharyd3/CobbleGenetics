@@ -148,7 +148,7 @@ public final class CobblemonHooks {
                 temperature = owner.serverLevel().getBiome(pos).value().getBaseTemperature();
             }
             double multiplier = GeneticsService.expMultiplier(genome, temperature);
-            multiplier *= GeneticsRules.resonance(genome, GeneticsService.typesOf(pokemon), GeneticsConfig.get());
+            multiplier *= resonance(pokemon, genome, owner);
             if (multiplier != 1) {
                 event.setExperience(Math.max(1, (int) Math.round(event.getExperience() * multiplier)));
             }
@@ -244,5 +244,29 @@ public final class CobblemonHooks {
                 CobbleGenetics.failed("the " + name + " hook", e);
             }
         };
+    }
+
+    /**
+     * Affinity resonance EXP multiplier, with the optional Resonance Fork relic: a stronger bonus, and at rank 3 a
+     * share of it for off-type affinities.
+     */
+    private static double resonance(Pokemon pokemon, Genome genome, ServerPlayer owner) {
+        GeneticsConfig config = GeneticsConfig.get();
+        double base = GeneticsRules.resonance(genome, GeneticsService.typesOf(pokemon), config);
+        if (owner == null) {
+            return base;
+        }
+        var hooks = com.cobblegenetics.compat.RelicHooks.get();
+        if (base > 1) {
+            hooks.resonated(owner);
+            return 1 + (base - 1) * Math.max(0, hooks.resonanceBoost(owner));
+        }
+        double share = hooks.offTypeResonance(owner);
+        if (share <= 0) {
+            return 1;
+        }
+        hooks.resonated(owner);
+        return 1 + Math.min(100, Math.max(0, genome.affinityStrength)) / 100.0 * config.affinityResonanceExp
+                * Math.min(1, share);
     }
 }

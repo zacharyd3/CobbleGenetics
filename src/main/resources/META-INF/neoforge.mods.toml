@@ -38,3 +38,11 @@ type = "required"
 versionRange = "[1.7.3,1.8)"
 ordering = "AFTER"
 side = "BOTH"
+
+# Optional: with Relics installed, six genetics relics are added (compat/relics). Loaded after it when present
+[[dependencies.cobblegenetics]]
+modId = "relics"
+type = "optional"
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "BOTH"

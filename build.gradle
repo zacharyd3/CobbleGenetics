@@ -17,6 +17,16 @@ repositories {
 		url = "https://thedarkcolour.github.io/KotlinForForge/"
 		content { includeGroup "thedarkcolour" }
 	}
+	// Modrinth, only to compile the optional Relics integration (compat/relics). Nothing from it goes in the jar
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+		filter { includeGroup "maven.modrinth" }
+	}
 }
 
 sourceSets {
@@ -54,6 +64,11 @@ dependencies {
 	// Cobblemon is written in Kotlin and needs Kotlin for Forge to load. Its 1.7.3 POM does not declare it, so runClient
 	// / runServer get it here (same version as the target modpack). Not bundled: players already have it
 	runtimeOnly "thedarkcolour:kotlinforforge-neoforge:${project.kff_version}"
+
+	// Relics (optional): the relics in compat/relics extend its WearableRelicItem, a Curios item. Only loaded when
+	// Relics is installed; same versions as the All the Mons modpack
+	compileOnly "maven.modrinth:relics-mod:${project.relics_version}"
+	compileOnly "maven.modrinth:curios:${project.curios_version}"
 
 	// The rule classes are plain Java and are tested without starting Minecraft; these two libraries are normally
 	// provided by the game at runtime

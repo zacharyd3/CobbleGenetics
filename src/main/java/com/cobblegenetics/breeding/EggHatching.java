@@ -106,6 +106,9 @@ public final class EggHatching {
         if (hasSpeedAbility(player)) {
             steps *= 2;
         }
+        // Optional relics (Breeder's Apron, rank 3)
+        steps = (int) Math.round(steps * Math.max(0, com.cobblegenetics.compat.RelicHooks.get()
+                .carriedEggSteps(player)));
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack stack = inventory.getItem(i);
             if (!stack.is(ModItems.POKEMON_EGG.get())) {
@@ -167,6 +170,7 @@ public final class EggHatching {
             com.cobblegenetics.research.Research.save(player, research);
             com.cobblegenetics.advancement.GeneticsTrigger.trigger(player,
                     com.cobblegenetics.advancement.GeneticsTrigger.Action.DAYCARE_HATCH, research.daycareHatched);
+            com.cobblegenetics.compat.RelicHooks.get().aideHatched(player);
         }
         return true;
     }
@@ -184,6 +188,7 @@ public final class EggHatching {
         pokemon.setUuid(UUID.randomUUID());
         stack.shrink(1);
         Cobblemon.INSTANCE.getStorage().getParty(player).add(pokemon);
+        com.cobblegenetics.compat.RelicHooks.get().walkedHatch(player);
 
         player.sendSystemMessage(Component.translatable("message.cobblegenetics.egg_hatched",
                 pokemon.getDisplayName(false)).withStyle(ChatFormatting.GREEN));
