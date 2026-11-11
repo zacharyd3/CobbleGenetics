@@ -67,15 +67,23 @@ public final class ModVillagers {
         NeoForge.EVENT_BUS.addListener(ModVillagers::trades);
     }
 
-    /** Whether a Day Care Attendant is within range of an Incubator (checked about once a second). */
-    public static boolean attendantNear(ServerLevel level, BlockPos pos) {
+    /** The nearest Day Care Aide within range of an Incubator, or null (checked about once a second). */
+    public static Villager attendantNear(ServerLevel level, BlockPos pos) {
         if (!GeneticsConfig.get().daycareAttendants) {
-            return false;
+            return null;
         }
         int range = GeneticsConfig.get().attendantRange;
-        return !level.getEntitiesOfClass(Villager.class, new AABB(pos).inflate(range),
-                villager -> villager.isAlive() && !villager.isBaby()
-                        && villager.getVillagerData().getProfession() == DAYCARE_ATTENDANT.get()).isEmpty();
+        Villager nearest = null;
+        double best = Double.MAX_VALUE;
+        for (Villager villager : level.getEntitiesOfClass(Villager.class, new AABB(pos).inflate(range),
+                v -> v.isAlive() && !v.isBaby() && v.getVillagerData().getProfession() == DAYCARE_ATTENDANT.get())) {
+            double distance = villager.distanceToSqr(pos.getCenter());
+            if (distance < best) {
+                best = distance;
+                nearest = villager;
+            }
+        }
+        return nearest;
     }
 
     // ------------------------------------------------------------------ trades

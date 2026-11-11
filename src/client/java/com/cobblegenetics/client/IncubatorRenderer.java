@@ -39,6 +39,8 @@ public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBl
     private static final float SIDE = 0.17f;
 
     private final Map<String, ItemStack> balls = new HashMap<>();
+    /** Blocks within which the Day Care label shows. */
+    private static final double LABEL_DISTANCE = 8;
 
     public IncubatorRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -98,14 +100,49 @@ public class IncubatorRenderer implements BlockEntityRenderer<GeneticIncubatorBl
     private void renderEgg(GeneticIncubatorBlockEntity incubator, Level level, float partialTick, PoseStack pose,
                            MultiBufferSource buffers, int light, int overlay) {
         float time = level.getGameTime() + partialTick;
+        var data = incubator.egg().get(com.cobblegenetics.item.ModItems.EGG_DATA.get());
+        float progress = data == null ? 0 : data.progress();
         pose.pushPose();
         pose.translate(0.5, 0.78 + Math.sin(time / 12) * 0.04, 0.5);
         pose.mulPose(Axis.YP.rotationDegrees(time * 2));
-        // A gentle wobble, as eggs do in the games
-        pose.mulPose(Axis.ZP.rotationDegrees((float) Math.sin(time / 5) * 6));
+        // Wobbles more as it gets closer to hatching, like the egg hints in the games: gentle, then a shake every
+        // few seconds, then shaking hard
+        float wobble = (float) Math.sin(time / 5) * 6;
+        if (progress >= 0.67f) {
+            float cycle = time % (progress >= 0.9f ? 30 : 60);
+            if (cycle < 12) {
+                wobble += (float) Math.sin(cycle / 12 * Math.PI * 4) * (progress >= 0.9f ? 16 : 10);
+            }
+        }
+        pose.mulPose(Axis.ZP.rotationDegrees(wobble));
         pose.scale(0.8f, 0.8f, 0.8f);
         Minecraft.getInstance().getItemRenderer().renderStatic(incubator.egg(), ItemDisplayContext.GROUND, light,
                 overlay, pose, buffers, level, 0);
+        pose.popPose();
+        if (incubator.tended()) {
+            renderDaycareLabel(incubator, progress, pose, buffers);
+        }
+    }
+
+    /** "♥ Day Care: 63%" floating over the Incubator while an aide keeps the Egg warm, for players close by. */
+    private void renderDaycareLabel(GeneticIncubatorBlockEntity incubator, float progress, PoseStack pose,
+                                    MultiBufferSource buffers) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.player == null
+                || minecraft.player.distanceToSqr(incubator.getBlockPos().getCenter()) > LABEL_DISTANCE * LABEL_DISTANCE) {
+            return;
+        }
+        net.minecraft.network.chat.Component text = net.minecraft.network.chat.Component.translatable(
+                "label.cobblegenetics.daycare", Math.round(progress * 100));
+        net.minecraft.client.gui.Font font = minecraft.font;
+        pose.pushPose();
+        pose.translate(0.5, 2.3, 0.5);
+        pose.mulPose(minecraft.getEntityRenderDispatcher().cameraOrientation());
+        pose.scale(0.025f, -0.025f, 0.025f);
+        int background = (int) (minecraft.options.getBackgroundOpacity(0.25f) * 255) << 24;
+        font.drawInBatch(text, -font.width(text) / 2f, 0, 0xFF9CFFB0, false, pose.last().pose(), buffers,
+                net.minecraft.client.gui.Font.DisplayMode.NORMAL, background,
+                net.minecraft.client.renderer.LightTexture.FULL_BRIGHT);
         pose.popPose();
     }
 

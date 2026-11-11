@@ -72,6 +72,8 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
     private UUID choosing;
     /** Whether this Incubator has checked it is a villager job site since it was loaded (not saved). */
     private boolean poiChecked;
+    /** A Day Care Aide is keeping the Egg warm right now (synced to clients for the label). */
+    private boolean tended;
     /** Fraction of a step carried between seconds while an attendant tends the Egg (not saved). */
     private double attendantSteps;
 
@@ -127,7 +129,14 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
                 player.displayClientMessage(Component.translatable("message.cobblegenetics.incubator_breeding",
                         seconds / 60, String.format("%02d", seconds % 60)).withStyle(ChatFormatting.AQUA), true);
             }
-            case EGG_READY -> takeEgg(player);
+            case EGG_READY -> {
+                // With an aide at work a click shows how it is going; sneak-click still takes the Egg
+                if (tended && !player.isShiftKeyDown()) {
+                    showDaycare(player);
+                } else {
+                    takeEgg(player);
+                }
+            }
         }
     }
 
@@ -259,6 +268,22 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
         }
     }
 
+    private void showDaycare(ServerPlayer player) {
+        var data = egg.get(com.cobblegenetics.item.ModItems.EGG_DATA.get());
+        double rate = GeneticsConfig.get().attendantStepsPerSecond;
+        if (data == null || rate <= 0) {
+            takeEgg(player);
+            return;
+        }
+        long minutes = Math.max(1, Math.round(data.remaining() / rate / 60));
+        player.displayClientMessage(Component.translatable("message.cobblegenetics.daycare_status",
+                Math.round(data.progress() * 100), minutes).withStyle(ChatFormatting.GREEN), true);
+    }
+
+    public boolean tended() {
+        return tended;
+    }
+
     private void takeEgg(ServerPlayer player) {
         if (!isOwner(player)) {
             player.displayClientMessage(Component.translatable("message.cobblegenetics.incubator_not_yours")
@@ -267,6 +292,7 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
         }
         ItemStack taken = egg;
         egg = ItemStack.EMPTY;
+        tended = false;
         phase = Phase.EMPTY;
         owner = null;
         changed();
@@ -330,9 +356,20 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
      */
     private void tendEgg(ServerLevel level) {
         double rate = GeneticsConfig.get().attendantStepsPerSecond;
-        if (owner == null || egg.isEmpty() || rate <= 0
-                || !com.cobblegenetics.village.ModVillagers.attendantNear(level, worldPosition)) {
+        net.minecraft.world.entity.npc.Villager aide = owner == null || egg.isEmpty() || rate <= 0 ? null
+                : com.cobblegenetics.village.ModVillagers.attendantNear(level, worldPosition);
+        if ((aide != null) != tended) {
+            // Clients draw the "Day Care" label and the wobble from this
+            tended = aide != null;
+            changed();
+        }
+        if (aide == null) {
             return;
+        }
+        if (level.getGameTime() % 60 == 0) {
+            // Every few seconds: sparkles around the aide's head, so you can see who is looking after it
+            level.sendParticles(net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER, aide.getX(),
+                    aide.getEyeY() + 0.4, aide.getZ(), 3, 0.25, 0.15, 0.25, 0);
         }
         var data = egg.get(com.cobblegenetics.item.ModItems.EGG_DATA.get());
         if (data == null) {
@@ -347,8 +384,13 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
         int remaining = data.remaining() - steps;
         if (remaining > 0) {
             egg.set(com.cobblegenetics.item.ModItems.EGG_DATA.get(), data.withRemaining(remaining));
-            setChanged();
-            if (level.random.nextInt(4) == 0) {
+            // The label's percentage on clients: an update every 5 seconds is plenty
+            if (level.getGameTime() % 100 == 0) {
+                changed();
+            } else {
+                setChanged();
+            }
+            if (level.random.nextInt(2) == 0) {
                 level.sendParticles(net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER,
                         worldPosition.getX() + 0.5, worldPosition.getY() + 0.9, worldPosition.getZ() + 0.5,
                         2, 0.2, 0.2, 0.2, 0);
@@ -360,6 +402,7 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
             phase = Phase.EMPTY;
             owner = null;
             attendantSteps = 0;
+            tended = false;
             changed();
         }
     }
@@ -481,6 +524,7 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
         startTime = tag.getLong("start");
         fed = tag.getInt("fed");
         endTime = tag.getLong("end");
+        tended = tag.getBoolean("tended");
         egg = tag.contains("egg") ? ItemStack.parseOptional(registries, tag.getCompound("egg")) : ItemStack.EMPTY;
         displays.clear();
         ListTag shown = tag.getList("displays", Tag.TAG_COMPOUND);
@@ -502,6 +546,7 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
         tag.putLong("start", startTime);
         tag.putInt("fed", fed);
         tag.putLong("end", endTime);
+        tag.putBoolean("tended", tended);
         if (!egg.isEmpty()) {
             tag.put("egg", egg.save(registries));
         }
