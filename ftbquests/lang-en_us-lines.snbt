@@ -3,10 +3,10 @@
 	chapter.6C4349CF7827A5B8.chapter_subtitle: ["Every Pokémon is genetically unique"]
 	quest.06B1CD143EBBDF22.title: "The Genetic Analyzer"
 	quest.06B1CD143EBBDF22.quest_subtitle: "Your window into Pokémon biology"
-	quest.06B1CD143EBBDF22.quest_desc: ["Craft a &bGenetic Analyzer&r (iron, glass, redstone and a Poké Ball - check JEI)." "" "&eRight-click&r any Pokémon in the world with it - wild or yours - or use it in the air to pick a Pokémon from your party."]
+	quest.06B1CD143EBBDF22.quest_desc: ["Craft a &bGenetic Analyzer&r (iron, glass, redstone and a Poké Ball - check JEI)." "" "&eRight-click&r any Pokémon in the world with it - wild or yours - or use it in the air to pick a Pokémon from your party." "" "The report reads like a Pokédex: every gene comes with a note on what it means for &othat&r Pokémon, and the right side shows its &6Breeding value&r and your best of its species so far. Lost? Press &b? Guide&r."]
 	quest.56ED2CE7E35621C1.title: "First Sample"
 	quest.56ED2CE7E35621C1.quest_subtitle: "Analyse a Pokémon"
-	quest.56ED2CE7E35621C1.quest_desc: ["Every Pokémon now carries its own &dgenetic profile&r, rolled when it was born." "" "The first thing you can read is its &6Genetic Potential&r, graded &aS&r, &aA&r, &eB&r, &eC&r or &cD&r. Wild Pokémon with high potential are born with better minimum stats (IVs)."]
+	quest.56ED2CE7E35621C1.quest_desc: ["Every Pokémon now carries its own &dgenetic profile&r, rolled when it was born." "" "The first thing you can read is its &6Genetic Potential&r, graded &aS&r, &aA&r, &eB&r, &eC&r or &cD&r. Wild Pokémon with high potential are born with better minimum stats (IVs), and keep improving as you train them."]
 	quest.642477C5A394EAFA.title: "No Two Alike"
 	quest.642477C5A394EAFA.quest_subtitle: "Analyse three different Pokémon"
 	quest.642477C5A394EAFA.quest_desc: ["Analyse a few Pokémon of the &osame species&r and compare them: their genes differ." "" "Greyed-out rows show what higher &bGenetic Research&r levels will reveal. Research rises as you study more Pokémon, or with &bAnalyzer Upgrades&r (use the one this quest gives you)."]
@@ -18,15 +18,21 @@
 	quest.7BF8CEA614B0EBD2.quest_desc: ["Press &bRecord Profile&r on the Analyzer screen of one of &oyour&r Pokémon. It writes the analysis onto a &bGenetic Record&r, using one paper." "" "Records are handy to compare parents before breeding."]
 	quest.5674030B43AE134C.title: "Research Level 2"
 	quest.5674030B43AE134C.quest_subtitle: "Stability & Affinity"
-	quest.5674030B43AE134C.quest_desc: ["At level 2 the Analyzer shows:" "&b- Genetic Stability&r: how resistant the genome is to change. Low stability means more mutations, and more of them harmful." "&b- Elemental Affinity&r: a hidden leaning towards a type, not always the Pokémon's own." "" "Your reward opens the next chapters: &aHeredity&r and &dMutations&r."]
+	quest.5674030B43AE134C.quest_desc: ["At level 2 the Analyzer shows:" "&b- Genetic Stability&r: how resistant the genome is to change. Low stability means more mutations, and more of them harmful." "&b- Elemental Affinity&r: a hidden leaning towards a type, with a strength grade. Matching the Pokémon's own type, it &aresonates&r (extra EXP). In breeding, strong affinities mean bigger bonuses and bigger risks." "&b- Breeding value&r: one grade for how good the Pokémon is to breed from." "" "Your reward opens the next chapters: &aHeredity&r and &dMutations&r."]
+	quest.3F1A6C2E9B7D4058.title: "Growing Pains"
+	quest.3F1A6C2E9B7D4058.quest_subtitle: "Train up some potential"
+	quest.3F1A6C2E9B7D4058.quest_desc: ["Level up a Pokémon with good &6Genetic Potential&r until one of its IVs rises." "" "Each level up has a chance to raise its &olowest&r IV by 1, up to a ceiling set by its potential: about 17 at grade C, 31 at grade S. The Analyzer shows the ceiling under Genetic Potential."]
+	quest.58C4E1B7A2D93F60.title: "In Tune"
+	quest.58C4E1B7A2D93F60.quest_subtitle: "Find a resonating affinity"
+	quest.58C4E1B7A2D93F60.quest_desc: ["At research level 2, analyse a Pokémon whose &bElemental Affinity&r is one of its own types." "" "It &aresonates&r: it gains extra EXP, more the stronger its affinity grade (up to +15% at S). The note under Elemental Affinity tells you when it does."]
 	chapter.2C88263FACF30DC2.title: "Heredity"
 	chapter.2C88263FACF30DC2.chapter_subtitle: ["How genes pass from parents to offspring"]
 	quest.15C95900440E45BD.title: "The Genetic Incubator"
 	quest.15C95900440E45BD.quest_subtitle: "Breeding, CobbleGenetics style"
-	quest.15C95900440E45BD.quest_desc: ["Place the &bGenetic Incubator&r, right-click it and pick two party Pokémon (level 15+). Then right-click it with a &aberry&r for each of them: love hearts, and breeding begins." "" "Same family: main-game rules (a shared &eegg group&r and opposite genders, or &dDitto&r). Two &ddifferent&r families make a &dfusion baby&r if Fusionmon is installed!" "" "After a few minutes they come back to your party and an &aEgg&r waits inside: right-click to take it."]
+	quest.15C95900440E45BD.quest_desc: ["Place the &bGenetic Incubator&r, right-click it and pick two party Pokémon (level 15+). Then right-click it with a &aberry&r for each of them: love hearts, and breeding begins." "" "Same family: main-game rules (a shared &eegg group&r and opposite genders, or &dDitto&r). Two &ddifferent&r families make a &dfusion baby&r if Fusionmon is installed!" "" "After a few minutes they come back to your party and an &aEgg&r waits inside: right-click to take it, or leave it for a &aDay Care Aide&r."]
 	quest.4C3CACB8E8D2B19A.title: "New Generation"
 	quest.4C3CACB8E8D2B19A.quest_subtitle: "Breed two Pokémon"
-	quest.4C3CACB8E8D2B19A.quest_desc: ["Keep the &aPokémon Egg&r in your inventory and &ewalk&r: it hatches into a level 1 Pokémon. Its tooltip hints how close it is, and a party Pokémon with &6Flame Body&r or &6Magma Armor&r halves the walk." "" "Its genes are &oa mix&r of both parents plus some randomness - never a copy of either. Three of its stats (IVs) also come from a random parent."]
+	quest.4C3CACB8E8D2B19A.quest_desc: ["Keep the &aPokémon Egg&r in your inventory and &ewalk&r: it hatches into a level 1 Pokémon. Its tooltip hints how close it is, and a party Pokémon with &6Flame Body&r or &6Magma Armor&r halves the walk." "" "No time to walk? A &aDay Care Aide&r can hatch it in the Incubator for you (see the Day Care quest)." "" "Its genes are &oa mix&r of both parents plus some randomness - never a copy of either. Three of its stats (IVs) also come from a random parent."]
 	quest.2E3352B9C0D17B99.title: "Proud Parent"
 	quest.2E3352B9C0D17B99.quest_subtitle: "Analyse one of the parents"
 	quest.2E3352B9C0D17B99.quest_desc: ["Analyse one of the parents again and keep its numbers in mind (or &bRecord&r it)."]
@@ -42,6 +48,12 @@
 	quest.2530A0BFCA34A198.title: "Research Level 3"
 	quest.2530A0BFCA34A198.quest_subtitle: "Heredity"
 	quest.2530A0BFCA34A198.quest_desc: ["Level 3 adds &bMutation Susceptibility&r, size genes and inherited traits." "" "Your next step: the &5Shadow Research&r chapter."]
+	quest.4E8B2D6F1C9A3075.title: "Day Care"
+	quest.4E8B2D6F1C9A3075.quest_subtitle: "Let a Day Care Aide hatch an Egg"
+	quest.4E8B2D6F1C9A3075.quest_desc: ["An unemployed villager near a &bGenetic Incubator&r takes the &aDay Care Aide&r job (look for the apron)." "" "Leave an Egg in the Incubator: while the aide is close by, &a♥ Day Care&r and its progress float above it, the Egg wobbles more as hatching nears, and the baby goes straight to your party or PC." "" "Click the Incubator for the time left; sneak-click takes the Egg."]
+	quest.7C1E5A9D3B2F6048.title: "Prize Bloodline"
+	quest.7C1E5A9D3B2F6048.quest_subtitle: "Breed a grade A Pokémon"
+	quest.7C1E5A9D3B2F6048.quest_desc: ["Analyse a Pokémon with a &6Breeding value&r of 75 or more (grade A)." "" "The breeding value sums up how good a Pokémon is to breed from: mostly &6Genetic Potential&r, then &bStability&r. The Analyzer remembers your best of every species, so each generation has a target to beat." "" "Tip: parents with different, compatible affinities give their babies extra potential (hybrid vigour), more so with strong affinity grades."]
 	chapter.6A6E624E40E54022.title: "Mutations"
 	chapter.6A6E624E40E54022.chapter_subtitle: ["When genes change"]
 	quest.1D988EF8565F6C9D.title: "Something Different"

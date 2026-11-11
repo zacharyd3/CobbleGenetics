@@ -1,0 +1,27 @@
+{
+  "parent": "cobblegenetics:analyze_offspring",
+  "display": {
+    "icon": {
+      "id": "minecraft:diamond"
+    },
+    "title": {
+      "translate": "advancement.cobblegenetics.breeding_value_75.title"
+    },
+    "description": {
+      "translate": "advancement.cobblegenetics.breeding_value_75.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "cobblegenetics:genetics",
+      "conditions": {
+        "action": "breeding_value",
+        "min_count": 75
+      }
+    }
+  }
+}

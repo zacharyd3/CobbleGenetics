@@ -90,7 +90,15 @@ public class GeneticsTrigger extends SimpleCriterionTrigger<GeneticsTrigger.Inst
         /** Research level reached. count = level. */
         RESEARCH_LEVEL,
         /** A mutation was induced with a Mutagen. */
-        MUTAGEN;
+        MUTAGEN,
+        /** Levelling up raised an IV through Genetic Potential. count = the IV now. */
+        POTENTIAL_TRAINING,
+        /** Analysed (research 2+) a Pokémon whose affinity matches one of its own types. */
+        RESONANCE,
+        /** Analysed (research 2+) a Pokémon. count = its breeding value (0-100). */
+        BREEDING_VALUE,
+        /** A Day Care Aide hatched one of the player's Eggs. count = Eggs hatched that way. */
+        DAYCARE_HATCH;
 
         public static final Codec<Action> CODEC = StringRepresentable.fromEnum(Action::values);
 

@@ -1,11 +1,11 @@
 # CobbleGenetics quest chapters for FTB Quests
 
-Seven ready-made chapters (43 quests) that teach players the genetics, mutation and Shadow systems as they play. Built for **FTB Quests 2101.1.x** (Minecraft 1.21.1).
+Seven ready-made chapters (47 quests) that teach players the genetics, mutation and Shadow systems as they play. Built for **FTB Quests 2101.1.x** (Minecraft 1.21.1).
 
 | # | Chapter | What it teaches |
 |---|---------|-----------------|
-| 1 | Genetics 101 | The Analyzer, Genetic Potential, how individuals differ, Genetic Records |
-| 2 | Heredity | The Genetic Incubator, inheritance, Mendelian traits, rare recessives |
+| 1 | Genetics 101 | The Analyzer, Genetic Potential and training, how individuals differ, affinity resonance, Genetic Records |
+| 2 | Heredity | The Genetic Incubator, Day Care Aides, inheritance, Mendelian traits, rare recessives, breeding value |
 | 3 | Mutations | Tiers, Mutagens, natural and inherited mutations |
 | 4 | Advanced Mutation Research | Instability, environmental, elemental and ability mutations |
 | 5 | Shadow Research | Finding, catching and measuring Shadow Pokémon |

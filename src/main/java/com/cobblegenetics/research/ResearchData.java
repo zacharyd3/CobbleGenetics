@@ -22,6 +22,8 @@ public final class ResearchData implements INBTSerializable<CompoundTag> {
     public int bred;
     public int records;
     public int purified;
+    /** Eggs a Day Care Aide hatched for this player. */
+    public int daycareHatched;
     public final Set<String> mutationsDiscovered = new LinkedHashSet<>();
     /** Pokémon already counted for "analyses" (re-analysing the same one does not count again). Capped. */
     public final Set<String> analyzedPokemon = new LinkedHashSet<>();
@@ -39,6 +41,7 @@ public final class ResearchData implements INBTSerializable<CompoundTag> {
         tag.putInt("bred", bred);
         tag.putInt("records", records);
         tag.putInt("purified", purified);
+        tag.putInt("daycareHatched", daycareHatched);
         ListTag mutations = new ListTag();
         mutationsDiscovered.forEach(id -> mutations.add(StringTag.valueOf(id)));
         tag.put("mutations", mutations);
@@ -59,6 +62,7 @@ public final class ResearchData implements INBTSerializable<CompoundTag> {
         bred = tag.getInt("bred");
         records = tag.getInt("records");
         purified = tag.getInt("purified");
+        daycareHatched = tag.getInt("daycareHatched");
         mutationsDiscovered.clear();
         ListTag mutations = tag.getList("mutations", Tag.TAG_STRING);
         for (int i = 0; i < mutations.size(); i++) {

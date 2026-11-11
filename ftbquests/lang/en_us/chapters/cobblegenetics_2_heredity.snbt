@@ -1,10 +1,10 @@
 {
 	quest.15C95900440E45BD.title: "The Genetic Incubator"
 	quest.15C95900440E45BD.quest_subtitle: "Breeding, CobbleGenetics style"
-	quest.15C95900440E45BD.quest_desc: ["Place the &bGenetic Incubator&r, right-click it and pick two party Pokémon (level 15+). Then right-click it with a &aberry&r for each of them: love hearts, and breeding begins." "" "Same family: main-game rules (a shared &eegg group&r and opposite genders, or &dDitto&r). Two &ddifferent&r families make a &dfusion baby&r if Fusionmon is installed!" "" "After a few minutes they come back to your party and an &aEgg&r waits inside: right-click to take it."]
+	quest.15C95900440E45BD.quest_desc: ["Place the &bGenetic Incubator&r, right-click it and pick two party Pokémon (level 15+). Then right-click it with a &aberry&r for each of them: love hearts, and breeding begins." "" "Same family: main-game rules (a shared &eegg group&r and opposite genders, or &dDitto&r). Two &ddifferent&r families make a &dfusion baby&r if Fusionmon is installed!" "" "After a few minutes they come back to your party and an &aEgg&r waits inside: right-click to take it, or leave it for a &aDay Care Aide&r."]
 	quest.4C3CACB8E8D2B19A.title: "New Generation"
 	quest.4C3CACB8E8D2B19A.quest_subtitle: "Breed two Pokémon"
-	quest.4C3CACB8E8D2B19A.quest_desc: ["Keep the &aPokémon Egg&r in your inventory and &ewalk&r: it hatches into a level 1 Pokémon. Its tooltip hints how close it is, and a party Pokémon with &6Flame Body&r or &6Magma Armor&r halves the walk." "" "Its genes are &oa mix&r of both parents plus some randomness - never a copy of either. Three of its stats (IVs) also come from a random parent."]
+	quest.4C3CACB8E8D2B19A.quest_desc: ["Keep the &aPokémon Egg&r in your inventory and &ewalk&r: it hatches into a level 1 Pokémon. Its tooltip hints how close it is, and a party Pokémon with &6Flame Body&r or &6Magma Armor&r halves the walk." "" "No time to walk? A &aDay Care Aide&r can hatch it in the Incubator for you (see the Day Care quest)." "" "Its genes are &oa mix&r of both parents plus some randomness - never a copy of either. Three of its stats (IVs) also come from a random parent."]
 	quest.2E3352B9C0D17B99.title: "Proud Parent"
 	quest.2E3352B9C0D17B99.quest_subtitle: "Analyse one of the parents"
 	quest.2E3352B9C0D17B99.quest_desc: ["Analyse one of the parents again and keep its numbers in mind (or &bRecord&r it)."]
@@ -20,4 +20,10 @@
 	quest.2530A0BFCA34A198.title: "Research Level 3"
 	quest.2530A0BFCA34A198.quest_subtitle: "Heredity"
 	quest.2530A0BFCA34A198.quest_desc: ["Level 3 adds &bMutation Susceptibility&r, size genes and inherited traits." "" "Your next step: the &5Shadow Research&r chapter."]
+	quest.4E8B2D6F1C9A3075.title: "Day Care"
+	quest.4E8B2D6F1C9A3075.quest_subtitle: "Let a Day Care Aide hatch an Egg"
+	quest.4E8B2D6F1C9A3075.quest_desc: ["An unemployed villager near a &bGenetic Incubator&r takes the &aDay Care Aide&r job (look for the apron)." "" "Leave an Egg in the Incubator: while the aide is close by, &a♥ Day Care&r and its progress float above it, the Egg wobbles more as hatching nears, and the baby goes straight to your party or PC." "" "Click the Incubator for the time left; sneak-click takes the Egg."]
+	quest.7C1E5A9D3B2F6048.title: "Prize Bloodline"
+	quest.7C1E5A9D3B2F6048.quest_subtitle: "Breed a grade A Pokémon"
+	quest.7C1E5A9D3B2F6048.quest_desc: ["Analyse a Pokémon with a &6Breeding value&r of 75 or more (grade A)." "" "The breeding value sums up how good a Pokémon is to breed from: mostly &6Genetic Potential&r, then &bStability&r. The Analyzer remembers your best of every species, so each generation has a target to beat." "" "Tip: parents with different, compatible affinities give their babies extra potential (hybrid vigour), more so with strong affinity grades."]
 }

@@ -277,6 +277,12 @@ public final class AnalysisService {
         Component breedingValue = Component.literal(GeneticsRules.grade(value) + " (" + round(value) + ")")
                 .withStyle(Style.EMPTY.withColor(gradeColor(value) & 0xFFFFFF));
         Component best = bestOfSpecies(player, pokemon, (int) Math.round(value));
+        if (level >= 2) {
+            GeneticsTrigger.trigger(player, Action.BREEDING_VALUE, (int) Math.round(value));
+            if (GeneticsRules.resonance(genome, GeneticsService.typesOf(pokemon), config) > 1) {
+                GeneticsTrigger.trigger(player, Action.RESONANCE, 1);
+            }
+        }
         var type = pokemon.getPrimaryType();
         boolean canRecord = !pokemon.isWild();
         if (player.connection.hasChannel(AnalysisPayload.TYPE)) {

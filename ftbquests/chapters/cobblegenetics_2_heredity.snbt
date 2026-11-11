@@ -87,5 +87,28 @@
 			x: 6.0d
 			y: -1.0d
 		}
+		{
+			dependencies: ["4C3CACB8E8D2B19A"]
+			icon: { id: "cobblegenetics:pokemon_egg" }
+			id: "4E8B2D6F1C9A3075"
+			rewards: [
+				{ count: 8, id: "6A2D8F4B1E3C7059", item: { count: 1, id: "minecraft:emerald" }, type: "item" }
+			]
+			tasks: [{ advancement: "cobblegenetics:daycare_hatch", criterion: "", id: "1F6C9E3A7B2D4058", type: "advancement" }]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["2530A0BFCA34A198"]
+			icon: { id: "minecraft:diamond" }
+			id: "7C1E5A9D3B2F6048"
+			rewards: [
+				{ count: 1, id: "5E9C3A1D7F2B4068", item: { count: 1, id: "cobblegenetics:gene_stabilizer" }, type: "item" }
+				{ count: 2, id: "2B7F4D1A9C3E6085", item: { count: 1, id: "cobblemon:exp_candy_l" }, type: "item" }
+			]
+			tasks: [{ advancement: "cobblegenetics:breeding_value_75", criterion: "", id: "3D8A2F6C9E1B5074", type: "advancement" }]
+			x: 8.0d
+			y: -1.0d
+		}
 	]
 }

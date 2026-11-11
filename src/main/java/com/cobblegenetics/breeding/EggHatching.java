@@ -162,6 +162,11 @@ public final class EggHatching {
             player.sendSystemMessage(Component.translatable("message.cobblegenetics.egg_hatched_daycare",
                     pokemon.getDisplayName(false)).withStyle(ChatFormatting.GREEN));
             CobblemonEvents.HATCH_EGG_POST.post(new HatchEggEvent.Post(player, pokemon));
+            var research = com.cobblegenetics.research.Research.of(player);
+            research.daycareHatched++;
+            com.cobblegenetics.research.Research.save(player, research);
+            com.cobblegenetics.advancement.GeneticsTrigger.trigger(player,
+                    com.cobblegenetics.advancement.GeneticsTrigger.Action.DAYCARE_HATCH, research.daycareHatched);
         }
         return true;
     }

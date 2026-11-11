@@ -1,10 +1,10 @@
 {
 	quest.06B1CD143EBBDF22.title: "The Genetic Analyzer"
 	quest.06B1CD143EBBDF22.quest_subtitle: "Your window into Pokémon biology"
-	quest.06B1CD143EBBDF22.quest_desc: ["Craft a &bGenetic Analyzer&r (iron, glass, redstone and a Poké Ball - check JEI)." "" "&eRight-click&r any Pokémon in the world with it - wild or yours - or use it in the air to pick a Pokémon from your party."]
+	quest.06B1CD143EBBDF22.quest_desc: ["Craft a &bGenetic Analyzer&r (iron, glass, redstone and a Poké Ball - check JEI)." "" "&eRight-click&r any Pokémon in the world with it - wild or yours - or use it in the air to pick a Pokémon from your party." "" "The report reads like a Pokédex: every gene comes with a note on what it means for &othat&r Pokémon, and the right side shows its &6Breeding value&r and your best of its species so far. Lost? Press &b? Guide&r."]
 	quest.56ED2CE7E35621C1.title: "First Sample"
 	quest.56ED2CE7E35621C1.quest_subtitle: "Analyse a Pokémon"
-	quest.56ED2CE7E35621C1.quest_desc: ["Every Pokémon now carries its own &dgenetic profile&r, rolled when it was born." "" "The first thing you can read is its &6Genetic Potential&r, graded &aS&r, &aA&r, &eB&r, &eC&r or &cD&r. Wild Pokémon with high potential are born with better minimum stats (IVs)."]
+	quest.56ED2CE7E35621C1.quest_desc: ["Every Pokémon now carries its own &dgenetic profile&r, rolled when it was born." "" "The first thing you can read is its &6Genetic Potential&r, graded &aS&r, &aA&r, &eB&r, &eC&r or &cD&r. Wild Pokémon with high potential are born with better minimum stats (IVs), and keep improving as you train them."]
 	quest.642477C5A394EAFA.title: "No Two Alike"
 	quest.642477C5A394EAFA.quest_subtitle: "Analyse three different Pokémon"
 	quest.642477C5A394EAFA.quest_desc: ["Analyse a few Pokémon of the &osame species&r and compare them: their genes differ." "" "Greyed-out rows show what higher &bGenetic Research&r levels will reveal. Research rises as you study more Pokémon, or with &bAnalyzer Upgrades&r (use the one this quest gives you)."]
@@ -16,5 +16,11 @@
 	quest.7BF8CEA614B0EBD2.quest_desc: ["Press &bRecord Profile&r on the Analyzer screen of one of &oyour&r Pokémon. It writes the analysis onto a &bGenetic Record&r, using one paper." "" "Records are handy to compare parents before breeding."]
 	quest.5674030B43AE134C.title: "Research Level 2"
 	quest.5674030B43AE134C.quest_subtitle: "Stability & Affinity"
-	quest.5674030B43AE134C.quest_desc: ["At level 2 the Analyzer shows:" "&b- Genetic Stability&r: how resistant the genome is to change. Low stability means more mutations, and more of them harmful." "&b- Elemental Affinity&r: a hidden leaning towards a type, not always the Pokémon's own." "" "Your reward opens the next chapters: &aHeredity&r and &dMutations&r."]
+	quest.5674030B43AE134C.quest_desc: ["At level 2 the Analyzer shows:" "&b- Genetic Stability&r: how resistant the genome is to change. Low stability means more mutations, and more of them harmful." "&b- Elemental Affinity&r: a hidden leaning towards a type, with a strength grade. Matching the Pokémon's own type, it &aresonates&r (extra EXP). In breeding, strong affinities mean bigger bonuses and bigger risks." "&b- Breeding value&r: one grade for how good the Pokémon is to breed from." "" "Your reward opens the next chapters: &aHeredity&r and &dMutations&r."]
+	quest.3F1A6C2E9B7D4058.title: "Growing Pains"
+	quest.3F1A6C2E9B7D4058.quest_subtitle: "Train up some potential"
+	quest.3F1A6C2E9B7D4058.quest_desc: ["Level up a Pokémon with good &6Genetic Potential&r until one of its IVs rises." "" "Each level up has a chance to raise its &olowest&r IV by 1, up to a ceiling set by its potential: about 17 at grade C, 31 at grade S. The Analyzer shows the ceiling under Genetic Potential."]
+	quest.58C4E1B7A2D93F60.title: "In Tune"
+	quest.58C4E1B7A2D93F60.quest_subtitle: "Find a resonating affinity"
+	quest.58C4E1B7A2D93F60.quest_desc: ["At research level 2, analyse a Pokémon whose &bElemental Affinity&r is one of its own types." "" "It &aresonates&r: it gains extra EXP, more the stronger its affinity grade (up to +15% at S). The note under Elemental Affinity tells you when it does."]
 }
