@@ -68,7 +68,7 @@ public final class BreedingService {
         if (mother == null || father == null) {
             return;
         }
-        Genome child = inherit(mother, father, childTypes(event.getEgg()));
+        Genome child = inherit(mother.getOwnerPlayer(), mother, father, childTypes(event.getEgg()));
         PokemonProperties egg = event.getEgg();
         List<CustomPokemonProperty> properties = new ArrayList<>(egg.getCustomProperties());
         properties.removeIf(p -> p instanceof GeneticsProperties.GenomeProperty);
@@ -220,7 +220,7 @@ public final class BreedingService {
         }
 
         if (GeneticsConfig.get().geneticInheritance) {
-            Genome genome = inherit(mother, father, GeneticsService.typesOf(child));
+            Genome genome = inherit(owner, mother, father, GeneticsService.typesOf(child));
             PokemonGenetics.setPending(child, GenomeNbt.write(genome));
         }
         GeneticsService.ensure(child, Genome.Origin.HATCHED);
@@ -260,7 +260,7 @@ public final class BreedingService {
     // ------------------------------------------------------------------ shared
 
     /** The offspring genome. Ensures both parents have one first (lazy genetics). */
-    static Genome inherit(Pokemon mother, Pokemon father, List<String> childTypes) {
+    static Genome inherit(ServerPlayer owner, Pokemon mother, Pokemon father, List<String> childTypes) {
         Genome m = GeneticsService.ensure(mother, Genome.Origin.RETROACTIVE);
         Genome f = GeneticsService.ensure(father, Genome.Origin.RETROACTIVE);
         GeneticsRules.BreedResult result = GeneticsRules.breed(m, f, ThreadLocalRandom.current(), GeneticsConfig.get(),
@@ -281,6 +281,16 @@ public final class BreedingService {
         PokemonGenetics.setGenome(father, f);
         if (result.incompatible()) {
             CobbleGenetics.LOGGER.debug("CobbleGenetics: incompatible affinities {} x {}", m.affinity, f.affinity);
+        }
+        // Optional relics (Heirloom Locket): extra potential, half the opposed-affinity penalty
+        var hooks = com.cobblegenetics.compat.RelicHooks.get();
+        if (owner != null) {
+            child.potential = Math.min(100, child.potential + Math.max(0, hooks.breedingPotential(owner)));
+            if (result.incompatible() && hooks.breedingHarmony(owner)) {
+                child.stability = Math.min(100, child.stability + GeneticsConfig.get().incompatibilityPenalty
+                        * GeneticsRules.affinityFactor(m, f) / 2);
+            }
+            hooks.bred(owner);
         }
         return child;
     }

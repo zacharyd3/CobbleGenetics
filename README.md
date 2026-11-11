@@ -31,6 +31,19 @@ CobbleGenetics is a separate mod from [Fusionmon](https://github.com/zacharyd3/f
 
 **Genetic Analyzer.** Use it on any Pokémon in the world, or on a party member. It opens a Pokédex-style report gated by **five research levels**: the Pokémon in 3D on its type's platform, every gene with a note on what it means for that Pokémon ("its babies start with every IV at 7 or more"), a **breeding value** grade and the best of that species you have analysed so far, to give you a target to beat. A **? Guide** page explains each gene, with topics unlocking as research grows. Levels rise from milestones or from Analyzer Upgrades. Level 4 adds breeding predictions between the last two analysed Pokémon, and level 5 adds exact Shadow analysis and hints at rare combinations.
 
+**Relics (optional).** With the [Relics](https://modrinth.com/mod/relics-mod) mod installed, six wearable relics join the game, found in chests like Relics' own and levelled by using them:
+
+| Relic | Slot | Ability | Rank 3 |
+|---|---|---|---|
+| Breeder's Apron | body | Your Day Care Aides hatch Eggs faster (up to 2.5x) | Eggs you carry hatch 25% sooner |
+| Geneticist's Loupe | head | Look at a Pokémon to read its breeding value (up to 24 blocks) | Also its Genetic Potential and Stability |
+| Training Weights | feet | Levelling raises IVs through potential more often (up to +30%) | Training ceiling +3 |
+| Resonance Fork | ring | Stronger affinity resonance (up to 2.5x the EXP bonus) | Off-type affinities resonate a third as much |
+| Heirloom Locket | back | Offspring you breed get more potential (up to +6) | Opposed affinities cost half the stability |
+| Glowcap Lantern | belt | More environmental mutations (up to 2.5x) | Night vision while a glowing Pokémon is out |
+
+Their values can be edited in `config/cobblegenetics/relics/`.
+
 **FTB Quests.** Seven chapters and 47 quests, all completed by real gameplay through the mod's advancement criterion. See [`ftbquests/`](ftbquests/README.md).
 
 ## Items

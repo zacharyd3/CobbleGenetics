@@ -375,6 +375,11 @@ public class GeneticIncubatorBlockEntity extends BlockEntity {
         if (data == null) {
             return;
         }
+        // Optional relics (Breeder's Apron): the owner's aides work faster
+        ServerPlayer ownerPlayer = level.getServer().getPlayerList().getPlayer(owner);
+        if (ownerPlayer != null) {
+            rate *= Math.max(0, com.cobblegenetics.compat.RelicHooks.get().aideSpeed(ownerPlayer));
+        }
         attendantSteps += rate;
         int steps = (int) attendantSteps;
         attendantSteps -= steps;

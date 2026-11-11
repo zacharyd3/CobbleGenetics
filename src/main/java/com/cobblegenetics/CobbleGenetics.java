@@ -35,6 +35,10 @@ public class CobbleGenetics {
         ModBlocks.initialize(modBus);
         ModItems.initialize(modBus);
         com.cobblegenetics.village.ModVillagers.initialize(modBus);
+        // Optional relics: only with Relics installed (its classes are never loaded otherwise)
+        if (net.neoforged.fml.ModList.get().isLoaded("relics")) {
+            com.cobblegenetics.compat.relics.RelicsCompat.initialize(modBus);
+        }
         Research.initialize(modBus);
         GeneticsTrigger.initialize(modBus);
         ModNetworking.initialize(modBus);
